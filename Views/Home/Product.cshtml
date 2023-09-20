@@ -73,18 +73,11 @@
 				<div class="item">
 					<div class="thumb">
 						<a href="@Url.Action("Single", "Home", new { id = product.Id })">
-							<img src="@product.imageUrl" alt=" " />
+                                <img src="../../@product.imageUrl" alt=" " />
 						</a>
                         <div class="down-content">
                             <h4>@product.IceName</h4>
                             <span>@product.Price.ToString("C")</span>
-                            <ul class="stars">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                            </ul>
                         </div>
 					</div>
 					
