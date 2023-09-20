@@ -41,13 +41,31 @@ namespace Cloud1.Controllers
             //ViewData["Layout"] = layout;
             return View();
         }
-        public IActionResult Product()
+        public async Task<IActionResult> Product()
         {
-            return View();
+            var products = await _context.IceCream.ToListAsync();
+            return View(products);
+                         
         }
-        public IActionResult Single()
+
+
+        //public IActionResult Single()
+        //{
+        //    return View();
+        //}
+
+        // Action method to view a single product
+        public IActionResult Single(int id)
         {
-            return View();
+            // Retrieve the product from the database based on the id
+            var product = _context.IceCream.FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound(); // Handle not found case
+            }
+
+            return View(product); // Pass the product to the SingleProduct view
         }
 
         // GET: Home/Details/5
