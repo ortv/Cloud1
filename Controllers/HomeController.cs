@@ -45,6 +45,10 @@ namespace Cloud1.Controllers
         {
             return View();
         }
+        public IActionResult Single()
+        {
+            return View();
+        }
 
         // GET: Home/Details/5
         public async Task<IActionResult> Details(int? id)
