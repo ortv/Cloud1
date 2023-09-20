@@ -11,7 +11,7 @@ namespace Cloud1.Models
 
         public string? IceDescription { get; set; }//brief description of the ice cream flavor
         
-
+        public double Price { get; set; }
         public string? imageUrl { get; set; }//option of no image
         public int Calories { get; set; }
         //ingridients??list...
