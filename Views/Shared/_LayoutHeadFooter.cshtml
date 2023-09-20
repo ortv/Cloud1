@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        <!-- ***** Header Area Start ***** -->
+        <header class="header-area header-sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="main-nav">
+                            <!-- ***** Logo Start ***** -->
+                            <a href="index.html" class="logo">
+                                <img src="/assets/images/logo.png">
+                            </a>
+                            <!-- ***** Logo End ***** -->
+                            <!-- ***** Menu Start ***** -->
+                            <ul class="nav">
+                                <li class="scroll-to-section"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                                <li class="scroll-to-section"><a href="@Url.Action("About", "Home")">About Us</a></li>
+                                <li class="scroll-to-section"><a href="@Url.Action("Product", "Home")">Products</a></li>
+                                <li class="scroll-to-section"><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                                <li class="scroll-to-section"><a href="@Url.Action("_LoginPartial", "Shared")">Login</a></li>
+
+                            </ul>
+                            <a class='menu-trigger'>
+                                <span>Menu</span>
+                            </a>
+                            <!-- ***** Menu End ***** -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ***** Header Area End ***** -->
+        @RenderBody()
+        <!-- ***** Footer Start ***** -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="first-item">
+                            <div class="logo">
+                                <img src="/assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
+                            </div>
+                            <ul>
+								<li><a href="mailto:ortv617@gmail.com"> Email</a></li>
+								<li> <a href="tel:054-5476488">Phone</a></li>
+                                 <li><a href="https://www.google.com/maps?q=הקליר%209%20נתניה">View in Google Maps</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="under-footer">
+                            <p>
+                                Copyright © 2023 IcePace Co., Ltd. All Rights Reserved.
+
+                                <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
+                            </p>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
