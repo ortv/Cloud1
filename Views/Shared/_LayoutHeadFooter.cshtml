@@ -1,4 +1,7 @@
-﻿
+﻿@* @{
+    Layout = "/Views/Shared/_Layout.cshtml";
+} *@
+
 
 <!DOCTYPE html>
 
@@ -26,7 +29,11 @@
                                 <li class="scroll-to-section"><a href="@Url.Action("About", "Home")">About Us</a></li>
                                 <li class="scroll-to-section"><a href="@Url.Action("Product", "Home")">Products</a></li>
                                 <li class="scroll-to-section"><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
-                                <li class="scroll-to-section"><a href="@Url.Action("_Layout", "Shared")">Login</a></li>
+                                <li class="scroll-to-section"><a href="/Identity/Account/Login">Login</a></li>
+                               
+                                
+                                
+
 
                             </ul>
                             <a class='menu-trigger'>
