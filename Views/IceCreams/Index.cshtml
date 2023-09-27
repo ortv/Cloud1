@@ -27,7 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,12 +38,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IceDescription)
             </td>
-                <td>
-                    <img src="~/@Html.DisplayFor(modelItem => item.imageUrl)" width="150" height="100" />
-                </td>
+            <td>
+                <img src="~/@Html.DisplayFor(modelItem => item.imageUrl)" width="150" height="100" />
+             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Calories)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

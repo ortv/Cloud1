@@ -1,4 +1,4 @@
-﻿@model Cloud1.Models.IceCream
+﻿@model Cloud1.Models.IceCream1
 
 @{
     ViewData["Title"] = "Delete";
@@ -30,10 +30,16 @@
             @Html.DisplayFor(model => model.imageUrl)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Calories)
+            @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Calories)
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.isAvailable)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.isAvailable)
         </dd>
     </dl>
     
