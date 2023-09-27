@@ -22,6 +22,14 @@ namespace Cloud1.Data
 
         //public DbSet<Cloud1.Models.Order>? Order { get; set; }
 
+        public DbSet<Cloud1.Models.CartItem>? CartItem { get; set; }
+
+        //public DbSet<Cloud1.Models.Order>? Order { get; set; }
+
+        public DbSet<Cloud1.Models.Order>? Order { get; set; }
+
+        //public DbSet<Cloud1.Models.Order>? Order { get; set; }
+
      //   public DbSet<Cloud1.Models.CartItem>? CartItem { get; set; }
 
         //public DbSet<Cloud1.Models.Order>? Order { get; set; }
