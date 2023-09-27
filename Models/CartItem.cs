@@ -10,6 +10,7 @@ namespace Cloud1.Models
         // Navigation property for ShoppingCart
         public ShoppingCart ShoppingCart { get; set; }
         public IceCream1 Cream1 { get; set; }
+        public System.DateTime DateCreated { get; set; }
 
         public int Amount { get; set; } // amount of products
 
