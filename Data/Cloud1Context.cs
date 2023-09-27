@@ -16,7 +16,7 @@ namespace Cloud1.Data
 
         public DbSet<Cloud1.Models.IceCream> IceCream { get; set; } = default!;
 
-        public DbSet<Cloud1.Models.Order>? Order { get; set; }
+        //public DbSet<Cloud1.Models.Order>? Order { get; set; }
 
         public DbSet<Cloud1.Models.IceCream1>? IceCream1 { get; set; }
     }
