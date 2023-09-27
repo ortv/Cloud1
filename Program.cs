@@ -12,7 +12,7 @@ namespace Cloud1
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<Cloud1Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Cloud1Context") ?? throw new InvalidOperationException("Connection string 'Cloud1Context' not found.")));
-
+            builder.Services.AddHttpContextAccessor();
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>

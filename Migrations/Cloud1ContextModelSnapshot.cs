@@ -80,29 +80,15 @@ namespace Cloud1.Migrations
                     b.ToTable("IceCream1");
                 });
 
-            modelBuilder.Entity("Cloud1.Models.Order", b =>
+            modelBuilder.Entity("Cloud1.Models.CartItem", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("Cloud1.Models.IceCream1", "Cream1")
+                        .WithMany()
+                        .HasForeignKey("Cream1Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("DeliveryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ShipDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Order");
+                    b.Navigation("Cream1");
                 });
 #pragma warning restore 612, 618
         }
