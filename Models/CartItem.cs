@@ -7,6 +7,7 @@ namespace Cloud1.Models
         public int IdItemCart { get; set; } // product id
         public int idShopCart { get; set; }
         public IceCream1 Cream1 { get; set; }
+        public System.DateTime DateCreated { get; set; }
 
         public int Amount { get; set; } // amount of products
 
