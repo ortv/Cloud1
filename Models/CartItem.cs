@@ -4,8 +4,11 @@ namespace Cloud1.Models
 {
     public class CartItem
     {
-        public int IdItemCart { get; set; } // product id
-        public int idShopCart { get; set; }
+        public int Id { get; set; } // cart item id
+        public int ShoppingCartId { get; set; } // Foreign key to ShoppingCart
+
+        // Navigation property for ShoppingCart
+        public ShoppingCart ShoppingCart { get; set; }
         public IceCream1 Cream1 { get; set; }
 
         public int Amount { get; set; } // amount of products
