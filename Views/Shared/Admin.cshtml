@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+	<link href="~/css/stylesheet.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div class="admin-header">
+        <a asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> HOME</a>
+        <a href="#"><i class="fas fa-cog"></i> Setting</a>
+        <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+    </div>
+
+
+
+    <div class="admin-content">
+        <!-- התוכן של דף ה־Admin יוצג כאן -->
+        @RenderBody()
+    </div>
+
+    <div class="admin-footer">
+        &copy; 2023 Your Company Name
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Admin.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+        <div class="search">
+            <input type="text" placeholder="Search..">
+            <button type="submit"><i class="fas fa-search"></i> </button>
+       </div>
+
+
+    <ul class="buttons-list">
+        <li><a href="#dashboard"> <i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="#orders">    <i class="fas fa-shopping-cart"></i> Orders</a></li>
+        <li><a href="#products"> <i class="fas fa-ice-cream"></i> Products</a></li>
+        <li><a href="#income">   <i class="fas fa-money-bill"></i> Income</a></li>
+
+    </ul>
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .search {
+            text-align: center;
+        }
+    </style>
+    
+
+
+
+
+</body>
+</html>

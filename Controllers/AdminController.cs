@@ -1,163 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cloud1.Data;
-using Cloud1.Models;
 
 namespace Cloud1.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly Cloud1Context _context;
-
-        public AdminController(Cloud1Context context)
+        // GET: AdminController
+        public ActionResult Index()
         {
-            _context = context;
+            return View("Index");
         }
 
-        // GET: Admin
-        public async Task<IActionResult> Index()
-        {
-              return _context.IceCream != null ? 
-                          View(await _context.IceCream.ToListAsync()) :
-                          Problem("Entity set 'Cloud1Context.IceCream'  is null.");
-        }
-
-        // GET: Admin/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.IceCream == null)
-            {
-                return NotFound();
-            }
-
-            var iceCream = await _context.IceCream
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (iceCream == null)
-            {
-                return NotFound();
-            }
-
-            return View(iceCream);
-        }
-
-        // GET: Admin/Create
-        public IActionResult Create()
+        // GET: AdminController/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
 
-        // POST: Admin/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // GET: AdminController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: AdminController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IceName,IceDescription,imageUrl,Calories")] IceCream iceCream)
+        public ActionResult Create(IFormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(iceCream);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(iceCream);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: Admin/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // GET: AdminController/Edit/5
+        public ActionResult Edit(int id)
         {
-            if (id == null || _context.IceCream == null)
-            {
-                return NotFound();
-            }
-
-            var iceCream = await _context.IceCream.FindAsync(id);
-            if (iceCream == null)
-            {
-                return NotFound();
-            }
-            return View(iceCream);
+            return View();
         }
 
-        // POST: Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: AdminController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IceName,IceDescription,imageUrl,Calories")] IceCream iceCream)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            if (id != iceCream.Id)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(iceCream);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!IceCreamExists(iceCream.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
-            return View(iceCream);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: Admin/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: AdminController/Delete/5
+        public ActionResult Delete(int id)
         {
-            if (id == null || _context.IceCream == null)
-            {
-                return NotFound();
-            }
-
-            var iceCream = await _context.IceCream
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (iceCream == null)
-            {
-                return NotFound();
-            }
-
-            return View(iceCream);
+            return View();
         }
 
-        // POST: Admin/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: AdminController/Delete/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
-            if (_context.IceCream == null)
+            try
             {
-                return Problem("Entity set 'Cloud1Context.IceCream'  is null.");
+                return RedirectToAction(nameof(Index));
             }
-            var iceCream = await _context.IceCream.FindAsync(id);
-            if (iceCream != null)
+            catch
             {
-                _context.IceCream.Remove(iceCream);
+                return View();
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool IceCreamExists(int id)
-        {
-          return (_context.IceCream?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

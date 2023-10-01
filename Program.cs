@@ -1,7 +1,8 @@
-﻿using Cloud1.Data;
+using Cloud1.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 
 namespace Cloud1
 {
