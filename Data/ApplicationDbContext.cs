@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Cloud1.Models;
 
 namespace Cloud1.Data
 {
@@ -10,6 +11,8 @@ namespace Cloud1.Data
             : base(options)
         {
         }
+   
+        
        
     }
 }

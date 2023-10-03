@@ -55,10 +55,10 @@
             <h3>Total: @Model.Total().ToString("C")</h3>
         </div>
 
-        <div class="checkout-button">
+       @*  <div class="checkout-button">
             <a href="@Url.Action("Checkout", "CartItems")">Checkout</a>
         </div>
-    </div>
+    </div> *@
     <script>
         document.querySelectorAll('.addToCartButton').forEach(button => {
             button.addEventListener('click', addToCart);

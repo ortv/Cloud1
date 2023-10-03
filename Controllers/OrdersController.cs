@@ -56,7 +56,7 @@ namespace Cloud1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderDate,ShipDate,DeliveryDate,TotalPrice")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,OrderDate,ShipDate,DeliveryDate,TotalPrice,Name,Address,City,Email")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Cloud1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,ShipDate,DeliveryDate,TotalPrice")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderDate,ShipDate,DeliveryDate,TotalPrice,Name,Address,City,Email")] Order order)
         {
             if (id != order.Id)
             {

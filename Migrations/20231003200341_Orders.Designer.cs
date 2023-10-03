@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cloud1.Migrations
 {
     [DbContext(typeof(Cloud1Context))]
-    [Migration("20230927160619_Orderss")]
-    partial class Orderss
+    [Migration("20231003200341_Orders")]
+    partial class Orders
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,35 +55,6 @@ namespace Cloud1.Migrations
                     b.ToTable("CartItem");
                 });
 
-            modelBuilder.Entity("Cloud1.Models.IceCream", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Calories")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IceDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("imageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IceCream");
-                });
-
             modelBuilder.Entity("Cloud1.Models.IceCream1", b =>
                 {
                     b.Property<int>("Id")
@@ -121,8 +92,24 @@ namespace Cloud1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("DeliveryDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");

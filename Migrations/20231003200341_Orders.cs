@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cloud1.Migrations
 {
-    public partial class Orderss : Migration
+    public partial class Orders : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,11 @@ namespace Cloud1.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ShipDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TotalPrice = table.Column<double>(type: "float", nullable: false)
+                    TotalPrice = table.Column<double>(type: "float", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
