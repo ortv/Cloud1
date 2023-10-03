@@ -168,14 +168,14 @@ namespace Cloud1.Controllers
             {
                 _context.CartItem.Remove(cartItem);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CartItemExists(string id)
         {
-            return (_context.CartItem?.Any(e => e.ItemId == id)).GetValueOrDefault();
+          return (_context.CartItem?.Any(e => e.ItemId == id)).GetValueOrDefault();
         }
 
         public async Task<IActionResult> Checkout()
@@ -195,7 +195,7 @@ namespace Cloud1.Controllers
                 iceCreams = iceCreamss
             };
             //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
-            Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total() };
+            Order order = new Order() { OrderDate=DateTime.Now, TotalPrice = cart.Total()  };
             string orderJson = JsonSerializer.Serialize(order);
 
             // Pass it as a route value
