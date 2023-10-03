@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,8 +13,12 @@
 </head>
 <body>
     <div class="admin-header">
+        <a href="#user"><i class="fas fa-user"></i> Hello @User.Identity?.Name!</a>
+
         <a asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> HOME</a>
+
         <a href="#"><i class="fas fa-cog"></i> Setting</a>
+
         <a href="#"><i class="fas fa-question-circle"></i> Help</a>
     </div>
 
@@ -23,7 +30,7 @@
     </div>
 
     <div class="admin-footer">
-        &copy; 2023 Your Company Name
+        &copy; 2023 ICEPACE
     </div>
 </body>
 </html>

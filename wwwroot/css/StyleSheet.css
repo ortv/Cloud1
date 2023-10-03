@@ -1,8 +1,8 @@
-﻿
-body {
+﻿body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background-color: rgba(0, 0, 0, 0.1); /* גוון אפור כהה */
+    color: #fff;
 }
 
 .admin-container {
@@ -64,37 +64,33 @@ body {
     }
 
     .search button {
-        padding: 5px;
-        background-color: #e67e22; /* גוון כתום כהה */
+        padding: 10px; /* גודל הכפתור גדול יותר */
+        background-color: #ff006e; /* גוון כתום כהה */
         border: none;
         cursor: pointer;
         color: #ecf0f1; /* צבע לבן */
+        border-radius: 5px;
     }
 
 .User .btn {
+    padding: 16px; /* גודל הכפתור גדול יותר */
     background-color: #27ae60; /* גוון ירוק */
     color: white;
-    padding: 8px 16px;
-    font-size: 1rem;
+    font-size: 1.2rem; /* גודל טקסט גדול יותר */
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-}
 
 .admin-header {
-    background-color: #333;
+    background-color: #ffffff;
     padding: 10px;
     color: white;
     text-align: right;
 }
 
     .admin-header a {
-        color: white;
+        color:#ff006e;
         text-decoration: none;
         margin-right: 20px;
     }
@@ -104,9 +100,9 @@ body {
 }
 
 .admin-footer {
-    background-color: #333;
+    background-color: #ecf0f1;
     padding: 10px;
-    color: white;
+    color:#ff006e;
     text-align: center;
     position: fixed;
     bottom: 0;
@@ -128,15 +124,12 @@ body {
             text-align: center;
             text-decoration: none;
             color: #fff;
-            background-color: #3498db; /* צבע רקע */
+            background-color: #ff006e; /* צבע רקע */
             border-radius: 50%; /* כדי ליצור כפתור עגול */
-            padding: 20px;
+            padding: 30px; /* גודל הכפתור גדול יותר */
             width: 100px;
         }
 
             .buttons-list li a:hover {
                 background-color: #2980b9; /* צבע רקע ב-hover */
             }
-
-
-   

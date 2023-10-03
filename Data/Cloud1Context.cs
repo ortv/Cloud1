@@ -21,12 +21,32 @@ namespace Cloud1.Data
 
         //public DbSet<Cloud1.Models.Order>? Order { get; set; }
 
+        //public DbSet<Cloud1.Models.IceCream1>? IceCream1 { get; set; }
+
+        //public DbSet<Cloud1.Models.Order>? Order { get; set; }
+
         public DbSet<Cloud1.Models.CartItem>? CartItem { get; set; }
 
         //public DbSet<Cloud1.Models.Order>? Order { get; set; }
 
         public DbSet<Cloud1.Models.Order>? Order { get; set; }
 
-       
+        //public DbSet<Cloud1.Models.Order>? Order { get; set; }
+
+     //   public DbSet<Cloud1.Models.CartItem>? CartItem { get; set; }
+
+        //public DbSet<Cloud1.Models.Order>? Order { get; set; }
+
+     //   public DbSet<Cloud1.Models.ShoppingCart>? ShoppingCart { get; set; }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+
+        //    modelBuilder.Entity<CartItem>()
+        //        .HasOne(ci => ci.ShoppingCart)
+        //        .WithMany(sc => sc.shoppingCartItems)
+        //        .HasForeignKey(ci => ci.ShoppingCartId);
+        //}
     }
 }
