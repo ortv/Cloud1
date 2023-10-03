@@ -23,7 +23,6 @@
                     <th>Item</th>
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th>Total</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,14 +36,13 @@
                             <a class="addToCartButton" data-id="@item.Cream1.Id" data-amount="1">
                                 <i class="fas fa-plus"></i>
                             </a>
-
+                            
                                 @item.Quantity
-                            <a href="@Url.Action("RemoveFromCart", "CartItems", new { id = item.ItemId })"><i class="fas fa-minus"></i></a>
+                            <a class="deleteFromCart" data-id="@item.ItemId"> <i class="fas fa-minus"></i></a>
                         </td>
                         <td>@item.Price</td>
-                        <td>@(item.Quantity * item.Price)</td>
                         <td>
-                            <a href="@Url.Action("DeleteConfirmed", "CartItems", new { id = item.ItemId })"><i class="fas fa-trash"></i></a>
+                            <a class="removeAll" data-id="@item.ItemId"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                     }
@@ -65,8 +63,8 @@
         });
 
         function addToCart(event) {
-            const id = event.target.dataset.id;
-            const amount = event.target.dataset.amount;
+            const id = event.currentTarget.dataset.id;
+            const amount = event.currentTarget.dataset.amount;
 
             // Fetch API to submit the form asynchronously
             fetch(`/CartItems/AddToCart?id=${id}&amount=${amount}`, {
@@ -76,6 +74,8 @@
                 .then(response => {
                     if (response.ok) {
                         // Optionally, update the UI to reflect the added item without reloading the page
+                        location.reload(); // Refresh the page
+
                     } else {
                         // Handle error if needed
                         console.error('Failed to add item to cart');
@@ -86,9 +86,68 @@
                     console.error('Fetch error:', error);
                 });
         }
-    </script>
+
     </script>
 
+    <script>
+        document.querySelectorAll('.deleteFromCart').forEach(button => {
+            button.addEventListener('click', deleteItemCart);
+        });
+
+        function deleteItemCart(event) {
+            const id = event.currentTarget.dataset.id;
+
+            // Fetch API to submit the form asynchronously
+            fetch(`/CartItems/RemoveFromCart?id=${id}`, {
+                method: 'POST',
+                // body: new FormData(document.getElementById('addToCartForm')),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload(); // Refresh the page
+
+                    } else {
+                        // Handle error if needed
+                        console.error('Failed to remove item from cart');
+                    }
+                })
+                .catch(error => {
+                    // Handle fetch error if needed
+                    console.error('Fetch error:', error);
+                });
+        }
+
+    </script>
+
+    <script>
+        document.querySelectorAll('.removeAll').forEach(button => {
+            button.addEventListener('click', removeAllItems);
+        });
+
+        function removeAllItems(event) {
+            const id = event.currentTarget.dataset.id;
+
+            // Fetch API to submit the form asynchronously
+            fetch(`/CartItems/RemoveFromCart2?id=${id}`, {
+                method: 'POST',
+                // body: new FormData(document.getElementById('addToCartForm')),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        location.reload(); // Refresh the page
+
+                    } else {
+                        // Handle error if needed
+                        console.error('Failed to delete items from cart');
+                    }
+                })
+                .catch(error => {
+                    // Handle fetch error if needed
+                    console.error('Fetch error:', error);
+                });
+        }
+
+    </script>
 </body>
  
 </html>

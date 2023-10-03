@@ -230,7 +230,7 @@ namespace Cloud1.Controllers
             {
                 // If the item exists in the cart, increment the quantity.
                 cartItem.Quantity += amount;
-                cartItem.Price += amount * GetIceCreamById(id).Price;
+                cartItem.Price = cartItem.Quantity * GetIceCreamById(id).Price;
                 cartItem.Price.ToString("F3");
             }
             try { await _context.SaveChangesAsync(); }
@@ -239,6 +239,36 @@ namespace Cloud1.Controllers
         }
 
         public async Task<IActionResult> RemoveFromCart(string id)
+        {
+            ShoppingCartId = GetCartId();
+
+            var cartItem = await _context.CartItem
+            .Include(c => c.Cream1)
+            .SingleOrDefaultAsync(c => c.CartId == ShoppingCartId && c.ItemId == id);
+
+
+            //var cartItem = await _context.CartItem.SingleOrDefaultAsync(
+            //  c => c.CartId == ShoppingCartId && c.ItemId == id);
+
+            if (cartItem != null)
+            {
+                if(cartItem.Quantity>1)
+                {
+                    cartItem.Quantity -= 1;
+                    cartItem.Price -= cartItem.Cream1.Price;
+                }
+                else
+                {
+                _context.CartItem.Remove(cartItem);
+
+                }
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> RemoveFromCart2(string id)
         {
             ShoppingCartId = GetCartId();
 
