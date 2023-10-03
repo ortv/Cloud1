@@ -31,7 +31,9 @@
                     @foreach (var item in Model.CartItems)
                     {
                     <tr>
-                        <td>@item.Cream1.IceName</td>
+                        <td>
+                            <img src="@item.Cream1.imageUrl" alt="Ice Cream Image" style="max-width: 100px; max-height: 100px;">
+                        </td>
                         <td>
                             <a class="addToCartButton" data-id="@item.Cream1.Id" data-amount="1">
                                 <i class="fas fa-plus"></i>

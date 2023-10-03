@@ -20,11 +20,20 @@ namespace Cloud1.Controllers
         }
 
         // GET: IceCream1
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-              return _context.IceCream1 != null ? 
-                          View(await _context.IceCream1.ToListAsync()) :
-                          Problem("Entity set 'Cloud1Context.IceCream1'  is null.");
+            if (String.IsNullOrEmpty(searchString))
+            {
+                var dataContext = _context.IceCream1;
+                return View(await dataContext.ToListAsync());
+            }
+            else
+            {
+                var searchItems = await _context.IceCream1
+                    .Where(s => s.IceName.Contains(searchString) || s.IceDescription.Contains(searchString))
+                    .ToListAsync();
+                return View(searchItems);
+            }
         }
 
         // GET: IceCream1/Details/5
@@ -159,5 +168,23 @@ namespace Cloud1.Controllers
         {
           return (_context.IceCream1?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        public async Task<ActionResult> Search(string searchString)
+        {
+            if (String.IsNullOrEmpty(searchString))
+            {
+                var dataContext = _context.IceCream1;
+                return View(await dataContext.ToListAsync());
+            }
+            else
+            {
+                var searchItems = await _context.IceCream1
+                    .Where(s => s.IceName.Contains(searchString) || s.IceDescription.Contains(searchString))
+                    .ToListAsync();
+                return View(searchItems);
+            }
+        }
+
+
+
     }
 }
