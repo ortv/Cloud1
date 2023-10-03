@@ -207,7 +207,7 @@ namespace Cloud1.Controllers
             ShoppingCartId = GetCartId();
 
             var cartItem = await _context.CartItem.SingleOrDefaultAsync(
-                c => c.CartId == ShoppingCartId && Convert.ToInt32(c.Cream1.Id) == id);
+                c => c.CartId == ShoppingCartId && c.Cream1.Id == id);
 
             if (cartItem == null)
             {
