@@ -1,23 +1,125 @@
 ﻿@model Cloud1.Models.CartView
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width">
-    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous"> *@
-	<link href="~/css/stylesheet.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <title>Your Cart</title>
-    
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #2C3E50;
+        }
+
+        h2 {
+            color: #3498db;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        img {
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 50%;
+            background-color: #eaeaea;
+            object-fit: cover;
+        }
+
+        .cart-total {
+            padding: 15px;
+            background-color: #FFC0CB;
+            text-align: right;
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        .checkout-button a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 300px;
+            transition: background-color 0.3s ease;
+            margin: 0 auto;
+        }
+
+            .checkout-button a:hover {
+                background-color: #2980b9;
+            }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .action-buttons a {
+                margin: 0 10px;
+                color: #e74c3c;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+            }
+
+                .action-buttons a:hover {
+                    color: #c0392b;
+                }
+
+        .fa {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
     <h2>Your Cart</h2>
 
     <div class="cart-container">
-        <table class="table">
+        <table>
             <thead>
                 <tr>
                     <th>Item</th>
@@ -27,27 +129,31 @@
                 </tr>
             </thead>
             <tbody>
-            <tbody>
-                    @foreach (var item in Model.CartItems)
-                    {
+                @foreach (var item in Model.CartItems)
+                {
                     <tr>
                         <td>
-                            <img src="@item.Cream1.imageUrl" alt="Ice Cream Image" style="max-width: 100px; max-height: 100px;">
+                            <img src="@item.Cream1.imageUrl" alt="Ice Cream Image">
                         </td>
                         <td>
                             <a class="addToCartButton" data-id="@item.Cream1.Id" data-amount="1">
-                                <i class="fas fa-plus"></i>
+                                <i class="fas fa-plus"></i> 
                             </a>
-                            
-                                @item.Quantity
-                            <a class="deleteFromCart" data-id="@item.ItemId"> <i class="fas fa-minus"></i></a>
+
+                            @item.Quantity
+
+                            <a class="deleteFromCart" data-id="@item.ItemId">
+                                <i class="fas fa-minus"></i>
+                            </a>
                         </td>
                         <td>@item.Price</td>
-                        <td>
-                            <a class="removeAll" data-id="@item.ItemId"><i class="fas fa-trash"></i></a>
+                        <td class="action-buttons">
+                            <a class="removeAll" data-id="@item.ItemId">
+                                <i class="fas fa-trash"></i> 
+                            </a>
                         </td>
                     </tr>
-                    }
+                }
             </tbody>
         </table>
 
@@ -55,10 +161,13 @@
             <h3>Total: @Model.Total().ToString("C")</h3>
         </div>
 
-       @*  <div class="checkout-button">
-            <a href="@Url.Action("Checkout", "CartItems")">Checkout</a>
+        <div class="checkout-button">
+            <a href="@Url.Action("Create", "Orders")">
+                <i class="fas fa-shopping-cart"></i> Checkout
+            </a>
         </div>
-    </div> *@
+    </div>
+   
     <script>
         document.querySelectorAll('.addToCartButton').forEach(button => {
             button.addEventListener('click', addToCart);
@@ -68,27 +177,20 @@
             const id = event.currentTarget.dataset.id;
             const amount = event.currentTarget.dataset.amount;
 
-            // Fetch API to submit the form asynchronously
             fetch(`/CartItems/AddToCart?id=${id}&amount=${amount}`, {
                 method: 'POST',
-                // body: new FormData(document.getElementById('addToCartForm')),
             })
                 .then(response => {
                     if (response.ok) {
-                        // Optionally, update the UI to reflect the added item without reloading the page
-                        location.reload(); // Refresh the page
-
+                        location.reload();
                     } else {
-                        // Handle error if needed
                         console.error('Failed to add item to cart');
                     }
                 })
                 .catch(error => {
-                    // Handle fetch error if needed
                     console.error('Fetch error:', error);
                 });
         }
-
     </script>
 
     <script>
@@ -99,26 +201,20 @@
         function deleteItemCart(event) {
             const id = event.currentTarget.dataset.id;
 
-            // Fetch API to submit the form asynchronously
             fetch(`/CartItems/RemoveFromCart?id=${id}`, {
                 method: 'POST',
-                // body: new FormData(document.getElementById('addToCartForm')),
             })
                 .then(response => {
                     if (response.ok) {
-                        location.reload(); // Refresh the page
-
+                        location.reload();
                     } else {
-                        // Handle error if needed
                         console.error('Failed to remove item from cart');
                     }
                 })
                 .catch(error => {
-                    // Handle fetch error if needed
                     console.error('Fetch error:', error);
                 });
         }
-
     </script>
 
     <script>
@@ -129,27 +225,20 @@
         function removeAllItems(event) {
             const id = event.currentTarget.dataset.id;
 
-            // Fetch API to submit the form asynchronously
             fetch(`/CartItems/RemoveFromCart2?id=${id}`, {
                 method: 'POST',
-                // body: new FormData(document.getElementById('addToCartForm')),
             })
                 .then(response => {
                     if (response.ok) {
-                        location.reload(); // Refresh the page
-
+                        location.reload();
                     } else {
-                        // Handle error if needed
                         console.error('Failed to delete items from cart');
                     }
                 })
                 .catch(error => {
-                    // Handle fetch error if needed
                     console.error('Fetch error:', error);
                 });
         }
-
     </script>
 </body>
- 
 </html>

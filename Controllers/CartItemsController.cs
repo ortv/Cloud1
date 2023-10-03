@@ -173,36 +173,36 @@ namespace Cloud1.Controllers
           return (_context.CartItem?.Any(e => e.ItemId == id)).GetValueOrDefault();
         }
 
-        //public async Task<IActionResult> Checkout()
-        //{
-        //   //var cartItem = await _context.CartItem
-        //   //.Include(c => c.Cream1)
-        //   //.SingleOrDefaultAsync(c => c.CartId == ShoppingCartId && c.ItemId == id);
-        //    var cartItemss = GetCartItems();
-        //    var iceCreamss = new List<IceCream1>();
+        public async Task<IActionResult> Checkout()
+        {
+            //var cartItem = await _context.CartItem
+            //.Include(c => c.Cream1)
+            //.SingleOrDefaultAsync(c => c.CartId == ShoppingCartId && c.ItemId == id);
+            var cartItemss = GetCartItems();
+            var iceCreamss = new List<IceCream1>();
 
-        //    foreach (var item in cartItemss)
-        //    {
-        //        var ice = GetIceCreamById(item.Cream1.Id);
-        //        iceCreamss.Add(ice);
-        //    }
+            foreach (var item in cartItemss)
+            {
+                var ice = GetIceCreamById(item.Cream1.Id);
+                iceCreamss.Add(ice);
+            }
 
-        //    var cart = new CartView
-        //    {
-        //        CartItems = cartItemss,
-        //        iceCreams = iceCreamss
-        //    };
-        //    //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
-        //    Order order = new Order() { OrderDate=DateTime.Now, TotalPrice = cart.Total()  };
-        //    string orderJson = JsonSerializer.Serialize(order);
+            var cart = new CartView
+            {
+                CartItems = cartItemss,
+                iceCreams = iceCreamss
+            };
+            //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
+            Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total(), };
+            string orderJson = JsonSerializer.Serialize(order);
 
-        //    // Pass it as a route value
-        //    return RedirectToAction("Checkout", "Orders", new { order = orderJson });
+            // Pass it as a route value
+            return RedirectToAction("Checkout", "Orders", new { order = orderJson });
 
-        //    //return RedirectToAction("Checkout", "Orders", order);
-        //    // To open a view from a different controller
-        //    //return View("~/Views/Orders/Checkout.cshtml", order);
-        //}
+            //return RedirectToAction("Checkout", "Orders", order);
+            // To open a view from a different controller
+            //return View("~/Views/Orders/Checkout.cshtml", order);
+        }
 
         //add &&  remove from cart
         public async Task AddToCart(int id, int amount)//amount-how many items to add

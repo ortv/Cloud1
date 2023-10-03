@@ -48,6 +48,7 @@ namespace Cloud1.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            //TempData["TotalPrice"] = totalPrice;
             return View();
         }
 
