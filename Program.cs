@@ -19,10 +19,22 @@ namespace Cloud1
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            ////
+            builder.Services.AddDistributedMemoryCache(); // Add a cache for session state
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout as needed
+            });
+            ///
+
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();///
+
+
 
             var app = builder.Build();
 
@@ -37,6 +49,10 @@ namespace Cloud1
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            app.UseSession(); // Enable sessions      /////
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

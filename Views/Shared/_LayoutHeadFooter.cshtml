@@ -8,6 +8,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
+
     <title>@ViewBag.Title</title>
 </head>
 <body>
@@ -30,11 +32,14 @@
                                 <li class="scroll-to-section"><a href="@Url.Action("Product", "Home")">Products</a></li>
                                 <li class="scroll-to-section"><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
                                 <li class="scroll-to-section"><a href="/Identity/Account/Login">Login</a></li>
-                               
-                                
-                                
+                                <li class="fas fa-shopping-cart"><a href="@Url.Action("Index", "CartItems")">Cart</a></li>
 
 
+                               @* <li>
+                                    <a href="@Url.Action("Index", "CartItems")">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </li>*@
                             </ul>
                             <a class='menu-trigger'>
                                 <span>Menu</span>

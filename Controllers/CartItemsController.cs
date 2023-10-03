@@ -23,22 +23,18 @@ namespace Cloud1.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var cartItems = GetCartItems();
-            var iceList = new List<IceCream>();
-
-            foreach (var item in cartItems)
-            {
-                var ice = GetIceCreamById(Convert.ToInt32(item.ItemId));
-                iceList.Add(ice);
-
-            }
+            var cartItems = _context.CartItem
+                .Include(c => c.Cream1) // Eager loading to include related IceCream1
+                .Where(c => c.CartId == GetCartId())
+                .ToList();
+            var iceCreams = cartItems.Select(c => c.Cream1).ToList(); // Extract associated IceCream1 entities
 
             var model = new CartView
             {
                 CartItems = cartItems,
-                iceCreams = iceList
+                iceCreams=iceCreams
             };
 
             return View(model);
@@ -180,7 +176,7 @@ namespace Cloud1.Controllers
         public async Task<IActionResult> Checkout()
         {
             var cartItemss = GetCartItems();
-            var iceCreamss = new List<IceCream>();
+            var iceCreamss = new List<IceCream1>();
 
             foreach (var item in cartItemss)
             {
@@ -211,7 +207,7 @@ namespace Cloud1.Controllers
             ShoppingCartId = GetCartId();
 
             var cartItem = await _context.CartItem.SingleOrDefaultAsync(
-                c => c.CartId == ShoppingCartId && Convert.ToInt32(c.ItemId) == id);
+                c => c.CartId == ShoppingCartId && Convert.ToInt32(c.Cream1.Id) == id);
 
             if (cartItem == null)
             {
@@ -221,6 +217,7 @@ namespace Cloud1.Controllers
                 {
                     ItemId = Guid.NewGuid().ToString(),
                     CartId = ShoppingCartId,
+                    Cream1= GetIceCreamById(id),
                     Quantity = 1,
                     DateCreated = DateTime.Now,
                     Price = amount * GetIceCreamById(id).Price//price for one multiple the amount
@@ -288,12 +285,13 @@ namespace Cloud1.Controllers
         {
             ShoppingCartId = GetCartId();
 
-            return _context.CartItem.Where(
+            var lst= _context.CartItem.Where(
                 c => c.CartId == ShoppingCartId).ToList();
+            return lst;
         }
-        public IceCream GetIceCreamById(int id)
+        public IceCream1 GetIceCreamById(int id)
         {
-            return _context.IceCream.SingleOrDefault(p => p.Id == id);
+            return _context.IceCream1.SingleOrDefault(p => p.Id == id);
         }
         public string GetFlavourNameById(int id)
         {
