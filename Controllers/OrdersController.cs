@@ -22,9 +22,9 @@ namespace Cloud1.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-              return _context.Order != null ? 
-                          View(await _context.Order.ToListAsync()) :
-                          Problem("Entity set 'Cloud1Context.Order'  is null.");
+            return _context.Order != null ?
+                        View(await _context.Order.ToListAsync()) :
+                        Problem("Entity set 'Cloud1Context.Order'  is null.");
         }
 
         // GET: Orders/Details/5
@@ -151,14 +151,14 @@ namespace Cloud1.Controllers
             {
                 _context.Order.Remove(order);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-          return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
         }
         public async Task<IActionResult> Checkout(Order order)
         {
@@ -167,26 +167,15 @@ namespace Cloud1.Controllers
         [HttpPost]
         public IActionResult Update(Order updatedOrder)
         {
-            // Fetch the existing order by Id from your data store
-            var existingOrder = _context.Order.FirstOrDefault(o => o.Id == updatedOrder.Id);
+            // Add the order to the context (in-memory representation)
+            _context.Order.Add(updatedOrder);
 
-            if (existingOrder == null)
-            {
-                // Handle the case where the order is not found, e.g., return an error view
-                return View("OrderNotFound");
-            }
-
-            // Update the fields of the existing order with the values from updatedOrder
-            existingOrder.Name = updatedOrder.Name;
-            existingOrder.Address = updatedOrder.Address;
-            existingOrder.City = updatedOrder.City;
-            existingOrder.Email = updatedOrder.Email;
-
-            // Save changes to your data store (if using Entity Framework Core)
+            // Save changes to the database
             _context.SaveChanges();
 
-            // Redirect to another page or return a view as needed
-            return RedirectToAction("OrderDetails", new { id = existingOrder.Id });
+            // Redirect to the PayPal.html page with the total price as a query parameter
+            return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
+
         }
 
     }
