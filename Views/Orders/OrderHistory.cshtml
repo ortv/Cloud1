@@ -1,0 +1,51 @@
+﻿@model List<Order>
+
+<form method="post" action="@Url.Action("OrderHistory", "Orders")">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" required>
+
+    <button type="submit">Show Graph</button>
+</form>
+
+<canvas id="orderChart" width="400" height="400"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('orderChart').getContext('2d');
+
+    var orderData = @Html.Raw(Json.Serialize(Model));
+
+    var dates = orderData.map(order => order.OrderDate);  // דוגמה, ניתן לשנות לפי המודל האמיתי
+    var prices = orderData.map(order => order.TotalPrice);
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Order Prices',
+                data: prices,
+                borderColor: 'rgb(75, 192, 192)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: [{
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    }
+                }],
+                y: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
