@@ -28,15 +28,18 @@
     <form id="orderForm" action="@Url.Action("Create", "Orders")" method="post">
         <!-- אוסף כאן את הפרטים שאתה רוצה לשלוח עם הטופס -->
         <input type="hidden" name="totalPrice" value="@Model.TotalPrice.ToString("C")">
+       @* <div class="form-group">
+            <input type="button" value="PayPal HTML" onclick="redicatToPayPal()" class="btn"/>
+        </div>*@
         <!-- כפתור ה-Order -->
         <button type="submit" id="orderButton">Order</button>
     </form>
-
 </form>
-<script>
-    // קביעת אירוע ללחיצה על הכפתור
-    document.getElementById('orderButton').addEventListener('click', function () {
-        // העברת המשתמש לדף PayPal.html
-        window.location.href = '~/PayPal.html';
-    });
-</script>
+@*<script>
+    function redirectToPayPal() {
+        var totalPrice = "@Model.TotalPrice"; // Get the total price from the Razor model
+        var PayPalUrl = "/PayPal.html";
+        PayPalUrl += "?total=" + totalPrice;
+        window.location.href = PayPalUrl;
+    }
+</script>*@

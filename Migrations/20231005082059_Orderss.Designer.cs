@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cloud1.Migrations
 {
     [DbContext(typeof(Cloud1Context))]
-    [Migration("20231003200341_Orders")]
-    partial class Orders
+    [Migration("20231005082059_Orderss")]
+    partial class Orderss
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

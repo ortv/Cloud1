@@ -9,6 +9,7 @@ using Cloud1.Data;
 using Cloud1.Models;
 using System.Text;
 using System.Text.Json;
+using Humanizer;
 
 namespace Cloud1.Controllers
 {
@@ -195,10 +196,14 @@ namespace Cloud1.Controllers
             };
             //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
             Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total(), };
+            ////Add the order to the context(in -memory representation)
+            //_context.Order.Add(order);
+            //// Save changes to the database
+            //await _context.SaveChangesAsync();
             //string orderJson = JsonSerializer.Serialize(order);
             //return View(order);
             // Pass it as a route value
-           return RedirectToAction("Checkout", "Orders", order);
+            return RedirectToAction("Checkout", "Orders", order);
         }
 
         //add &&  remove from cart

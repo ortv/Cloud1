@@ -5,10 +5,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cloud1.Migrations
 {
-    public partial class Orders : Migration
+    public partial class Orderss : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "IceCream");
+
             migrationBuilder.CreateTable(
                 name: "Order",
                 columns: table => new
@@ -34,6 +37,23 @@ namespace Cloud1.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Order");
+
+            migrationBuilder.CreateTable(
+                name: "IceCream",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Calories = table.Column<int>(type: "int", nullable: false),
+                    IceDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IceName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    imageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IceCream", x => x.Id);
+                });
         }
     }
 }
