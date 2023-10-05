@@ -1,51 +1,65 @@
-﻿@model List<Order>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Order History Chart</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Order History Chart</h1>
 
-<form method="post" action="@Url.Action("OrderHistory", "Orders")">
-    <label for="startDate">Start Date:</label>
-    <input type="date" id="startDate" name="startDate" required>
+    <!-- Chart canvas -->
+    <canvas id="orderChart" width="400" height="200"></canvas>
 
-    <label for="endDate">End Date:</label>
-    <input type="date" id="endDate" name="endDate" required>
+    <!-- JavaScript for Chart.js -->
+    <script>
+        // Retrieve the data for the chart from the ViewBag (or ViewData) passed from the controller
 
-    <button type="submit">Show Graph</button>
-</form>
+        var orderData = @Html.Raw(Json.Serialize(ViewBag.OrderData));
+        console.log(orderData); // Output the data to the browser's console for debugging
 
-<canvas id="orderChart" width="400" height="400"></canvas>
+        // Extract labels (dates) and values (order counts) from the data
+        var labels = orderData.map(item => item.OrderDate);
+        var values = orderData.map(item => item.OrderCount);
+        console.log(labels); // Output the labels
+        console.log(values); // Output the values
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    var ctx = document.getElementById('orderChart').getContext('2d');
-
-    var orderData = @Html.Raw(Json.Serialize(Model));
-
-    var dates = orderData.map(order => order.OrderDate);  // דוגמה, ניתן לשנות לפי המודל האמיתי
-    var prices = orderData.map(order => order.TotalPrice);
-
-    var chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: dates,
-            datasets: [{
-                label: 'Order Prices',
-                data: prices,
-                borderColor: 'rgb(75, 192, 192)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                x: [{
-                    type: 'time',
-                    time: {
-                        unit: 'day'
-                    }
-                }],
-                y: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
+        var ctx = document.getElementById('orderChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Orders',
+                    data: values,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
                 }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day' // You can adjust the time unit as needed
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Orders'
+                        }
+                    }
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
+</body>
+</html>

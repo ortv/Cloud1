@@ -188,10 +188,9 @@ namespace Cloud1.Controllers
         {
             // קבלת הזמנות ממסד הנתונים לפי טווח תאריכים
             var orders = _context.Order
-                .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate)
-                .ToList();
+                .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate);
 
-            return orders;
+            return orders.ToList();
         }
         public IActionResult Graph()
         {
