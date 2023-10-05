@@ -160,5 +160,34 @@ namespace Cloud1.Controllers
         {
           return (_context.Order?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        public async Task<IActionResult> Checkout(Order order)
+        {
+            return View(order);
+        }
+        [HttpPost]
+        public IActionResult Update(Order updatedOrder)
+        {
+            // Fetch the existing order by Id from your data store
+            var existingOrder = _context.Order.FirstOrDefault(o => o.Id == updatedOrder.Id);
+
+            if (existingOrder == null)
+            {
+                // Handle the case where the order is not found, e.g., return an error view
+                return View("OrderNotFound");
+            }
+
+            // Update the fields of the existing order with the values from updatedOrder
+            existingOrder.Name = updatedOrder.Name;
+            existingOrder.Address = updatedOrder.Address;
+            existingOrder.City = updatedOrder.City;
+            existingOrder.Email = updatedOrder.Email;
+
+            // Save changes to your data store (if using Entity Framework Core)
+            _context.SaveChanges();
+
+            // Redirect to another page or return a view as needed
+            return RedirectToAction("OrderDetails", new { id = existingOrder.Id });
+        }
+
     }
 }

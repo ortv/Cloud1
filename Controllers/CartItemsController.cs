@@ -179,6 +179,7 @@ namespace Cloud1.Controllers
             //.Include(c => c.Cream1)
             //.SingleOrDefaultAsync(c => c.CartId == ShoppingCartId && c.ItemId == id);
             var cartItemss = GetCartItems();
+
             var iceCreamss = new List<IceCream1>();
 
             foreach (var item in cartItemss)
@@ -194,14 +195,10 @@ namespace Cloud1.Controllers
             };
             //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
             Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total(), };
-            string orderJson = JsonSerializer.Serialize(order);
-
+            //string orderJson = JsonSerializer.Serialize(order);
+            //return View(order);
             // Pass it as a route value
-            return RedirectToAction("Checkout", "Orders", new { order = orderJson });
-
-            //return RedirectToAction("Checkout", "Orders", order);
-            // To open a view from a different controller
-            //return View("~/Views/Orders/Checkout.cshtml", order);
+           return RedirectToAction("Checkout", "Orders", order);
         }
 
         //add &&  remove from cart
@@ -318,7 +315,7 @@ namespace Cloud1.Controllers
         {
             ShoppingCartId = GetCartId();
 
-            var lst= _context.CartItem.Where(
+            var lst= _context.CartItem.Include(c => c.Cream1).Where(
                 c => c.CartId == ShoppingCartId).ToList();
             return lst;
         }
