@@ -25,6 +25,18 @@
         <label for="Email">Email:</label>
         <input type="text" id="Email" name="Email" value="@Model.Email" />
     </div>
-    <button type="submit"> Order</button>
+    <form id="orderForm" action="@Url.Action("Create", "Orders")" method="post">
+        <!-- אוסף כאן את הפרטים שאתה רוצה לשלוח עם הטופס -->
+        <input type="hidden" name="totalPrice" value="@Model.TotalPrice.ToString("C")">
+        <!-- כפתור ה-Order -->
+        <button type="submit" id="orderButton">Order</button>
+    </form>
+
 </form>
->
+<script>
+    // קביעת אירוע ללחיצה על הכפתור
+    document.getElementById('orderButton').addEventListener('click', function () {
+        // העברת המשתמש לדף PayPal.html
+        window.location.href = 'wwwroot/PayPal.html';
+    });
+</script>
