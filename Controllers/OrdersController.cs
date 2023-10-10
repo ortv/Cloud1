@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
+using Newtonsoft.Json;
 
 namespace Cloud1.Controllers
 {
@@ -180,9 +181,16 @@ namespace Cloud1.Controllers
         public IActionResult OrderHistory(DateTime startDate, DateTime endDate)
         {
             var orderData = GetOrderData(startDate, endDate);
+           // ViewBag.OrderData = orderData; // Set ViewBag.OrderData with the retrieved data
 
-            return View(orderData);
+            //***
+            //ViewBag.OrderData = JsonConvert.SerializeObject(orderData);
+            //***
+
+           return View(orderData);
+           // return View();
         }
+
 
         private List<Order> GetOrderData(DateTime startDate, DateTime endDate)
         {

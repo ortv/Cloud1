@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@model List<Order>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title>Order History Chart</title>
-    <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -14,17 +15,16 @@
 
     <!-- JavaScript for Chart.js -->
     <script>
-        // Retrieve the data for the chart from the ViewBag (or ViewData) passed from the controller
+        // Retrieve the data from the model
+        console.log('Order data:', @Html.Raw(Json.Serialize(Model)));
 
-        var orderData = @Html.Raw(Json.Serialize(ViewBag.OrderData));
-        console.log(orderData); // Output the data to the browser's console for debugging
+        var orderData = @Html.Raw(Json.Serialize(Model));
 
-        // Extract labels (dates) and values (order counts) from the data
-        var labels = orderData.map(item => item.OrderDate);
-        var values = orderData.map(item => item.OrderCount);
-        console.log(labels); // Output the labels
-        console.log(values); // Output the values
+        // Process the data to create labels and values for the chart
+        var labels = orderData.map(item => new Date(item.orderDate));
+        var values = orderData.map(item => item.orderCount);
 
+        // Create the chart
         var ctx = document.getElementById('orderChart').getContext('2d');
         var chart = new Chart(ctx, {
             type: 'bar',
@@ -43,7 +43,7 @@
                     x: {
                         type: 'time',
                         time: {
-                            unit: 'day' // You can adjust the time unit as needed
+                            unit: 'day'
                         },
                         title: {
                             display: true,
