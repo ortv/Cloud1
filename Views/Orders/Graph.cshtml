@@ -1,0 +1,57 @@
+﻿@model OrderGraphViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Order Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Order Graph</h1>
+
+    <!-- Form for selecting date range -->
+    <form method="get" action="/Orders/Graph">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="start" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="end" required>
+
+        <button type="submit">Generate Graph</button>
+    </form>
+
+    <!-- Canvas for the Chart.js chart -->
+    <canvas id="orderChart" width="400" height="200"></canvas>
+
+    <script>
+        // Get the canvas element
+        var ctx = document.getElementById('orderChart').getContext('2d');
+
+        // Get the data for the chart from the model
+        var chartData = {
+            labels: @Html.Raw(Json.Serialize(Model.DateLabels)), // An array of date labels
+            datasets: [{
+                label: 'Total Price',
+                data: @Html.Raw(Json.Serialize(Model.TotalPrices)), // An array of total prices
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Specify the background color
+                borderColor: 'rgba(75, 192, 192, 1)', // Specify the border color
+                borderWidth: 1
+            }]
+        };
+
+        // Create the chart
+        var chart = new Chart(ctx, {
+            type: 'bar', // You can change the chart type (e.g., 'line', 'bar', 'pie', etc.)
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Start the y-axis at zero
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
