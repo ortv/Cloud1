@@ -177,29 +177,7 @@ namespace Cloud1.Controllers
             return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
 
         }
-        public IActionResult OrderHistory(DateTime startDate, DateTime endDate)
-        {
-            var orderData = GetOrderData(startDate, endDate);
-
-            return View(orderData);
-        }
-
-        private List<Order> GetOrderData(DateTime startDate, DateTime endDate)
-        {
-            // קבלת הזמנות ממסד הנתונים לפי טווח תאריכים
-            var orders = _context.Order
-                .Where(o => o.OrderDate >= startDate && o.OrderDate <= endDate);
-
-            return orders.ToList();
-        }
-        public IActionResult Graph()
-        {
-            return View();
-        }
-
-
-
-
+        
 
     }
 }
