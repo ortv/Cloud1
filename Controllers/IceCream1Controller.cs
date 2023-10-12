@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
+using Cloud1.Services;
 
 namespace Cloud1.Controllers
 {
     public class IceCream1Controller : Controller
     {
         private readonly Cloud1Context _context;
+        //private readonly ImaggaService imaggaService= ;
 
         public IceCream1Controller(Cloud1Context context)
         {
             _context = context;
+            
         }
 
         // GET: IceCream1
@@ -69,9 +72,24 @@ namespace Cloud1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(iceCream1);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                HttpClient httpClient = new HttpClient();
+                ImaggaService imagga = new ImaggaService(httpClient);
+                bool contains =  await imagga.CheckForIceCream(iceCream1.imageUrl);
+                if (contains)
+                {
+                    _context.Add(iceCream1);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    
+                    ModelState.AddModelError("imageUrl", "No ice cream detected in the image");
+                }
+
+                //_context.Add(iceCream1);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
             return View(iceCream1);
         }

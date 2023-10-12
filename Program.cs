@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
+using Cloud1.Services;
 
 namespace Cloud1
 {
@@ -20,6 +21,7 @@ namespace Cloud1
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             ////
+           
             builder.Services.AddDistributedMemoryCache(); // Add a cache for session state
             builder.Services.AddSession(options =>
             {
@@ -33,7 +35,8 @@ namespace Cloud1
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();///
-
+            builder.Services.AddHttpClient<ImaggaService>();
+            builder.Services.AddScoped<ImaggaService>();
 
 
             var app = builder.Build();
