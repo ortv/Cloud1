@@ -72,10 +72,8 @@ namespace Cloud1.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpClient httpClient = new HttpClient();
-                ImaggaService imagga = new ImaggaService(httpClient);
-                bool contains =  await imagga.CheckForIceCream(iceCream1.imageUrl);
-                if (contains)
+                var contain = await CheckImage(iceCream1.imageUrl);
+                if(contain)
                 {
                     _context.Add(iceCream1);
                     await _context.SaveChangesAsync();
@@ -83,15 +81,25 @@ namespace Cloud1.Controllers
                 }
                 else
                 {
-                    
-                    ModelState.AddModelError("imageUrl", "No ice cream detected in the image");
+                    ModelState.AddModelError("imageUrl", "No ice cream");
                 }
+                //HttpClient httpClient = new HttpClient();
+                //ImaggaService imagga = new ImaggaService(httpClient);
+                //bool contains =  await imagga.CheckForIceCream(iceCream1.imageUrl);
+                //if (contains)
+
 
                 //_context.Add(iceCream1);
                 //await _context.SaveChangesAsync();
                 //return RedirectToAction(nameof(Index));
             }
             return View(iceCream1);
+        }
+        private async Task<bool> CheckImage(string ImageUrl)
+        {
+            var apiService = new ApiService("acc_3d60a751e375dec");
+            var IsIceCream = await apiService.GetApiResponseAsync<bool>($"http://localhost:5122/api/imagga?imageUrl={Uri.EscapeDataString(ImageUrl)}");
+            return IsIceCream;
         }
 
         // GET: IceCream1/Edit/5
