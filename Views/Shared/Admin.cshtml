@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,11 +11,16 @@
     <title>@ViewBag.Title</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
 	<link href="~/css/stylesheet.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     
 </head>
 <body>
     <div class="admin-header">
-        <a href="#user"><i class="fas fa-user"></i> Hello @User.Identity?.Name!</a>
+        @{
+            var user = await UserManager.GetUserAsync(User);
+            var userEmail = user?.Email;
+        }
+        <a href="#user"><i class="fas fa-user"></i> Hello Avigail @userEmail</a>
 
         <a asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> HOME</a>
 

@@ -1,10 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutHeadFooter.cshtml";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,6 +14,33 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <title>Hexashop Ecommerce HTML CSS Template</title>
+
+    <style>
+        .thumb img {
+            border-radius: 20%; /* קצוות מעוגלים */
+            max-width: 100%; /* גודל תמונה מקסימלי */
+            height: auto;
+        }
+    </style>
+
+    <style>
+        .product-info {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .thumb:hover .product-info {
+            opacity: 1;
+        }
+    </style>
 
 
     <!-- Additional CSS Files -->
@@ -25,17 +53,17 @@
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
-<!--
+    <!--
 
-TemplateMo 571 Hexashop
+    TemplateMo 571 Hexashop
 
-https://templatemo.com/tm-571-hexashop
+    https://templatemo.com/tm-571-hexashop
 
--->
-    </head>
-    
-    <body>
-    
+    -->
+</head>
+
+<body style="background-color: black; color: white;">
+
     <!-- ***** Preloader Start ***** -->
     <div id="preloader">
         <div class="jumper">
@@ -43,121 +71,18 @@ https://templatemo.com/tm-571-hexashop
             <div></div>
             <div></div>
         </div>
-    </div>  
+    </div>
     <!-- ***** Preloader End ***** -->
-    
-    
-    
-
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="left-content">
-                        <div class="thumb">
-                            <div class="inner-content">
-                                <h4>We Are Hexashop</h4>
-                                <span>Awesome, clean &amp; creative HTML5 Template</span>
-                                <div class="main-border-button">
-                                    <a href="#">Purchase Now!</a>
-                                </div>
-                            </div>
-                            <img src="assets/images/left-banner-image.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="right-content">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="right-first-image">
-                                    <div class="thumb">
-                                        <div class="inner-content">
-                                            <h4>Women</h4>
-                                            <span>Best Clothes For Women</span>
-                                        </div>
-                                        <div class="hover-content">
-                                            <div class="inner">
-                                                <h4>Women</h4>
-                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                                <div class="main-border-button">
-                                                    <a href="#">Discover More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img src="assets/images/baner-right-image-01.jpg">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="right-first-image">
-                                    <div class="thumb">
-                                        <div class="inner-content">
-                                            <h4>Men</h4>
-                                            <span>Best Clothes For Men</span>
-                                        </div>
-                                        <div class="hover-content">
-                                            <div class="inner">
-                                                <h4>Men</h4>
-                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                                <div class="main-border-button">
-                                                    <a href="#">Discover More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img src="assets/images/baner-right-image-02.jpg">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="right-first-image">
-                                    <div class="thumb">
-                                        <div class="inner-content">
-                                            <h4>Kids</h4>
-                                            <span>Best Clothes For Kids</span>
-                                        </div>
-                                        <div class="hover-content">
-                                            <div class="inner">
-                                                <h4>Kids</h4>
-                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                                <div class="main-border-button">
-                                                    <a href="#">Discover More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img src="assets/images/baner-right-image-03.jpg">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="right-first-image">
-                                    <div class="thumb">
-                                        <div class="inner-content">
-                                            <h4>Accessories</h4>
-                                            <span>Best Trend Accessories</span>
-                                        </div>
-                                        <div class="hover-content">
-                                            <div class="inner">
-                                                <h4>Accessories</h4>
-                                                <p>Lorem ipsum dolor sit amet, conservisii ctetur adipiscing elit incid.</p>
-                                                <div class="main-border-button">
-                                                    <a href="#">Discover More</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <img src="assets/images/baner-right-image-04.jpg">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Embedding a video with autoplay and muted for background -->
+       
+        <video class="w-100" autoplay loop muted>
+            <source src="/assets/images/logo2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <!-- ***** Main Banner Area End ***** -->
-
     <!-- ***** Men Area Starts ***** -->
     <section class="section" id="men">
         <div class="container">
@@ -165,9 +90,9 @@ https://templatemo.com/tm-571-hexashop
                 <div class="col-lg-6">
                     <div class="section-heading">
                         <h2>
-                            The Star Series
+                            Our recommended ice creams
                         </h2>
-                        <span>Where each celestial-inspired ice cream flavor takes your taste buds on a cosmic journey, one scoop at a time.</span>
+                        <span>Here you can see our list of best-selling and recommended ice creams. Enjoy!</span>
                     </div>
                 </div>
             </div>
@@ -189,17 +114,7 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/earth.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> כדור הארץ</h4>
-                                    <span>$90.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
+
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -211,17 +126,6 @@ https://templatemo.com/tm-571-hexashop
                                         </ul>
                                     </div>
                                     <img src="assets/images/Mercury.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4> מרקורי</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="item">
@@ -235,17 +139,6 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/Neptune.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> נפטון</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -257,17 +150,6 @@ https://templatemo.com/tm-571-hexashop
                                         </ul>
                                     </div>
                                     <img src="assets/images/Venus.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4> נגה</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="item">
@@ -281,17 +163,7 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/Sun.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> שמש</h4>
-                                    <span>$120.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
+
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -304,17 +176,6 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/Pluto2.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> פלוטו</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -326,17 +187,6 @@ https://templatemo.com/tm-571-hexashop
                                         </ul>
                                     </div>
                                     <img src="assets/images/Saturn.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4> שבתאי</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
                                 </div>
                             </div>
                             <div class="item">
@@ -350,17 +200,7 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/Jupiter.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> צדק</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
+
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -373,17 +213,7 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/Uranus.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> אורנוס</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
+
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -396,17 +226,8 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/Mars.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4> מאדים</h4>
-                                    <span>$150.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
+
+
                             </div>
                             <div class="item">
                                 <div class="thumb">
@@ -419,144 +240,14 @@ https://templatemo.com/tm-571-hexashop
                                     </div>
                                     <img src="assets/images/moon.jpg" alt="">
                                 </div>
-                                <div class="down-content">
-                                    <h4>ירח</h4>
-                                    <span>$120.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
     <!-- ***** Men Area Ends ***** -->
-
-    <!-- ***** Women Area Starts ***** -->
-    <section class="section" id="women">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="section-heading">
-                        <h2>Back to earth</h2>
-                        <span>Experience a sweet return to earthly delights with our 'Back to Earth' ice cream collection at IcePace, offering nostalgic flavors that bring you closer to home</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="women-item-carousel">
-                        <div class="owl-women-item owl-carousel">
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Saturn.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4>New Green Jacket</h4>
-                                    <span>$75.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/women-02.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4>Classic Dress</h4>
-                                    <span>$45.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/women-03.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4>Spring Collection</h4>
-                                    <span>$130.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/women-01.jpg" alt="">
-                                </div>
-                                <div class="down-content">
-                                    <h4>Classic Spring</h4>
-                                    <span>$120.00</span>
-                                    <ul class="stars">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Women Area Ends ***** -->
-
-    
 
     <!-- ***** Explore Area Starts ***** -->
     <section class="section" id="explore">
@@ -569,7 +260,7 @@ https://templatemo.com/tm-571-hexashop
                         <div class="quote">
                             <i class="fa fa-quote-left"></i><p>From Galactic Gobstopper, a swirling blend of cosmic colors, to Nebula Nectar, a heavenly fusion of exotic fruits, every scoop is a voyage through the universe of taste..</p>
                         </div>
-                        <p>Whether you're a stargazer or an astronaut at heart, our Explore Area promises to elevate your ice cream experience to new cosmic heights. Prepare for an out-of-this-world adventure with each spoonful, where the universe of ice cream meets the wonders of the cosmos at IcePace!</p>
+                        <p>In addition to our special star series, you can enjoy our usual and amazing ice cream flavors. Flavors like chocolate, vanilla and strawberry, that everyone can enjoy!</p>
                         <div class="main-border-button">
                             <a href="Product">Discover More</a>
                         </div>
@@ -580,7 +271,7 @@ https://templatemo.com/tm-571-hexashop
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="leather">
-                                    <h4>Leather Flavors</h4>
+                                    <h4>The Star Series</h4>
                                     <span>Insanely delicious</span>
                                 </div>
                             </div>
@@ -596,7 +287,7 @@ https://templatemo.com/tm-571-hexashop
                             </div>
                             <div class="col-lg-6">
                                 <div class="types">
-                                    <h4>Different Types</h4>
+                                    <h4>Back to earth</h4>
                                     <span>For EveryOne!</span>
                                 </div>
                             </div>
@@ -607,10 +298,6 @@ https://templatemo.com/tm-571-hexashop
         </div>
     </section>
     <!-- ***** Explore Area Ends ***** -->
-
-  
-    
-
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 
@@ -625,31 +312,31 @@ https://templatemo.com/tm-571-hexashop
     <script src="assets/js/scrollreveal.min.js"></script>
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    <script src="assets/js/slick.js"></script> 
-    <script src="assets/js/lightbox.js"></script> 
-    <script src="assets/js/isotope.js"></script> 
-    
+    <script src="assets/js/imgfix.min.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/lightbox.js"></script>
+    <script src="assets/js/isotope.js"></script>
+
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
 
     <script>
 
-        $(function() {
+        $(function () {
             var selectedClass = "";
-            $("p").click(function(){
-            selectedClass = $(this).attr("data-rel");
-            $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("."+selectedClass).fadeOut();
-            setTimeout(function() {
-              $("."+selectedClass).fadeIn();
-              $("#portfolio").fadeTo(50, 1);
-            }, 500);
-                
+            $("p").click(function () {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function () {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+
             });
         });
 
     </script>
 
-  </body>
+</body>
 </html>

@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
+using Cloud1.Services;
 
 namespace Cloud1.Controllers
 {
     public class IceCream1Controller : Controller
     {
         private readonly Cloud1Context _context;
+        //private readonly ImaggaService imaggaService= ;
 
         public IceCream1Controller(Cloud1Context context)
         {
             _context = context;
+            
         }
 
         // GET: IceCream1
@@ -69,11 +72,34 @@ namespace Cloud1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(iceCream1);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var contain = await CheckImage(iceCream1.imageUrl);
+                if(contain)
+                {
+                    _context.Add(iceCream1);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("imageUrl", "No ice cream");
+                }
+                //HttpClient httpClient = new HttpClient();
+                //ImaggaService imagga = new ImaggaService(httpClient);
+                //bool contains =  await imagga.CheckForIceCream(iceCream1.imageUrl);
+                //if (contains)
+
+
+                //_context.Add(iceCream1);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
             return View(iceCream1);
+        }
+        private async Task<bool> CheckImage(string ImageUrl)
+        {
+            var apiService = new ApiService("acc_3d60a751e375dec");
+            var IsIceCream = await apiService.GetApiResponseAsync<bool>($"http://localhost:5122/api/imagga?imageUrl={Uri.EscapeDataString(ImageUrl)}");
+            return IsIceCream;
         }
 
         // GET: IceCream1/Edit/5

@@ -1,5 +1,9 @@
 ﻿@model Order
+@{
+    ViewData["Title"] = "Index";
+        Layout = "~/Views/Shared/_Layout.cshtml";
 
+}
 <form method="post" action="/Orders/Update">
     <div>
         <label for="OrderDate">Order Date:</label>
