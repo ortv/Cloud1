@@ -10,6 +10,11 @@ using Cloud1.Models;
 using System.Text;
 using System.Text.Json;
 using Humanizer;
+//using Cloud1.Services;
+//using GateWay.Models;
+using Newtonsoft.Json;
+using Microsoft.DotNet.MSIdentity.Shared;
+//using static GateWay.Models.hebcal;
 
 namespace Cloud1.Controllers
 {
@@ -196,14 +201,21 @@ namespace Cloud1.Controllers
             };
             //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
             Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total(), };
-            ////Add the order to the context(in -memory representation)
-            //_context.Order.Add(order);
-            //// Save changes to the database
-            //await _context.SaveChangesAsync();
-            //string orderJson = JsonSerializer.Serialize(order);
-            //return View(order);
-            // Pass it as a route value
-            return RedirectToAction("Checkout", "Orders", order);
+			HttpClient httpClient = new HttpClient();
+			//GatewayService services = new GatewayService(httpClient);//tp access our services
+			//														 // Call the GetHebcalDate method to get the JSON response
+			//var hebcalData = await services.GetHebcalDate();
+   //         HebcalResponse hebRes=new HebcalResponse();
+   //         hebRes.dayInAWeek = hebcalData.hebrew;
+   //         hebRes.IfHoliday = hebcalData.events.Count() > 1 ?true :false;
+   //         OrderDetails details= new OrderDetails();
+   //         details.cartItemsList = cartItemss;
+   //         details.hebcalResponse = hebRes;
+   //         details.order = order;
+   //         _context.OrderDetails.Add(details);
+
+
+			return RedirectToAction("Checkout", "Orders", order);
         }
 
         //add &&  remove from cart
