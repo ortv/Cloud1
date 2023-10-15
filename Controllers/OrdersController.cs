@@ -8,16 +8,20 @@ using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
 using Newtonsoft.Json;
+using System.Net.Mail;
+using System.Net;
+using Microsoft.Extensions.Options;
 
 namespace Cloud1.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly Cloud1Context _context;
-
+        //private readonly IOptions<EmailSettings> _emailSettings;
         public OrdersController(Cloud1Context context)
         {
             _context = context;
+            //_emailSettings = emailSettings;
         }
 
         // GET: Orders
@@ -170,7 +174,7 @@ namespace Cloud1.Controllers
         {
             // Add the order to the context (in-memory representation)
             _context.Order.Add(updatedOrder);
-
+            //SendEmail(updatedOrder);
             // Save changes to the database
             _context.SaveChanges();
 
@@ -178,13 +182,39 @@ namespace Cloud1.Controllers
             return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
 
         }
-		public IActionResult GraphCreate()
+        //private void SendEmail(Order order)
+        //{
+        //    string subject = "Order Completed";
+        //    string body = $"Thank you for your order! Your total price is {order.TotalPrice.ToString("C")}. We will process your order shortly.";
+
+        //    using (SmtpClient client = new SmtpClient(_emailSettings.Value.SmtpServer, _emailSettings.Value.Port))
+        //    {
+        //        client.Credentials = new NetworkCredential(_emailSettings.Value.UserName, _emailSettings.Value.Password);
+        //        client.EnableSsl = true;
+
+        //        MailMessage mailMessage = new MailMessage
+        //        {
+        //            From = new MailAddress(_emailSettings.Value.UserName),
+        //            Subject = subject,
+        //            Body = body,
+        //            IsBodyHtml = true
+        //        };
+
+        //        mailMessage.To.Add(order.Email);
+
+        //        client.Send(mailMessage);
+        //    }
+        //}
+
+
+        public IActionResult GraphCreate()
         {
             return View();
         }
 		public IActionResult Graph(DateTime? start, DateTime? end)
 		{
-			var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
+            var orderCounts = new List<int>();
+            var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
 
 			// Prepare data for the view model
 			var dateLabels = orders.Select(order => order.OrderDate?.ToShortDateString()).Distinct().ToList();
@@ -192,14 +222,16 @@ namespace Cloud1.Controllers
 
 			foreach (var dateLabel in dateLabels)
 			{
-				totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
+                orderCounts.Add(orders.Count(order => order.OrderDate?.ToShortDateString() == dateLabel));
+                totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
 			}
 
 			var viewModel = new OrderGraphViewModel
 			{
 				DateLabels = dateLabels,
-				TotalPrices = totalPrices
-			};
+				TotalPrices = totalPrices,
+                OrderCounts = orderCounts
+            };
 
 			return View(viewModel); // Pass the view model to the view
 		}
