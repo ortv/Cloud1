@@ -8,20 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
 using Newtonsoft.Json;
-using System.Net.Mail;
-using System.Net;
-using Microsoft.Extensions.Options;
+using Cloud1.Services;
+using Microsoft.VisualBasic;
+//using Cloud1.Services;
 
 namespace Cloud1.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly Cloud1Context _context;
-        //private readonly IOptions<EmailSettings> _emailSettings;
+
         public OrdersController(Cloud1Context context)
         {
             _context = context;
-            //_emailSettings = emailSettings;
         }
 
         // GET: Orders
@@ -170,51 +169,38 @@ namespace Cloud1.Controllers
             return View(order);
         }
         [HttpPost]
-        public IActionResult Update(Order updatedOrder)
+		public async Task<IActionResult> Update(Order updatedOrder)
         {
             // Add the order to the context (in-memory representation)
-            _context.Order.Add(updatedOrder);
-            //SendEmail(updatedOrder);
-            // Save changes to the database
-            _context.SaveChanges();
+            //_context.Order.Add(updatedOrder);
+            //need to update the weather in the OrderDetails object
+            var order = _context.Order.OrderByDescending(e => e.Id).FirstOrDefault();
+            order = updatedOrder;
+            var details = _context.OrderDetails.OrderByDescending(e => e.Id).FirstOrDefault();
+            details.order = updatedOrder;
+            details.weatherResponse = await WeatherService(updatedOrder.City);
+           
 
+			_context.SaveChanges(); // Save changes to the database
+            //now, we have an order and orderDetails aved in the db!
             // Redirect to the PayPal.html page with the total price as a query parameter
             return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
 
         }
-        //private void SendEmail(Order order)
-        //{
-        //    string subject = "Order Completed";
-        //    string body = $"Thank you for your order! Your total price is {order.TotalPrice.ToString("C")}. We will process your order shortly.";
-
-        //    using (SmtpClient client = new SmtpClient(_emailSettings.Value.SmtpServer, _emailSettings.Value.Port))
-        //    {
-        //        client.Credentials = new NetworkCredential(_emailSettings.Value.UserName, _emailSettings.Value.Password);
-        //        client.EnableSsl = true;
-
-        //        MailMessage mailMessage = new MailMessage
-        //        {
-        //            From = new MailAddress(_emailSettings.Value.UserName),
-        //            Subject = subject,
-        //            Body = body,
-        //            IsBodyHtml = true
-        //        };
-
-        //        mailMessage.To.Add(order.Email);
-
-        //        client.Send(mailMessage);
-        //    }
-        //}
-
-
-        public IActionResult GraphCreate()
+		public async Task<WeatherResponse> WeatherService(string city)
+        {
+			var apiService = new ApiService("acc_3d60a751e375dec");
+			var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://localhost:5122/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
+			return weather;
+		}
+		
+			public IActionResult GraphCreate()
         {
             return View();
         }
 		public IActionResult Graph(DateTime? start, DateTime? end)
 		{
-            var orderCounts = new List<int>();
-            var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
+			var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
 
 			// Prepare data for the view model
 			var dateLabels = orders.Select(order => order.OrderDate?.ToShortDateString()).Distinct().ToList();
@@ -222,16 +208,14 @@ namespace Cloud1.Controllers
 
 			foreach (var dateLabel in dateLabels)
 			{
-                orderCounts.Add(orders.Count(order => order.OrderDate?.ToShortDateString() == dateLabel));
-                totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
+				totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
 			}
 
 			var viewModel = new OrderGraphViewModel
 			{
 				DateLabels = dateLabels,
-				TotalPrices = totalPrices,
-                OrderCounts = orderCounts
-            };
+				TotalPrices = totalPrices
+			};
 
 			return View(viewModel); // Pass the view model to the view
 		}

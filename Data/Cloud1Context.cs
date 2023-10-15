@@ -27,6 +27,10 @@ namespace Cloud1.Data
 
         public DbSet<Cloud1.Models.Order>? Order { get; set; }
 
+       
+
+        public DbSet<Cloud1.Models.OrderDetails>? OrderDetails { get; set; }
+
 
       
 
