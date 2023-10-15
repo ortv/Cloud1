@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
 using Newtonsoft.Json;
+using Cloud1.Services;
+using Microsoft.VisualBasic;
 //using Cloud1.Services;
 
 namespace Cloud1.Controllers
@@ -170,24 +172,14 @@ namespace Cloud1.Controllers
 		public async Task<IActionResult> Update(Order updatedOrder)
         {
             // Add the order to the context (in-memory representation)
-            _context.Order.Add(updatedOrder);
-			//need to update the weather in the OrderDetails object
-			HttpClient httpClient = new HttpClient();
-			//GatewayService services = new GatewayService(httpClient);//tp access our services
-   //                                                                  // Call the GetHebcalDate method to get the JSON response
-   //         var weatherData =await  services.GetCurrentWeather(updatedOrder.City);
-   //         WeatherResponse wesRes=new WeatherResponse();
-   //         wesRes.FeelsLike=weatherData.Main.FeelsLike;
-			//wesRes.FeelsLike = weatherData.Main.Humidity;
-			////update order details
-			//var orderDetails = _context.OrderDetails.Where(o => o.order.Id == updatedOrder.Id).SingleOrDefault(); 
-			//if (orderDetails != null)
-			//{
-   //             // Update the desired field
-   //             orderDetails.weatherResponse = wesRes;
-			//	// Save changes to the database
-			//	_context.SaveChanges();
-			//}
+            //_context.Order.Add(updatedOrder);
+            //need to update the weather in the OrderDetails object
+            var order = _context.Order.OrderByDescending(e => e.Id).FirstOrDefault();
+            order = updatedOrder;
+            var details = _context.OrderDetails.OrderByDescending(e => e.Id).FirstOrDefault();
+            details.order = updatedOrder;
+            details.weatherResponse = await WeatherService(updatedOrder.City);
+           
 
 			_context.SaveChanges(); // Save changes to the database
             //now, we have an order and orderDetails aved in the db!
@@ -195,7 +187,14 @@ namespace Cloud1.Controllers
             return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
 
         }
-		public IActionResult GraphCreate()
+		public async Task<WeatherResponse> WeatherService(string city)
+        {
+			var apiService = new ApiService("acc_3d60a751e375dec");
+			var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://localhost:5122/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
+			return weather;
+		}
+		
+			public IActionResult GraphCreate()
         {
             return View();
         }
