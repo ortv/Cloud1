@@ -50,33 +50,7 @@ namespace Cloud1.Services
                 throw new Exception($"API request failed: {ex.Message}");
             }
         }
-		public async Task<HebcalResponse> GetApiResponseAsync2(string apiUrl)
-		{
-			try
-			{
-				// Set any required headers or parameters for the API request here
-				_httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
-
-				HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
-
-				if (response.IsSuccessStatusCode)
-				{
-					string responseContent = await response.Content.ReadAsStringAsync();
-					var hebcalApiResponse = JsonConvert.DeserializeObject<HebcalResponse>(responseContent);
-					return hebcalApiResponse;
-				}
-				else
-				{
-					// Handle API error response here
-					throw new Exception($"API request failed with status code: {response.StatusCode}");
-				}
-			}
-			catch (Exception ex)
-			{
-				// Handle exceptions
-				throw new Exception($"API request failed: {ex.Message}");
-			}
-		}
+		
 		
 
 	}

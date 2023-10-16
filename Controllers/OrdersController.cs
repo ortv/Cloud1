@@ -10,6 +10,8 @@ using Cloud1.Models;
 using Newtonsoft.Json;
 using Cloud1.Services;
 using Microsoft.VisualBasic;
+using Cloud1.Migrations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 //using Cloud1.Services;
 
 namespace Cloud1.Controllers
@@ -166,27 +168,73 @@ namespace Cloud1.Controllers
         }
         public async Task<IActionResult> Checkout(Order order)
         {
-            return View(order);
+			
+			return View(order);
         }
         [HttpPost]
 		public async Task<IActionResult> Update(Order updatedOrder)
         {
-            // Add the order to the context (in-memory representation)
-            //_context.Order.Add(updatedOrder);
-            //need to update the weather in the OrderDetails object
-            var order = _context.Order.OrderByDescending(e => e.Id).FirstOrDefault();
-            order = updatedOrder;
-            var details = _context.OrderDetails.OrderByDescending(e => e.Id).FirstOrDefault();
-            details.order = updatedOrder;
-            details.weatherResponse = await WeatherService(updatedOrder.City);
-           
+            //first,need to check if its a valid address
+            if (ModelState.IsValid)
+            {
+                bool exist = await CheckAddress(updatedOrder.City, updatedOrder.Address);
+                if (exist)//correct
+                {
+                    // Add the order to the context (in-memory representation)
+                    //_context.Order.Add(updatedOrder);
+                    //need to update the weather in the OrderDetails object
+                    var order = _context.Order.OrderByDescending(e => e.Id).FirstOrDefault();
+                    // order = updatedOrder;
+                    //updeate db for order
+                    order.Address = updatedOrder.Address;
+                    order.OrderDate = updatedOrder.OrderDate;
+                    order.TotalPrice = updatedOrder.TotalPrice;
+                    order.City = updatedOrder.City;
+                    order.Email = updatedOrder.Email;
+                    order.Name = updatedOrder.Name; // Add this line
 
-			_context.SaveChanges(); // Save changes to the database
-            //now, we have an order and orderDetails aved in the db!
-            // Redirect to the PayPal.html page with the total price as a query parameter
-            return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
+                    var details = _context.OrderDetails.OrderByDescending(e => e.Id).FirstOrDefault();
+                    details.order.Address = updatedOrder.Address;
+                    details.order.OrderDate = updatedOrder.OrderDate;
+                    details.order.TotalPrice = updatedOrder.TotalPrice;
+                    details.order.City = updatedOrder.City;
+                    details.order.Email = updatedOrder.Email;
+                    details.order.Name = updatedOrder.Name; // Add this line
 
-        }
+                    details.weatherResponse = await WeatherService(updatedOrder.City);
+
+                    _context.SaveChanges(); // Save changes to the database
+
+                    // Redirect to the PayPal.html page with the total price as a query parameter
+                    return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
+
+
+
+                    _context.SaveChanges(); // Save changes to the database
+                                            //now, we have an order and orderDetails aved in the db!
+                                            // Redirect to the PayPal.html page with the total price as a query parameter
+                    return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
+                }
+                else//incorrect
+                {
+					ModelState.AddModelError("Address", "The provided address is incorrect. Please check the address and try again.");
+					
+				}
+			}
+			return View(updatedOrder);
+
+
+		}
+
+
+		private async Task<bool> CheckAddress(string city,string street)
+		{
+			var apiService = new ApiService("acc_3d60a751e375dec");
+            //http://localhost:5122/api/address?CityName=%D7%91%D7%A0%D7%99%20%D7%91%D7%A8%D7%A7&StreetName=%D7%A7%D7%91%D7%95%D7%A5%20%D7%92%D7%9C%D7%99%D7%95%D7%AA
+
+            var address = await apiService.GetApiResponseAsync<bool>($"http://localhost:5122/api/address?CityName={Uri.EscapeDataString(city)}&StreetName={Uri.EscapeDataString(street)}");
+			return address;
+		}
 		public async Task<WeatherResponse> WeatherService(string city)
         {
 			var apiService = new ApiService("acc_3d60a751e375dec");
