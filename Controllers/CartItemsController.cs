@@ -15,7 +15,6 @@ using Humanizer;
 using Newtonsoft.Json;
 using Microsoft.DotNet.MSIdentity.Shared;
 using Cloud1.Services;
-using static Cloud1.Models.hebcal;
 //using static GateWay.Models.hebcal;
 
 namespace Cloud1.Controllers
@@ -201,10 +200,10 @@ namespace Cloud1.Controllers
             //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
             Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total(), };
             //saving defult values!
-            order.Address = "הזן כתובת";
-            order.City = "הזן עיר";
-            order.Email = "הזן מייל";
-            order.Name = "הזן שמך";
+            order.Address = string.Empty;
+            order.City = string.Empty;
+            order.Email = string.Empty;
+            order.Name = string.Empty;
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
             OrderDetails details= new OrderDetails();
@@ -213,7 +212,7 @@ namespace Cloud1.Controllers
             details.order = order;
 
             WeatherResponse weather = new WeatherResponse();
-            weather.City = "city";
+            weather.City = string.Empty;
             weather.Humidity = 3;
             weather.FeelsLike = 2;
             details.weatherResponse=weather;
@@ -224,7 +223,7 @@ namespace Cloud1.Controllers
 		public async Task<HebcalResponse> HebcalService()
 		{
 			var apiService = new ApiService("acc_3d60a751e375dec");
-			var hebcalApiResponse = await apiService.GetApiResponseAsync2("http://localhost:5122/api/Hebcal");
+			var hebcalApiResponse = await apiService.GetApiResponseAsync<HebcalResponse>("http://localhost:5122/api/Hebcal");
             //return (hebcalApiResponse.Day, hebcalApiResponse.IsHoliday);
             return hebcalApiResponse;
 		}

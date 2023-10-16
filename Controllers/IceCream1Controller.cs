@@ -83,15 +83,6 @@ namespace Cloud1.Controllers
                 {
                     ModelState.AddModelError("imageUrl", "No ice cream");
                 }
-                //HttpClient httpClient = new HttpClient();
-                //ImaggaService imagga = new ImaggaService(httpClient);
-                //bool contains =  await imagga.CheckForIceCream(iceCream1.imageUrl);
-                //if (contains)
-
-
-                //_context.Add(iceCream1);
-                //await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
             }
             return View(iceCream1);
         }
