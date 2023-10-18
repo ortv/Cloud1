@@ -363,6 +363,15 @@ namespace Cloud1.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpGet]
+        public JsonResult GetCartItemCount()
+        {
+            var cartItemsCount = _context.CartItem
+                .Count(c => c.CartId == GetCartId());
+
+            return Json(cartItemsCount);
+        }
+
     }
 }
 

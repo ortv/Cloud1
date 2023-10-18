@@ -12,6 +12,9 @@ using Cloud1.Services;
 using Microsoft.VisualBasic;
 using Cloud1.Migrations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Net.Mail;
+using System.Net;
+
 //using Cloud1.Services;
 
 namespace Cloud1.Controllers
@@ -204,7 +207,7 @@ namespace Cloud1.Controllers
                     details.weatherResponse = await WeatherService(updatedOrder.City);
 
                     _context.SaveChanges(); // Save changes to the database
-
+                    await SendOrderConfirmationEmail(updatedOrder);
                     // Redirect to the PayPal.html page with the total price as a query parameter
                     return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
 
@@ -225,6 +228,7 @@ namespace Cloud1.Controllers
 
 
 		}
+
 
 
 		private async Task<bool> CheckAddress(string city,string street)
@@ -248,6 +252,7 @@ namespace Cloud1.Controllers
         }
 		public IActionResult Graph(DateTime? start, DateTime? end)
 		{
+            var orderCounts = new List<int>();
 			var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
 
 			// Prepare data for the view model
@@ -256,18 +261,49 @@ namespace Cloud1.Controllers
 
 			foreach (var dateLabel in dateLabels)
 			{
+                orderCounts.Add(orders.Count(order=>order.OrderDate?.ToShortDateString() == dateLabel));
 				totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
 			}
 
 			var viewModel = new OrderGraphViewModel
 			{
 				DateLabels = dateLabels,
-				TotalPrices = totalPrices
+				TotalPrices = totalPrices,
+                OrderCounts = orderCounts
+
 			};
 
 			return View(viewModel); // Pass the view model to the view
 		}
+        private async Task SendOrderConfirmationEmail(Order order)
+        {
+            // Replace these values with your SMTP server details
+            string smtpServer = "smtp.gmail.com";
+            int smtpPort = 587;
+            string smtpUsername = "icepace2023@gmail.com";
+            string smtpPassword = "zzkm wtti wngk uozo";
+
+            using (var client = new SmtpClient(smtpServer, smtpPort))
+            {
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                client.EnableSsl = true;
+
+                var message = new MailMessage
+                {
+                    From = new MailAddress("icepace2023@gmail.com"),
+                    Subject = "Order Confirmation",
+                    Body = $" Dear {order.Name},Thank you for your order. Your total price is {order.TotalPrice:C}.",
+                    IsBodyHtml = false
+                };
+
+                message.To.Add(order.Email);
+
+                await client.SendMailAsync(message);
+            }
+        }
 
 
-	}
+    }
+
 }

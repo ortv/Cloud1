@@ -10,6 +10,10 @@ namespace Cloud1.Controllers
         {
             return View("Index");
         }
+        public ActionResult PageMeng()
+        {
+            return View("Admin1");
+        }
 
         // GET: AdminController/Details/5
         public ActionResult Details(int id)
