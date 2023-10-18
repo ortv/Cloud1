@@ -1,4 +1,6 @@
-﻿namespace Cloud1.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Cloud1.Models
 {
 	public class OrderDetails
 	{
@@ -6,8 +8,9 @@
 		//and the order that we are talking about.
 		public int Id { get; set; }
 		public WeatherResponse weatherResponse { get; set; }
-		public HebcalResponse hebcalResponse { get; set; }
-		public List<CartItem> cartItemsList { get; set; }
+		public HebcalResponse hebcalResponse { get; set; } 
+
+        public List<CartItem> cartItemsList { get; set; }
 		public Order order { get; set; }//for communication
 
 

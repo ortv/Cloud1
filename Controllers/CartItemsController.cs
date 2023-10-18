@@ -207,8 +207,8 @@ namespace Cloud1.Controllers
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
             OrderDetails details= new OrderDetails();
-            details.cartItemsList = cartItemss;
-			details.hebcalResponse = await HebcalService();
+            details.cartItemsList = cartItemss.ToList();
+            details.hebcalResponse = await HebcalService();
             details.order = order;
 
             WeatherResponse weather = new WeatherResponse();
