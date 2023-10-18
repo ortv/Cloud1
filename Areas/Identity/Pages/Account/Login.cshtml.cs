@@ -114,8 +114,21 @@ namespace Cloud1.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl); // שימי לב לשימוש בשמות הפעולה והקונטרולר המתאימים
+                    var isAdmin = IsAdminUser(Input.Email);
+
+                    if (isAdmin)
+                    {
+                        // Redirect to the admin page
+                        return RedirectToPage("Admin/Index");
+                    }
+                    else
+                    {
+                        // User is not an admin, add an error message
+                        ModelState.AddModelError(string.Empty, "You do not have permission to access this page.");
+                       
+                    }
+                    //_logger.LogInformation("User logged in.");
+                    //return LocalRedirect(returnUrl);
                 }
 
                 if (result.RequiresTwoFactor)
@@ -125,7 +138,7 @@ namespace Cloud1.Areas.Identity.Pages.Account
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
+                    return RedirectToPage("Admin/Index");
                 }
                 else
                 {
@@ -136,6 +149,17 @@ namespace Cloud1.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+       
+        }
+        private bool IsAdminUser(string userEmail)
+        {
+            // Implement your logic to check if the user with the given email is an admin
+            // For example, you might have a list of admin email addresses
+            var adminEmails = new List<string> { "icepace2023@gmail.com", "avigailcohen17@gmail.com" };
+
+            return adminEmails.Contains(userEmail);
         }
     }
+
+   
 }

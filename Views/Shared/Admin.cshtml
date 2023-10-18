@@ -16,17 +16,17 @@
 </head>
 <body>
     <div class="admin-header">
-        @{
+        @* @{
             var user = await UserManager.GetUserAsync(User);
             var userEmail = user?.Email;
-        }
-        <a href="#user"><i class="fas fa-user"></i> Hello Avigail @userEmail</a>
+        } *@
+       @*  <a href="#user"><i class="fas fa-user"></i> Hello Avigail @userEmail</a> *@
 
         <a asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> HOME</a>
 
         <a href="#"><i class="fas fa-cog"></i> Setting</a>
 
-        <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+        <a asp-action="PageMeng" asp-controller="Admin" ><i class="fas fa-question-circle"> </i> Help </a>
     </div>
 
 
