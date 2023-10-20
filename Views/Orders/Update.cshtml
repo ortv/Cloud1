@@ -2,11 +2,8 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
-
 }
+
 <form method="post" action="/Orders/Update">
     <div>
         <label for="OrderDate">Order Date:</label>
@@ -33,13 +30,52 @@
         <label for="Email">Email:</label>
         <input type="text" id="Email" name="Email" value="@Model.Email" />
     </div>
-    <form id="orderForm" action="@Url.Action("Create", "Orders")" method="post">
-        <!-- אוסף כאן את הפרטים שאתה רוצה לשלוח עם הטופס -->
-        <input type="hidden" name="totalPrice" value="@Model.TotalPrice.ToString("C")">
-        @* <div class="form-group">
-        <input type="button" value="PayPal HTML" onclick="redicatToPayPal()" class="btn"/>
-        </div>*@
-        <!-- כפתור ה-Order -->
-        <button type="submit" id="orderButton">Order</button>
-    </form>
+    <div>
+        <label for="DiscountedPrice">Discounted Price:</label>
+        <input type="text" id="DiscountedPrice" name="DiscountedPrice" readonly />
+    </div>
+
+    <div>
+        <label for="CouponCode">Coupon Code:</label>
+        <input type="text" id="CouponCode" name="CouponCode" />
+        <button type="button" onclick="applyCoupon()">Apply Coupon</button>
+    </div>
+
+    <!-- Move the form closing tag here -->
+    <!-- אוסף כאן את הפרטים שאתה רוצה לשלוח עם הטופס -->
+    <input type="hidden" name="totalPrice" value="@Model.TotalPrice.ToString("C")">
+    @* <div class="form-group">
+    <input type="button" value="PayPal HTML" onclick="redicatToPayPal()" class="btn"/>
+    </div>*@
+    <!-- כפתור ה-Order -->
+    <button type="submit" id="orderButton">Order Now</button>
 </form>
+<script>
+    function applyCoupon() {
+        // Get the entered coupon code
+        const couponCode = document.getElementById('CouponCode').value;
+
+        // Assuming you have a server-side endpoint to check the coupon
+        // This is a simplified example, and you need to implement the actual server-side logic
+        fetch(`/check-coupon?code=${couponCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.valid) {
+                    // Apply the discount on the front-end
+                    const originalPrice = parseFloat(document.getElementById('TotalPrice').value.replace(',', ''));
+                    const discountedPriceInput = document.getElementById('DiscountedPrice');
+                    const discountedPrice = originalPrice - 10;
+
+                    // Update the input field with the discounted price
+                    discountedPriceInput.value = discountedPrice.toFixed(2);
+
+                    // You can also update other parts of your UI to reflect the discount
+                } else {
+                    alert('Invalid coupon code. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+
+

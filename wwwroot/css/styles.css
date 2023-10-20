@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'BN Alpaca', sans-serif;
+    font-family: Arial, sans-serif;
     font-weight: normal;
 }
 
@@ -86,8 +86,9 @@ label[for="search"] {
     top: 60px;
     width: 260px;
     height: calc(100% - 60px);
-    background: linear-gradient(to bottom, #001c3d, #0d004c, #1a005b, #26006a, #330079);
+    background:#000000;
     overflow-x: hidden;
+    font-family:Aharoni
 }
 
     .sidebar ul {
@@ -98,7 +99,12 @@ label[for="search"] {
             width: 100%;
             list-style: none;
         }
-
+            .sidebar ul li:hover{
+                background:#fff;
+            }
+            .sidebar ul li:hover a {
+                color: #000000;
+            }
             .sidebar ul li a {
                 width: 100%;
                 text-decoration: none;
@@ -112,7 +118,11 @@ label[for="search"] {
                     min-height: 60px;
                     font-size: 24px;
                     text-align: center;
-                }
+             
+          
+                    }
+                
+            
 
 .main {
     position: absolute;
@@ -121,17 +131,21 @@ label[for="search"] {
     left: 260px;
     min-height: calc(100vh - 60px);
     background: #f5f5f5;
+    padding: 20px; /* Add padding to create space around the cards and charts */
+    padding-top: 40px; /* Add padding at the top to create space below the cards */
+    font-family: Aharoni;
 }
-
 .cards {
     display: flex;
-    flex-direction: row; /* Updated to 'row' for horizontal arrangement */
+    flex-direction: row; /* Ensure it's set to 'row' for horizontal arrangement */
     justify-content: space-around;
     align-items: center;
     height: 100%;
 }
 
 .card {
+    flex: 1; /* Allow the card to grow and take available space */
+    margin: 0 10px; /* Add some margin between cards */
     padding: 20px;
     display: flex;
     align-items: center;
@@ -140,10 +154,14 @@ label[for="search"] {
     border-radius: 10px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 }
-
+.card:hover{
+    background:rgba(0, 0, 0, 0.1);
+}
 .card-content {
     text-align: center;
+    width: 100%; /* Ensure the content takes the full width of the card */
 }
+
 
 .icon-box {
     display: flex;
@@ -151,10 +169,10 @@ label[for="search"] {
     align-items: center;
     margin-top: 20px;
 }
-
     .icon-box i {
-        font-size: 24px;
+        font-size: 45px;
         margin-right: 8px;
+        
     }
 
 .card-name {
@@ -163,9 +181,41 @@ label[for="search"] {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1; 
+    color:#888;
+    font-size:24px;
+
 }
 
-.number {
+.numbers {
     font-family: Arial, sans-serif;
-    font-size: 24px;
+    font-size: 35px;
+    font-weight: 500;
+    color: #000000 /* Dark purple color, change as needed */
+}
+.charts {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    width: 100%;
+    padding: 20px;
+    padding-top: 60px; /* Increase padding at the top to move charts further down */
+    font-family: Aharoni;
+}
+.chart h2 {
+    margin-bottom:5px;
+    font-size:20px;
+    color:black;
+    text-align:center;
+    /*padding: 10px;*/ /* Padding properties */
+    /*display: inline-block;*/ /* Make the border wrap around the text */
+    /*font-weight: bold;*/ /* Make the text bolder */
+}
+.chart
+{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    width:100%;
 }

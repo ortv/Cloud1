@@ -246,7 +246,7 @@ namespace Cloud1.Controllers
 			return weather;
 		}
 		
-			public IActionResult GraphCreate()
+		public IActionResult GraphCreate()
         {
             return View();
         }
@@ -301,6 +301,16 @@ namespace Cloud1.Controllers
 
                 await client.SendMailAsync(message);
             }
+        }
+        [HttpGet]
+        public IActionResult CheckCoupon(string code)
+        {
+            // Assume a hardcoded valid coupon code for simplicity
+            const string validCouponCode = "MYCOUPON";
+
+            var isValid = string.Equals(code, validCouponCode, StringComparison.OrdinalIgnoreCase);
+
+            return Json(new { valid = isValid });
         }
 
 

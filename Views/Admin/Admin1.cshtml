@@ -16,29 +16,33 @@
     <div class="sidebar">
         <ul>
             <li>
-                <a href="#">
+                <a asp-action="Index" asp-controller="Orders">
                     <i class="fas fa-shopping-cart"> Orders</i>
                     @* <div>Orders</div> *@
                 </a>
             </li>
+
             <li>
-                <a href="#">
+                <a asp-action="Index" asp-controller="IceCream1">
                     <i class="fas fa-ice-cream"> Products</i>
                     @* <div>Products</div> *@
                 </a>
             </li>
+
             <li>
-                <a href="#">
+                <a asp-action="Graph" asp-controller="Orders">
                     <i class="fas fa-money-bill"> Earnings</i>
                    @*  <div>Earnings</div> *@
                 </a>
             </li>
+
             <li>
                 <a href="#">
                     <i class="fas fa-cogs"> Setting</i>
                    @*  <div>Setting</div> *@
                 </a>
             </li>
+
             <li>
                 <a href="#">
                     <i class="fas fa-question-circle"> Help</i>
@@ -51,9 +55,10 @@
                     @* <div>Deals & Discounts</div> *@
                 </a>
             </li>
+
             <li>
                 <a href="#">
-                    <i class="fas fa-users">Employees</i>
+                    <i class="fas fa-store"> Activity </i>
                     @* div>Employees</div> *@
                 </a>
             </li>
@@ -65,41 +70,54 @@
         <div class="cards">
             <div class="card">
                 <div class="card-content">
-                    <div class="number">1217</div>
+                    <div class="numbers">$1000</div>
                     <div class="card-name">
-                        Sales
+                        Sales for today
+                        <div class="icon-box">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="numbers">25</div>
+                    <div class="card-name">
+                        Employees
+                        <div class="icon-box">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <div class="numbers">10</div>
+                    <div class="card-name">
+                        statistics
                         <div class="icon-box">
                             <i class="fas fa-chart-line"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="number">1217</div>
-                    <div class="card-name">
-                        Expenses
-                        <div class="icon-box">
-                            <i class="fas fa-ice-cream"></i>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="charts">
+            <div class="chart">
+                <h2> Earnings (past 12 months)</h2>
+                <canvas id="lineChart"></canvas>
             </div>
-            <div class="card">
-                <div class="card-content">
-                    <div class="number">1217</div>
-                    <div class="card-name">
-                        Inventory
-                        <div class="icon-box">
-                            <i class="fas fa-box"></i>
-                        </div>
-                    </div>
-                </div>
+            <div class="chart" id="doughnut-chart">
+                <h2>Social Media</h2>
+                <canvas id="doughnut"></canvas>
             </div>
         </div>
-        <div class="charts"></div>
     </div>
-        
+    <script src="
+https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js
+"></script>
+<script src="~/js/chart.js"></script>
+<script src="~/js/chart2.js"></script>
        
 </body>
 </html>
