@@ -49,31 +49,3 @@
         <button type="submit" id="orderButton">Order Now </button>
     </form>
 </form>
-<script>
-    function applyCoupon() {
-        // Get the entered coupon code
-        const couponCode = document.getElementById('CouponCode').value;
-
-        // Assuming you have a server-side endpoint to check the coupon
-        // This is a simplified example, and you need to implement the actual server-side logic
-        fetch(`/check-coupon?code=${couponCode}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.valid) {
-                    // Apply the discount on the front-end
-                    const originalPrice = parseFloat(document.getElementById('TotalPrice').value.replace(',', ''));
-                    const discountedPriceInput = document.getElementById('DiscountedPrice');
-                    const discountedPrice = originalPrice - 10;
-
-                    // Update the input field with the discounted price
-                    discountedPriceInput.value = discountedPrice.toFixed(2);
-
-                    // You can also update other parts of your UI to reflect the discount
-                } else {
-                    alert('Invalid coupon code. Please try again.');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
-</script>
-

@@ -171,11 +171,11 @@ namespace Cloud1.Controllers
         }
         public async Task<IActionResult> Checkout(Order order)
         {
-			
-			return View(order);
+
+            return View(order);
         }
         [HttpPost]
-		public async Task<IActionResult> Update(Order updatedOrder)
+        public async Task<IActionResult> Update(Order updatedOrder)
         {
             //first,need to check if its a valid address
             if (ModelState.IsValid)
@@ -220,61 +220,61 @@ namespace Cloud1.Controllers
                 }
                 else//incorrect
                 {
-					ModelState.AddModelError("Address", "The provided address is incorrect. Please check the address and try again.");
-					
-				}
-			}
-			return View(updatedOrder);
+                    ModelState.AddModelError("Address", "The provided address is incorrect. Please check the address and try again.");
+
+                }
+            }
+            return View(updatedOrder);
 
 
-		}
+        }
 
 
 
-		private async Task<bool> CheckAddress(string city,string street)
-		{
-			var apiService = new ApiService("acc_3d60a751e375dec");
+        private async Task<bool> CheckAddress(string city, string street)
+        {
+            var apiService = new ApiService("acc_3d60a751e375dec");
             //http://localhost:5122/api/address?CityName=%D7%91%D7%A0%D7%99%20%D7%91%D7%A8%D7%A7&StreetName=%D7%A7%D7%91%D7%95%D7%A5%20%D7%92%D7%9C%D7%99%D7%95%D7%AA
 
             var address = await apiService.GetApiResponseAsync<bool>($"http://localhost:5122/api/address?CityName={Uri.EscapeDataString(city)}&StreetName={Uri.EscapeDataString(street)}");
-			return address;
-		}
-		public async Task<WeatherResponse> WeatherService(string city)
+            return address;
+        }
+        public async Task<WeatherResponse> WeatherService(string city)
         {
-			var apiService = new ApiService("acc_3d60a751e375dec");
-			var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://localhost:5122/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
-			return weather;
-		}
-		
-		public IActionResult GraphCreate()
+            var apiService = new ApiService("acc_3d60a751e375dec");
+            var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://localhost:5122/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
+            return weather;
+        }
+
+        public IActionResult GraphCreate()
         {
             return View();
         }
-		public IActionResult Graph(DateTime? start, DateTime? end)
-		{
+        public IActionResult Graph(DateTime? start, DateTime? end)
+        {
             var orderCounts = new List<int>();
-			var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
+            var orders = _context.Order.Where(order => order.OrderDate >= start && order.OrderDate <= end).ToList();
 
-			// Prepare data for the view model
-			var dateLabels = orders.Select(order => order.OrderDate?.ToShortDateString()).Distinct().ToList();
-			var totalPrices = new List<double>();
+            // Prepare data for the view model
+            var dateLabels = orders.Select(order => order.OrderDate?.ToShortDateString()).Distinct().ToList();
+            var totalPrices = new List<double>();
 
-			foreach (var dateLabel in dateLabels)
-			{
-                orderCounts.Add(orders.Count(order=>order.OrderDate?.ToShortDateString() == dateLabel));
-				totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
-			}
+            foreach (var dateLabel in dateLabels)
+            {
+                orderCounts.Add(orders.Count(order => order.OrderDate?.ToShortDateString() == dateLabel));
+                totalPrices.Add(orders.Where(order => order.OrderDate?.ToShortDateString() == dateLabel).Sum(order => order.TotalPrice));
+            }
 
-			var viewModel = new OrderGraphViewModel
-			{
-				DateLabels = dateLabels,
-				TotalPrices = totalPrices,
+            var viewModel = new OrderGraphViewModel
+            {
+                DateLabels = dateLabels,
+                TotalPrices = totalPrices,
                 OrderCounts = orderCounts
 
-			};
+            };
 
-			return View(viewModel); // Pass the view model to the view
-		}
+            return View(viewModel); // Pass the view model to the view
+        }
         private async Task SendOrderConfirmationEmail(Order order)
         {
             // Replace these values with your SMTP server details
@@ -302,16 +302,8 @@ namespace Cloud1.Controllers
                 await client.SendMailAsync(message);
             }
         }
-        [HttpGet]
-        public IActionResult CheckCoupon(string code)
-        {
-            // Assume a hardcoded valid coupon code for simplicity
-            const string validCouponCode = "MYCOUPON";
-
-            var isValid = string.Equals(code, validCouponCode, StringComparison.OrdinalIgnoreCase);
-
-            return Json(new { valid = isValid });
-        }
+       
+    
 
 
     }
