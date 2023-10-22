@@ -1,7 +1,7 @@
 ﻿@model Order
 @{
     ViewData["Title"] = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 <form method="post" action="/Orders/Update">
@@ -29,21 +29,11 @@
         <label for="Email">Email:</label>
         <input type="text" id="Email" name="Email" value="@Model.Email" />
     </div>
-    <div>
-        <label for="DiscountedPrice">Discounted Price:</label>
-        <input type="text" id="DiscountedPrice" name="DiscountedPrice" readonly />
-    </div>
-
-    <div>
-        <label for="CouponCode">Coupon Code:</label>
-        <input type="text" id="CouponCode" name="CouponCode" />
-        <button type="button" onclick="applyCoupon()">Apply Coupon</button>
-    </div>
     <form id="orderForm" action="@Url.Action("Create", "Orders")" method="post">
         <!-- אוסף כאן את הפרטים שאתה רוצה לשלוח עם הטופס -->
         <input type="hidden" name="totalPrice" value="@Model.TotalPrice.ToString("C")">
-       @* <div class="form-group">
-            <input type="button" value="PayPal HTML" onclick="redicatToPayPal()" class="btn"/>
+        @* <div class="form-group">
+        <input type="button" value="PayPal HTML" onclick="redicatToPayPal()" class="btn"/>
         </div>*@
         <!-- כפתור ה-Order -->
         <button type="submit" id="orderButton">Order Now </button>

@@ -205,6 +205,17 @@ namespace Cloud1.Controllers
                     details.order.Name = updatedOrder.Name; // Add this line
 
                     details.weatherResponse = await WeatherService(updatedOrder.City);
+                    //if (IsValidCoupon(couponCode))
+                    //{
+                    //    // Apply a fixed discount of 10 shekels
+                    //    updatedOrder.TotalPrice = ApplyCoupon(updatedOrder.TotalPrice);
+                    //}
+                    //else
+                    //{
+                    //    // Invalid coupon code, add a model error
+                    //    ModelState.AddModelError("CouponCode", "Invalid coupon code. Please enter a valid code.");
+                       
+                    //}
 
                     _context.SaveChanges(); // Save changes to the database
                     await SendOrderConfirmationEmail(updatedOrder);
@@ -301,11 +312,24 @@ namespace Cloud1.Controllers
 
                 await client.SendMailAsync(message);
             }
+
         }
-       
-    
+        //private double ApplyCoupon(double originalPrice)
+        //{
+        //    // Implement logic to apply discount
+        //    // Apply a fixed discount of 10 shekels
+        //    return originalPrice - 10.0;
+        //}
+
+        //private bool IsValidCoupon(string couponCode)
+        //{
+        //    // Implement validation logic here (e.g., check against a list of valid codes)
+        //    return couponCode == "YOUR_COUPON_CODE";
+        //}
 
 
-    }
+
+
+     }
 
 }
