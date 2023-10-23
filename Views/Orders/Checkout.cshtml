@@ -2,9 +2,9 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
-<form method="post" action="/Orders/Update">
+
+<form method="post" action="/Orders/Update" onsubmit="return validateForm()">
     <div>
         <label for="OrderDate">Order Date:</label>
         <input type="text" id="OrderDate" name="OrderDate" value="@Model.OrderDate" readonly />
@@ -16,26 +16,97 @@
     <div>
         <label for="Name">Name:</label>
         <input type="text" id="Name" name="Name" value="@Model.Name" />
+        <span id="NameError" style="color: red;"></span>
     </div>
     <div>
         <label for="Address">Address:</label>
         <input type="text" id="Address" name="Address" value="@Model.Address" />
+        <span id="AddressError" style="color: red;"></span>
     </div>
     <div>
         <label for="City">City:</label>
         <input type="text" id="City" name="City" value="@Model.City" />
+        <span id="CityError" style="color: red;"></span>
     </div>
     <div>
         <label for="Email">Email:</label>
         <input type="text" id="Email" name="Email" value="@Model.Email" />
+        <span id="EmailError" style="color: red;"></span>
     </div>
-    <form id="orderForm" action="@Url.Action("Create", "Orders")" method="post">
-        <!-- אוסף כאן את הפרטים שאתה רוצה לשלוח עם הטופס -->
-        <input type="hidden" name="totalPrice" value="@Model.TotalPrice.ToString("C")">
-        @* <div class="form-group">
-        <input type="button" value="PayPal HTML" onclick="redicatToPayPal()" class="btn"/>
-        </div>*@
-        <!-- כפתור ה-Order -->
-        <button type="submit" id="orderButton">Order Now </button>
-    </form>
+
+    <div class="coupon-container">
+        <label for="Coupon">Coupon:</label>
+        <input type="text" id="Coupon" name="Coupon" />
+        <button type="button" id="applyCouponButton" onclick="applyCoupon(@Model.TotalPrice)">Apply Coupon</button>
+    </div>
+
+    <!-- Optionally, add a span to display the result of applying the coupon -->
+    <span id="CouponResult" style="color: green;"></span>
+
+    <button type="submit" id="orderButton">Order Now</button>
 </form>
+
+<script>
+    function validateForm() {
+        var name = document.getElementById("Name").value;
+        var address = document.getElementById("Address").value;
+        var city = document.getElementById("City").value;
+        var email = document.getElementById("Email").value;
+
+        var isValid = true;
+
+        if (name.trim() === "") {
+            document.getElementById("NameError").textContent = "Name is required";
+            isValid = false;
+        } else {
+            document.getElementById("NameError").textContent = "";
+        }
+
+        if (address.trim() === "") {
+            document.getElementById("AddressError").textContent = "Address is required";
+            isValid = false;
+        } else {
+            document.getElementById("AddressError").textContent = "";
+        }
+
+        if (city.trim() === "") {
+            document.getElementById("CityError").textContent = "City is required";
+            isValid = false;
+        } else {
+            document.getElementById("CityError").textContent = "";
+        }
+
+        if (email.trim() === "") {
+            document.getElementById("EmailError").textContent = "Email is required";
+            isValid = false;
+        } else {
+            document.getElementById("EmailError").textContent = "";
+        }
+
+        return isValid;
+    }
+
+    function applyCoupon(totalPrice) {
+
+        var couponCode = document.getElementById("Coupon").value;
+
+        // Make an AJAX request to apply the coupon
+        fetch("/Orders/ApplyCoupon?couponCode=" + couponCode + "&totalPrice=" + totalPrice, {
+            method: "POST"
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Display the result in the "CouponResult" span
+                document.getElementById("CouponResult").textContent = data.message;
+                // Update the TotalPrice in the view with the modified value
+                document.getElementById("TotalPrice").value = data.updatedTotalPrice;
+            });
+    }
+</script>
+
+<style>
+    .coupon-container {
+        display: flex;
+        align-items: center;
+    }
+</style>

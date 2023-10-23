@@ -175,6 +175,20 @@ namespace Cloud1.Controllers
             return View(order);
         }
         [HttpPost]
+        public IActionResult ApplyCoupon(string couponCode, decimal totalPrice)
+        {
+            // Implement coupon processing logic here and apply changes to totalPrice
+            if (couponCode == "ICE10")
+            {
+                // Apply your specific coupon logic here
+                totalPrice -= 10; // Adjust the price as per your coupon logic
+            }
+
+            // Return a response with the modified totalPrice
+            return Json(new { message = "Coupon applied successfully", updatedTotalPrice = totalPrice });
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Update(Order updatedOrder)
         {
             //first,need to check if its a valid address
