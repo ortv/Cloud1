@@ -3,7 +3,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: black; color: white;">
 
 <head>
 
@@ -21,9 +21,11 @@
             max-width: 100%; /* גודל תמונה מקסימלי */
             height: auto;
         }
-    </style>
 
-    <style>
+        body {
+            background-color: #000; /* הגדרת הצבע לשחור */
+            color: #fff; /* הגדרת הצבע ללבן */
+        }
         .product-info {
             position: absolute;
             background-color: rgba(0, 0, 0, 0.8);
@@ -40,6 +42,21 @@
         .thumb:hover .product-info {
             opacity: 1;
         }
+
+        .video-container {
+            width: 100%;
+            max-width: 100vw; /* הגבל את הרוחב לרוחב העמוד */
+            height: auto; /* השאר את הגובה אוטומטי */
+            overflow: hidden;
+            margin-top: 20px; /* הוסף מרווח עליון של 20 פיקסלים */
+        }
+
+        video.w-100 {
+            width: 100%;
+            height: 816px; /* גובה נמוך ביחס 21:9 */
+        }
+
+
     </style>
 
 
@@ -74,183 +91,22 @@
     </div>
     <!-- ***** Preloader End ***** -->
     <!-- ***** Main Banner Area Start ***** -->
-    <div class="main-banner" id="top">
+    <div  id="top">
         <!-- Embedding a video with autoplay and muted for background -->
        
-        <video class="w-100" autoplay loop muted>
-            <source src="/assets/images/logo2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div class="video-container" style="background-color: black; color: white;">
+            <video class="w-100" autoplay loop muted>
+                <source src="/assets/images/logo4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
     </div>
     <!-- ***** Main Banner Area End ***** -->
-    <!-- ***** Men Area Starts ***** -->
-    <section class="section" id="men">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="section-heading">
-                        <h2>
-                            Our recommended ice creams
-                        </h2>
-                        <span>Here you can see our list of best-selling and recommended ice creams. Enjoy!</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="men-item-carousel">
-                        <div class="owl-men-item owl-carousel">
-
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/earth.jpg" alt="">
-                                </div>
-
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Mercury.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Neptune.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Venus.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Sun.jpg" alt="">
-                                </div>
-
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Pluto2.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Saturn.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Jupiter.jpg" alt="">
-                                </div>
-
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Uranus.jpg" alt="">
-                                </div>
-
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/Mars.jpg" alt="">
-                                </div>
-
-
-                            </div>
-                            <div class="item">
-                                <div class="thumb">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <img src="assets/images/moon.jpg" alt="">
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </section>
-    <!-- ***** Men Area Ends ***** -->
+  
 
     <!-- ***** Explore Area Starts ***** -->
-    <section class="section" id="explore">
+    <section class="section" id="explore" style="background-color: black; color: white;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
