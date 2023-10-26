@@ -10,6 +10,12 @@ using Cloud1.Models;
 using System.Text;
 using System.Text.Json;
 using Humanizer;
+//using Cloud1.Services;
+//using GateWay.Models;
+using Newtonsoft.Json;
+using Microsoft.DotNet.MSIdentity.Shared;
+using Cloud1.Services;
+//using static GateWay.Models.hebcal;
 
 namespace Cloud1.Controllers
 {
@@ -176,9 +182,6 @@ namespace Cloud1.Controllers
 
         public async Task<IActionResult> Checkout()
         {
-            //var cartItem = await _context.CartItem
-            //.Include(c => c.Cream1)
-            //.SingleOrDefaultAsync(c => c.CartId == ShoppingCartId && c.ItemId == id);
             var cartItemss = GetCartItems();
 
             var iceCreamss = new List<IceCream1>();
@@ -196,18 +199,37 @@ namespace Cloud1.Controllers
             };
             //Order order = new Order() { Products = cart.CartItems, Total= cart.Total() };
             Order order = new Order() { OrderDate = DateTime.Now, TotalPrice = cart.Total(), };
-            ////Add the order to the context(in -memory representation)
-            //_context.Order.Add(order);
-            //// Save changes to the database
-            //await _context.SaveChangesAsync();
-            //string orderJson = JsonSerializer.Serialize(order);
-            //return View(order);
-            // Pass it as a route value
-            return RedirectToAction("Checkout", "Orders", order);
-        }
+            //saving defult values!
+            order.Address = string.Empty;
+            order.City = string.Empty;
+            order.Email = string.Empty;
+            order.Name = string.Empty;
+            _context.Order.Add(order);
+            await _context.SaveChangesAsync();
+            OrderDetails details= new OrderDetails();
+            details.cartItemsList = cartItemss.ToList();
+            details.hebcalResponse = await HebcalService();
+            details.order = order;
 
-        //add &&  remove from cart
-        public async Task AddToCart(int id, int amount)//amount-how many items to add
+            WeatherResponse weather = new WeatherResponse();
+            weather.City = string.Empty;
+            weather.Humidity = 3;
+            weather.FeelsLike = 2;
+            details.weatherResponse=weather;
+			_context.OrderDetails.Add(details);
+			await _context.SaveChangesAsync();
+			return RedirectToAction("Checkout", "Orders", order);
+        }
+		public async Task<HebcalResponse> HebcalService()
+		{
+			var apiService = new ApiService("acc_3d60a751e375dec");
+			var hebcalApiResponse = await apiService.GetApiResponseAsync<HebcalResponse>("http://localhost:5122/api/Hebcal");
+            //return (hebcalApiResponse.Day, hebcalApiResponse.IsHoliday);
+            return hebcalApiResponse;
+		}
+
+		//add &&  remove from cart
+		public async Task AddToCart(int id, int amount)//amount-how many items to add
         {
             ShoppingCartId = GetCartId();
 
@@ -341,6 +363,15 @@ namespace Cloud1.Controllers
             }
             base.Dispose(disposing);
         }
+        [HttpGet]
+        public JsonResult GetCartItemCount()
+        {
+            var cartItemsCount = _context.CartItem
+                .Count(c => c.CartId == GetCartId());
+
+            return Json(cartItemsCount);
+        }
+
     }
 }
 

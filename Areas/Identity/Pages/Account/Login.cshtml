@@ -139,61 +139,109 @@
             transition: all 0.3s ease;
         }
 
-            form .field input[type="submit"]:active {
-                transform: scale(0.95);
-            }
+<style>
+    body {
+        background-color: #fce4ec; /* Light Pink background */
+    }
 
-        form .signup-link {
-            color: #262626;
-            margin-top: 20px;
-            text-align: center;
+    h1 {
+        color: #e91e63; /* Pink header text color */
+    }
+
+    .form-floating {
+        margin-bottom: 20px;
+    }
+
+    label {
+        color: #9c27b0; /* Purple label text color */
+    }
+
+    .btn-primary {
+        background-color: #ff4081; /* Pink button background color */
+        border-color: #ff4081; /* Pink button border color */
+    }
+
+        .btn-primary:hover {
+            background-color: #c51162; /* Darker pink on hover */
+            border-color: #c51162;
         }
 
-            form .pass-link a,
-            form .signup-link a {
-                color: #4158d0;
-                text-decoration: none;
-            }
-
-                form .pass-link a:hover,
-                form .signup-link a:hover {
-                    text-decoration: underline;
-                }
-
-    </style>
-    <link rel="stylesheet" href="path/to/login-style.css">
-</head>
-<body>
-    <div class="wrapper">
-        <div class="title">
-            Login Form
-        </div>
-        <form asp-controller="Admin" asp-action="Index" method="post">
-            <div class="field">
-                <input asp-for="Input.Email" required>
-                <label asp-for="Input.Email">Email Address</label>
-            </div>
-            <div class="field">
-                <input asp-for="Input.Password" required>
-                <label asp-for="Input.Password">Password</label>
-            </div>
-            <div class="content">
-                <div class="checkbox">
-                    <input asp-for="Input.RememberMe" id="remember-me" type="checkbox">
-                    <label for="remember-me">Remember me</label>
+    .checkbox label {
+        color: #673ab7; /* Deep Purple checkbox text color */
+    }
+</style>
+<div asp-validation-summary="ModelOnly" class="text-danger">
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p>@Model.ErrorMessage</p>
+    }
+</div>
+<h1>@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post">
+                <h2 style="color: #e91e63;">Use a local account to log in.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-floating">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                    <label asp-for="Input.Email" class="form-label"></label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+                    <label asp-for="Input.Password" class="form-label"></label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div>
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" asp-action="Index" asp-controller="Admin" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
                 <div class="pass-link">
                     <a asp-page="./ForgotPassword">Forgot password?</a>
                 </div>
-            </div>
-            <div class="field">
-                <input type="submit" value="Login">
-            </div>
-            <div class="signup-link">
-                Not a member? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Signup now</a>
-            </div>
-        </form>
+            </form>
+        </section>
     </div>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to log in.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div>
 
 
 

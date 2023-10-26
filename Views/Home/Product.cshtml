@@ -15,30 +15,42 @@
 
     <title>Hexashop - Product Listing Page</title>
 
-
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
-
     <link rel="stylesheet" href="/assets/css/templatemo-hexashop.css">
-
     <link rel="stylesheet" href="/assets/css/owl-carousel.css">
-
     <link rel="stylesheet" href="/assets/css/lightbox.css">
+    <link href="~/assets/css/template.css" rel="stylesheet" />
+    <style>
+        .item {
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
 
-	<link href="~/assets/css/template.css" rel="stylesheet" />
-    <!--
+            .item img {
+                width: 100%;
+                height: auto;
+                border-radius: 50%;
+                display: block;
+            }
 
-    TemplateMo 571 Hexashop
-
-    https://templatemo.com/tm-571-hexashop
-
-    -->
+        .down-content {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            width: 80%;
+        }
+    </style>
 </head>
 
 <body>
-
 
     <!-- ***** Main Banner Area Start ***** -->
     <div class="page-heading" id="top">
@@ -54,24 +66,22 @@
         </div>
     </div>
     <!-- ***** Main Banner Area End ***** -->
-    <!--try starts-->
-
+    <!-- Products Section Start -->
     <section class="section" id="products">
-        <div class="container text-center">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
-                        <h2>Our Latest Flavers</h2>
+                        <h2>Our Latest Flavors</h2>
                         <span>Check out all of our IceCreams.</span>
                     </div>
                 </div>
             </div>
-            @foreach (var product in Model)
-            {
-
-                <div class="col-lg-4">
-                    <div class="item">
-                        <div class="thumb">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-4">
+                        <div class="item">
                             <a href="@Url.Action("Single", "Home", new { id = product.Id })">
                                 <img src="../../@product.imageUrl" alt=" " />
                             </a>
@@ -80,114 +90,14 @@
                                 <span>@product.Price.ToString("C")</span>
                             </div>
                         </div>
-
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </section>
-
-
-
-    <!--try ends-->
-    @* <!-- ***** Products Area Starts ***** -->
-    <section class="section" id="products">
-    <div class="container">
-    <div class="row">
-    <div class="col-lg-12">
-    <div class="section-heading">
-    <h2>Our Latest Flavers</h2>
-    <span>Check out all of our IceCreams.</span>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="container">
-    <div class="row">
-    <div class="col-lg-4">
-    <div class="item">
-    <div class="thumb">
-    <div class="hover-content">
-    <ul>
-    <li><a href="Single.cshtml"><i class="fa fa-eye"></i></a></li>
-    <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-    <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-    </ul>
-    </div>
-    <img src="/assets/images/men-01.jpg" alt="">
-    </div>
-    <div class="down-content">
-    <h4>Classic Spring</h4>
-    <span>$120.00</span>
-    <ul class="stars">
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div class="col-lg-4">
-    <div class="item">
-    <div class="thumb">
-    <div class="hover-content">
-    <ul>
-    <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-    <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-    <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-    </ul>
-    </div>
-    <img src="/assets/images/men-02.jpg" alt="">
-    </div>
-    <div class="down-content">
-    <h4>Air Force 1 X</h4>
-    <span>$90.00</span>
-    <ul class="stars">
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div class="col-lg-4">
-    <div class="item">
-    <div class="thumb">
-    <div class="hover-content">
-    <ul>
-    <li><a href="single-product.html"><i class="fa fa-eye"></i></a></li>
-    <li><a href="single-product.html"><i class="fa fa-star"></i></a></li>
-    <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
-    </ul>
-    </div>
-    <img src="/assets/images/men-03.jpg" alt="">
-    </div>
-    <div class="down-content">
-    <h4>Love Nana ‘20</h4>
-    <span>$150.00</span>
-    <ul class="stars">
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    <li><i class="fa fa-star"></i></li>
-    </ul>
-    </div>
-    </div>
-    </div>
-
-
-    </div>
-    </div>
-    </section>
-    <!-- ***** Products Area Ends ***** -->*@
+    <!-- Products Section End -->
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
-
     <!-- Bootstrap -->
     <script src="assets/js/popper.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
@@ -208,7 +118,6 @@
     <script src="assets/js/custom.js"></script>
 
     <script>
-
         $(function () {
             var selectedClass = "";
             $("p").click(function () {
@@ -219,10 +128,8 @@
                     $("." + selectedClass).fadeIn();
                     $("#portfolio").fadeTo(50, 1);
                 }, 500);
-
             });
         });
-
     </script>
 
 </body>

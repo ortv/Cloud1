@@ -16,16 +16,11 @@
 
     <title>Hexashop - Product Listing Page</title>
 
-
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
-
     <link rel="stylesheet" href="/assets/css/templatemo-hexashop.css">
-
     <link rel="stylesheet" href="/assets/css/owl-carousel.css">
-
     <link rel="stylesheet" href="/assets/css/lightbox.css">
     <!--
 
@@ -34,11 +29,42 @@
     https://templatemo.com/tm-571-hexashop
 
     -->
+    <style>
+        .product-details {
+            text-align: center;
+        }
+
+        .product-image {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .product-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .add-to-cart-btn {
+            font-size: 20px;
+            padding: 15px 30px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <
     <!-- ***** Main Banner Area Start ***** -->
     <div class="page-heading" id="top">
         <div class="container">
@@ -53,39 +79,69 @@
         </div>
     </div>
     <!-- ***** Main Banner Area End ***** -->
-    <!--product area starts-->
+    <!-- Product area starts -->
     <section class="section" id="products">
         <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-6 product-details">
+                    <img src="../../@Model.imageUrl" alt="Product Image" class="product-image" />
+                    <div class="product-title">@Model.IceName</div>
+                    <div class="product-description">@Model.IceDescription</div>
+                </div>
+                <div class="col-lg-6 product-details">
+                    <div class="product-price">Price: @Model.Price.ToString("C")</div>
+                    <form id="addToCartForm" asp-controller="CartItems" asp-action="AddToCart" method="post">
+                        <!-- Hidden input field for 'id' parameter -->
+                        <input type="hidden" name="id" value="@Model.Id"> <!-- Replace with the actual value -->
+                        <!-- Hidden input field for 'amount' parameter -->
+                        <input type="hidden" name="amount" value="1"> <!-- Replace with the actual value -->
+                        <button type="button" class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    </form>
 
-
-            <img src="../../@Model.imageUrl" alt=" " />
-            <h4>@Model.IceName</h4>
-            <span>@Model.Price.ToString("C")</span>
-
-
-         </div>
+                    <div id="successMessage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; text-align: center; padding: 10px; z-index: 1000;">
+                        Success! Item added to the cart.
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <form id="addToCartForm" asp-controller="CartItems" asp-action="AddToCart" method="post">
-        <!-- Hidden input field for 'id' parameter -->
-        <input type="hidden" name="id" value="@Model.Id"> <!-- Replace with the actual value -->
-        <!-- Hidden input field for 'amount' parameter -->
-        <input type="hidden" name="amount" value="1"> <!-- Replace with the actual value -->
-        <button type="button" class="container text-center" style="
-        display: inline-block;
-        font-family: FontAwesome;
-        float: left;
-        content: '\f217';
-        font-weight: 300;
-        margin-right: 1em;"
-                onclick="addToCart()">
-            Add to Cart
-        </button>
-    </form>
-    <div id="successMessage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; text-align: center; padding: 10px; z-index: 1000;">
-        Success! Item added to the cart.
-    </div>
+    <!-- Product area ends -->
+    <!-- jQuery -->
+    <script src="/assets/js/jquery-2.1.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="/assets/js/popper.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+
+    <!-- Plugins -->
+    <script src="/assets/js/owl-carousel.js"></script>
+    <script src="/assets/js/accordions.js"></script>
+    <script src="/assets/js/datepicker.js"></script>
+    <script src="/assets/js/scrollreveal.min.js"></script>
+    <script src="/assets/js/waypoints.min.js"></script>
+    <script src="/assets/js/jquery.counterup.min.js"></script>
+    <script src="/assets/js/imgfix.min.js"></script>
+    <script src="/assets/js/slick.js"></script>
+    <script src="/assets/js/lightbox.js"></script>
+    <script src="/assets/js/isotope.js"></script>
+
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
 
     <script>
+        $(function () {
+            var selectedClass = "";
+            $("p").click(function () {
+                selectedClass = $(this).attr("data-rel");
+                $("#portfolio").fadeTo(50, 0.1);
+                $("#portfolio div").not("." + selectedClass).fadeOut();
+                setTimeout(function () {
+                    $("." + selectedClass).fadeIn();
+                    $("#portfolio").fadeTo(50, 1);
+                }, 500);
+            });
+        });
+
         function addToCart() {
             // Fetch API to submit the form asynchronously
             fetch('/CartItems/AddToCart', {
@@ -116,55 +172,6 @@
                     console.error('Fetch error:', error);
                 });
         }
-    </script>
-
-
-
-
-
-
-
-
-
-    <!--product area ends-->
-    <!-- jQuery -->
-    <script src="/assets/js/jquery-2.1.0.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="/assets/js/popper.js"></script>
-    <script src="/assets/js/bootstrap.min.js"></script>
-
-    <!-- Plugins -->
-    <script src="/assets/js/owl-carousel.js"></script>
-    <script src="/assets/js/accordions.js"></script>
-    <script src="/assets/js/datepicker.js"></script>
-    <script src="/assets/js/scrollreveal.min.js"></script>
-    <script src="/assets/js/waypoints.min.js"></script>
-    <script src="/assets/js/jquery.counterup.min.js"></script>
-    <script src="/assets/js/imgfix.min.js"></script>
-    <script src="/assets/js/slick.js"></script>
-    <script src="/assets/js/lightbox.js"></script>
-    <script src="/assets/js/isotope.js"></script>
-
-    <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
-
-    <script>
-
-        $(function () {
-            var selectedClass = "";
-            $("p").click(function () {
-                selectedClass = $(this).attr("data-rel");
-                $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("." + selectedClass).fadeOut();
-                setTimeout(function () {
-                    $("." + selectedClass).fadeIn();
-                    $("#portfolio").fadeTo(50, 1);
-                }, 500);
-
-            });
-        });
-
     </script>
 
 </body>
