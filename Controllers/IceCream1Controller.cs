@@ -70,21 +70,21 @@ namespace Cloud1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IceName,IceDescription,Price,imageUrl,isAvailable")] IceCream1 iceCream1)
         {
-            if (ModelState.IsValid)
-            {
-                var contain = await CheckImage(iceCream1.imageUrl);
-                if(contain)
-                {
+            //if (ModelState.IsValid)
+            //{
+            //    //var contain = await CheckImage(iceCream1.imageUrl);
+                //if(contain)
+                //{
                     _context.Add(iceCream1);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("imageUrl", "No ice cream");
-                }
-            }
-            return View(iceCream1);
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("imageUrl", "No ice cream");
+             //   }
+           // }
+            //return View(iceCream1);
         }
         private async Task<bool> CheckImage(string ImageUrl)
         {
