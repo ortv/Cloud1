@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cloud1.Models
 {
@@ -13,6 +14,7 @@ namespace Cloud1.Models
 
         public double Price { get; set; }
         //[RegularExpression(@"^(?!.*\.{2,})[a-zA-Z0-9]+\.(jpg|jpeg|png|gif)$", ErrorMessage = "Invalid image file name.")]
+        [DisplayName("Ice Cream")]
         public string? imageUrl { get; set; }//option of no image
 
         //public string? imageUrl { get; set; }//option of no image
