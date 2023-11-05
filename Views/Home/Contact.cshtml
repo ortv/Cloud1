@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_LayoutHeadFooter.cshtml";
 }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: black; color: white;">
 
 <head>
 
@@ -34,33 +34,33 @@
     -->
 </head>
 
-<body>
+<body style="background-color: black; color: white;">
 
-   @* <!-- ***** Preloader Start ***** -->
+
+    <!-- ***** Preloader Start ***** -->
     <div id="preloader">
         <div class="jumper">
             <div></div>
             <div></div>
             <div></div>
         </div>
-    </div>*@
+    </div>
     <!-- ***** Preloader End ***** -->
     <!-- ***** Main Banner Area Start ***** -->
-    <div class="page-heading about-page-heading" id="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="inner-content">
-                        <h2>Contact Us</h2>
-                        <span>Reach out to us at IcePace – we're just a click or call away!</span>
-                    </div>
-                </div>
-            </div>
+    <div id="top">
+        <!-- Embedding a video with autoplay and muted for background -->
+
+        <div class="video-container" style="background-color: black; color: white;">
+            <video class="w-100" autoplay loop muted>
+                <source src="/assets/images/conect.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+
     </div>
     <!-- ***** Main Banner Area End ***** -->
     <!-- ***** Contact Area Starts ***** -->
-    <div class="contact-us">
+    <div class="contact-us" style="background-color: black; color: white;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">

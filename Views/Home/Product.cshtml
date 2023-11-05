@@ -3,7 +3,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: black; color: white;">
 
 <head>
 
@@ -23,6 +23,12 @@
     <link rel="stylesheet" href="/assets/css/lightbox.css">
     <link href="~/assets/css/template.css" rel="stylesheet" />
     <style>
+
+
+        body {
+            /* או כל גוון שתרצה */
+        }
+
         .item {
             border-radius: 50%;
             overflow: hidden;
@@ -47,25 +53,112 @@
             border-radius: 5px;
             width: 80%;
         }
+
+
+        :root {
+            --background: #000000;
+            --background-border: hotpink;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Poppins;
+            height: 100vh;
+            padding: 32px;
+            display: grid;
+            place-items: center;
+            background-color: var(--background);
+        }
+
+        .gallery {
+            display: flex;
+            background-color: var(--background);
+            gap: 16px;
+            scale: 1.6;
+            grid-gap: 20px; /* מרווח בין המוצרים */
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 עמודות בכל שורה */
+            grid-gap: 20px; /* מרווח בין המוצרים */
+        }
+
+        .card {
+            position: relative;
+            left: 0px;
+            width: 140px;
+            height: 160px;
+            background-color: var(--background);
+            border-radius: 8px;
+            transition: 1000ms all;
+            transform-origin: center left;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+            outline: 1px solid var(--background);
+            overflow: hidden;
+            margin: 10px; /* הוספת רווח בכל צד של הקרטיס */
+        }
+
+
+            .card img {
+                height: 160px;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+
+            .card:hover {
+                cursor: pointer;
+                transform: scale(1.15);
+                box-shadow: 0 0 20px hotpink;
+                margin: 5px;
+            }
+
+                .card:hover figcaption {
+                    font-size: 0.6rem;
+                    position: absolute;
+                    height: 80px;
+                    width: 160px;
+                    display: flex;
+                    align-items: end;
+                    background: linear-gradient( to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100% );
+                    color: white;
+                    left: 0px;
+                    bottom: 0px;
+                    padding-left: 12px;
+                    padding-bottom: 10px;
+                }
+
+                .card:hover ~ .card {
+                    font-weight: bold;
+                    cursor: pointer;
+                    transform: translateX(22px);
+                }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- ***** Main Banner Area Start ***** -->
-    <div class="page-heading" id="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="inner-content">
-                        <h2>Check Our Products</h2>
-                        <span>Discover our stellar products at IcePace and embark on a cosmic flavor adventure today.</span>
-                    </div>
-                </div>
-            </div>
+    <div id="top">
+        <!-- Embedding a video with autoplay and muted for background -->
+
+        <div class="video-container" style="background-color: black; color: white;">
+            <video class="w-100" autoplay loop muted>
+                <source src="/assets/images/PROD.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+
     </div>
-    <!-- ***** Main Banner Area End ***** -->
+
+
     <!-- Products Section Start -->
     <section class="section" id="products">
         <div class="container">
@@ -77,22 +170,31 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="gallery">
                 @foreach (var product in Model)
                 {
-                    <div class="col-lg-4">
-                        <div class="item">
+                    <article class="card">
+                        <figure>
                             <a href="@Url.Action("Single", "Home", new { id = product.Id })">
                                 <img src="../../@product.imageUrl" alt=" " />
                             </a>
-                            <div class="down-content">
-                                <h4>@product.IceName</h4>
-                                <span>@product.Price.ToString("C")</span>
-                            </div>
-                        </div>
-                    </div>
+                            <figcaption>
+                                <div class="product-info">
+                                    <h3 style="font-size: 14px; margin-bottom: 5px;">@product.IceName</h3>
+                                    <p style="font-size: 12px; margin: 0; color: white;">
+                                        ₪@product.Price
+                                    </p>
+                                </div>
+                            </figcaption>
+                        </figure>
+                    </article>
                 }
             </div>
+
+
+
+
+
         </div>
     </section>
     <!-- Products Section End -->

@@ -1,19 +1,13 @@
-﻿@* @{
-    Layout = "/Views/Shared/_Layout.cshtml";
-} *@
-
+﻿
 <!DOCTYPE html>
 <html>
 <head>
-  @*   <meta name="viewport" content="width=device-width" /> *@
-    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous"> *@
-    @* <title>@ViewBag.Title</title> *@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <title>@ViewBag.Title</title>
-
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
+    <title>@ViewBag.Title</title>
 
     <style>
       
@@ -107,7 +101,7 @@
         
         /* סלקטור לשניות צבע הכיתוב וגודל הגופן */
         header.header-area {
-            background-color: white;
+            background-color: black;
             color: white; /* כיתוב לבן */
         }
 
@@ -118,7 +112,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: white;
+            background-color: black;
             color: white;
             border-bottom: none;
         }
@@ -149,22 +143,26 @@
                     <nav class="main-nav">
                   
                         <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                            <li class="scroll-to-section"><a href="@Url.Action("About", "Home")">About Us</a></li>
-                            <li class="scroll-to-section"><a href="@Url.Action("Product", "Home")">Products</a></li>
-
-                          
-                             <!-- ***** Logo Start ***** -->
-                            <a href="index.html" class="logo">
-                                <img src="~/assets/images/logo3.ico" alt="logo">
-                            </a>
-                            <!-- ***** Logo End ***** --> 
-                            <li class="scroll-to-section"><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
-                            <li class="scroll-to-section"><a href="/Identity/Account/Login">Login</a></li>
-                            <li><a href="@Url.Action("Index", "CartItems")"><i class="fa fa-shopping-cart" ></i> Cart</a></li>
-
-
+                        <ul class="list">
+                            <li>
+                                <a href="@Url.Action("Index", "Home")" class="link">Home</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("About", "Home")" class="link">About Us</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Product", "Home")" class="link">Products</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Contact", "Home")" class="link">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="/Identity/Account/Login" class="link">Login</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "CartItems")" class="link">Cart</a>
+                            </li>
+                        </ul>
 
                         <!-- ***** Menu End ***** -->
                     </nav>
