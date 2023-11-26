@@ -170,10 +170,12 @@
             </div>
         </div>
     </header>
+    @RenderSection("Styles", required: false)
     <!-- ***** Header Area End ***** -->
     <!-- ***** Page Content ***** -->
     <div>
         @RenderBody()
+        @RenderSection("Scripts", required: false)
     </div>
         <!-- ***** Footer Start ***** -->
     <footer style="background-color: black; color: white;">

@@ -159,5 +159,10 @@ namespace Cloud1.Controllers
         {
           return (_context.OrderDetails?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+        public IActionResult OrderDetalisGraph(DateTime? start, DateTime? end)
+        {
+            
+        }
+
     }
 }
