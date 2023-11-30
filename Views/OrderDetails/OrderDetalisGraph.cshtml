@@ -1,0 +1,71 @@
+﻿@model Cloud1.Models.OrderDetalisViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Order Details Graph</title>
+    <style>
+        /* Add your custom styles here */
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+    <!-- Form for selecting date range -->
+    <form method="get" asp-action="OrderDetalisGraph" asp-controller="OrderDetails">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="start" required>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="end" required>
+
+        <button type="submit">Generate Graph</button>
+    </form>
+
+    <!-- Your graph canvas -->
+    <canvas id="orderDetailsGraph"></canvas>
+    @section scripts {
+        <script>
+            var ids = @Html.Raw(Json.Serialize(Model.OrdersID));
+            var servicesData = @Html.Raw(Json.Serialize(Model.Services));
+
+            var ctx = document.getElementById('orderDetailsGraph').getContext('2d');
+            var orderDetailsGraph = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ids,
+                    datasets: [
+                        {
+                            label: 'Is Holiday',
+                            data: servicesData.map(s => s.IsHoliday ? 1 : 0),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Humidity',
+                            data: servicesData.map(s => s.Humidity),
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+    }
+
+
+
+</body>
+</html>
