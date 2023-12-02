@@ -228,10 +228,19 @@ namespace Cloud1.Controllers
             return hebcalApiResponse;
 		}
 
-		//add &&  remove from cart
-		public async Task AddToCart(int id, int amount)//amount-how many items to add
+        //add &&  remove from cart
+        public async Task<IActionResult> AddToCart(int id, int amount)
         {
             ShoppingCartId = GetCartId();
+
+            // Check if the user has already added 5 items to the cart
+            var cartItemCount = _context.CartItem.Count(c => c.CartId == ShoppingCartId);
+
+            if (cartItemCount >= 5)
+            {
+                // If the user has reached the limit, return a JSON response
+                return Json(new { success = false, message = "You can only add up to 5 products to the cart." });
+            }
 
             var cartItem = await _context.CartItem.SingleOrDefaultAsync(
                 c => c.CartId == ShoppingCartId && c.Cream1.Id == id);
@@ -239,16 +248,14 @@ namespace Cloud1.Controllers
             if (cartItem == null)
             {
                 // Create a new cart item if it doesn't exist.
-
                 cartItem = new CartItem
                 {
                     ItemId = Guid.NewGuid().ToString(),
                     CartId = ShoppingCartId,
-                    Cream1= GetIceCreamById(id),
+                    Cream1 = GetIceCreamById(id),
                     Quantity = 1,
                     DateCreated = DateTime.Now,
-                    Price = amount * GetIceCreamById(id).Price//price for one multiple the amount
-                    // OrderId=6
+                    Price = amount * GetIceCreamById(id).Price
                 };
 
                 _context.CartItem.Add(cartItem);
@@ -260,9 +267,21 @@ namespace Cloud1.Controllers
                 cartItem.Price = cartItem.Quantity * GetIceCreamById(id).Price;
                 cartItem.Price.ToString("F3");
             }
-            try { await _context.SaveChangesAsync(); }
-            catch (Exception ex) { }
 
+            try
+            {
+                await _context.SaveChangesAsync();
+
+                // Return a JSON response indicating success
+                return Json(new { success = true, message = "Item added to the cart successfully." });
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions if needed
+
+                // Return a JSON response indicating failure
+                return Json(new { success = false, message = "Failed to add item to the cart." });
+            }
         }
 
         public async Task<IActionResult> RemoveFromCart(string id)
@@ -363,14 +382,7 @@ namespace Cloud1.Controllers
             }
             base.Dispose(disposing);
         }
-        [HttpGet]
-        public JsonResult GetCartItemCount()
-        {
-            var cartItemsCount = _context.CartItem
-                .Count(c => c.CartId == GetCartId());
-
-            return Json(cartItemsCount);
-        }
+        
 
     }
 }
