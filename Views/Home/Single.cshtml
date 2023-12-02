@@ -34,10 +34,18 @@
             text-align: center;
         }
 
-        .product-image {
+        .product-image-container {
             max-width: 100%;
             margin-bottom: 20px;
         }
+
+        .product-image {
+            max-width: 100%;
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 10px; /* Adjust the value based on your preference */
+        }
+
 
         .product-title {
             font-size: 24px;
@@ -46,9 +54,13 @@
         }
 
         .product-description {
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 20px;
         }
+          .product-description {
+        font-size: 18px; /* Adjust the value based on your preference */
+        margin-bottom: 20px;
+    }
 
         .product-price {
             font-size: 24px;
@@ -59,53 +71,80 @@
         .add-to-cart-btn {
             font-size: 20px;
             padding: 15px 30px;
+            display: block;
+            margin: 0 auto; 
+            background-color: lightpink;
         }
+
+            .add-to-cart-btn:hover {
+                background-color: hotpink;
+            }
+
+        .product-image {
+            width: 600px; /* Set a fixed width based on your preference */
+            height: 500px; /* Set a fixed height based on your preference */
+            object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 10px;
+        }
+
     </style>
 </head>
 
-<body>
+<body style="background-color: black; color: white;">
 
-    <!-- ***** Main Banner Area Start ***** -->
-    <div class="page-heading" id="top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="inner-content">
-                        <h2>@Model.IceName</h2>
-                        <span>@Model.IceDescription</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ***** Main Banner Area End ***** -->
-    <!-- Product area starts -->
     <section class="section" id="products">
-        <div class="container text-center">
+        <div class="container text-center my-4">
+            <!-- Add margin using Bootstrap utility classes -->
             <div class="row">
-                <div class="col-lg-6 product-details">
-                    <img src="../../@Model.imageUrl" alt="Product Image" class="product-image" />
-                    <div class="product-title">@Model.IceName</div>
-                    <div class="product-description">@Model.IceDescription</div>
-                </div>
-                <div class="col-lg-6 product-details">
-                    <div class="product-price">Price: @Model.Price.ToString("C")</div>
-                    <form id="addToCartForm" asp-controller="CartItems" asp-action="AddToCart" method="post">
-                        <!-- Hidden input field for 'id' parameter -->
-                        <input type="hidden" name="id" value="@Model.Id"> <!-- Replace with the actual value -->
-                        <!-- Hidden input field for 'amount' parameter -->
-                        <input type="hidden" name="amount" value="1"> <!-- Replace with the actual value -->
-                        <button type="button" class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
-                    </form>
+                <section class="section" id="products">
+                    <div class="container text-center">
+                        <div class="row">
+                            <div class="col-lg-12 product-details">
+                                <div class="inner-content">
+                                    <h2>@Model.IceName</h2>
+                                   
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mx-auto product-details d-flex flex-column align-items-center">
+                                <div class="product-image-container">
+                                    <img src="../../@Model.imageUrl" alt="Product Image" class="product-image" />
+                                </div>
+                                <div>
+                                    <span>@Model.IceDescription</span>
+                                </div>
+                                <div class="product-price">Price: @Model.Price.ToString("C")</div>
 
-                    <div id="successMessage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; text-align: center; padding: 10px; z-index: 1000;">
-                        Success! Item added to the cart.
+                               
+                                <form id="addToCartForm" asp-controller="CartItems" asp-action="AddToCart" method="post">
+                                    <!-- Hidden input field for 'id' parameter -->
+                                    <input type="hidden" name="id" value="@Model.Id">
+                                    <!-- Hidden input field for 'amount' parameter -->
+                                    <input type="hidden" name="amount" value="1">
+                                    <button type="button" class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+
+                                </form>
+
+                                <div id="successMessage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; text-align: center; padding: 10px; z-index: 1000;">
+                                    Success! Item added to the cart.
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
         </div>
     </section>
+   
+    <!-- Product area starts -->
+   
+
     <!-- Product area ends -->
+    <!-- Rest of your scripts and styles -->
+
+
+ 
     <!-- jQuery -->
     <script src="/assets/js/jquery-2.1.0.min.js"></script>
 
