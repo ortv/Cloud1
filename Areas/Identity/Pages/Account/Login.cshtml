@@ -7,48 +7,214 @@
 
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-  
-    <link rel="stylesheet" href="path/to/login-style.css">
+    <!-- Design by foolishdeveloper.com -->
+    <title>Glassmorphism login Form Tutorial in html css</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #080710;
+        }
+
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+        }
+
+            .background .shape {
+                height: 200px;
+                width: 200px;
+                position: absolute;
+                border-radius: 50%;
+            }
+
+        .shape:first-child {
+            background: linear-gradient( lightpink, deeppink );
+            left: -80px;
+            top: -80px;
+        }
+
+        .shape:last-child {
+            background: linear-gradient( to right, pink, hotpink );
+            right: -30px;
+            bottom: -80px;
+        }
+
+        form {
+            height: 520px;
+            width: 400px;
+            background-color: rgba(255,255,255,0.13);
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+        }
+
+            form * {
+                font-family: 'Poppins',sans-serif;
+                color: #ffffff;
+                letter-spacing: 0.5px;
+                outline: none;
+                border: none;
+            }
+
+            form h3 {
+                font-size: 32px;
+                font-weight: 500;
+                line-height: 42px;
+                text-align: center;
+            }
+
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: #e5e5e5;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .social {
+            margin-top: 30px;
+            display: flex;
+        }
+
+            .social div {
+                background: red;
+                width: 150px;
+                border-radius: 3px;
+                padding: 5px 10px 10px 5px;
+                background-color: rgba(255,255,255,0.27);
+                color: #eaf0fb;
+                text-align: center;
+            }
+
+                .social div:hover {
+                    background-color: rgba(255,255,255,0.47);
+                }
+
+            .social .fb {
+                margin-left: 25px;
+            }
+
+            .social i {
+                margin-right: 4px;
+            }
+
+        .button-link {
+            text-decoration: none; /* נוסיף קו תחתי כאשר העכבר לא מעל הלינק */
+            display: block;
+            width: 100%;
+            height: 50px;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+            .button-link:hover {
+                background-color: #e5e5e5;
+                text-decoration: none; /* נוסיף קו תחתי כאשר העכבר מעל הלינק */
+               }
+
+        
+   
+
+    </style>
 </head>
 
 <body>
-    <div class="wrapper">
-        <a href="@Url.Action("Index", "Home")" class="home-button">Home</a>
-        <div class="title">
-            Login Form
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
+    </div>
+
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="wrapper">
         <form asp-controller="Admin" asp-action="Index" method="post">
-            <div class="field">
-                <input asp-for="Input.Email" required>
-                <label asp-for="Input.Email">Email Address</label>
-            </div>
-            <div class="field">
-                <input asp-for="Input.Password" required>
-                <label asp-for="Input.Password">Password</label>
-            </div>
-            <div class="content">
-                <div class="checkbox">
-                    <input asp-for="Input.RememberMe" id="remember-me" type="checkbox">
-                    <label for="remember-me">Remember me</label>
-                </div>
-                <div class="pass-link">
-                    <a asp-page="./ForgotPassword">Forgot password?</a>
-                </div>
-            </div>
-            <div class="field">
-                <input type="submit" value="Login">
-            </div>
-            <div class="signup-link">
-                Not a member? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Signup now</a>
-            </div>
+            <h3>Login Here</h3>
+
+            <label for="username">Username</label>
+            <input type="text" placeholder="Email or Phone" id="username">
+
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" id="password">
+
+            <button>Log In</button>
+            <a asp-controller="Home" asp-action="Index" class="button-link">HOME</a>
+
+           
         </form>
     </div>
 
-
-
-
+   
 </body>
 
 </html>
