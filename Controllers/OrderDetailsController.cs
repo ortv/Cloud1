@@ -159,5 +159,30 @@ namespace Cloud1.Controllers
         {
           return (_context.OrderDetails?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        public IActionResult OrderDetalisGraph(DateTime? start, DateTime? end)
+        {
+            //list of all the order in this dates
+            var ordersDet = _context.OrderDetails.Include(c=>c.weatherResponse).Include(c=>c.hebcalResponse).Include(c=>c.order).Where(or => or.order.OrderDate >= start && or.order.OrderDate <= end).ToList();
+            var ids = new List<int>();
+            var services = new List<OrderDetailData>();
+            
+            foreach(var item in ordersDet)
+            {
+                ids.Add(item.order.Id);//list of ids of orders
+                services.Add(new OrderDetailData
+                {
+                    IsHoliday = item.hebcalResponse.IfHoliday,
+                    Humidity = item.weatherResponse.Humidity
+                });
+            }
+            var viewModel = new OrderDetalisViewModel()
+            {
+                Services = services,
+                OrdersID = ids
+            };
+            return View(viewModel);
+        }
+
     }
 }
