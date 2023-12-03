@@ -1,8 +1,112 @@
 ﻿@model Order
+
+
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #000; /* Black background */
+        color: #fff; /* White text */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    form {
+        background-color: #111; /* Dark background */
+        border-radius: 15px;
+        padding: 15px; /* Smaller padding */
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* White shadow */
+        width: 70%; /* Adjust the width of the form */
+    }
+
+    label {
+        font-size: 14px; /* Smaller font size */
+        display: block;
+        margin-bottom: 6px; /* Smaller margin */
+        color: #fff; /* White text */
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        padding: 6px; /* Smaller padding */
+        margin-bottom: 10px; /* Smaller margin */
+        border: 1px solid #777; /* Light gray border */
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: #222; /* Darker background */
+        color: #fff; /* White text */
+    }
+
+    input[type="checkbox"] {
+        margin-right: 6px; /* Smaller margin */
+    }
+
+    .coupon-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; /* Smaller margin */
+    }
+
+    button {
+        background-color: #ff6eff; /* Pink button */
+        color: #000; /* Black text */
+        padding: 8px 12px; /* Smaller padding */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px; /* Smaller font size */
+    }
+
+    button:hover {
+        background-color: #ff3eff; /* Lighter pink on hover */
+    }
+
+    .option-label {
+        display: inline-block;
+        margin: 8px; /* Smaller margin */
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .option-label:hover {
+        transform: scale(1.1);
+    }
+
+    .option-img {
+        width: 120px; /* Larger image size */
+        height: 120px; /* Larger image size */
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    #CouponResult {
+        font-size: 12px; /* Smaller font size */
+        margin-top: 6px; /* Smaller margin */
+        color: #6effff; /* Light blue */
+    }
+
+    #NameError,
+    #AddressError,
+    #CityError,
+    #EmailError {
+        font-size: 12px; /* Smaller font size */
+        margin-top: 6px; /* Smaller margin */
+        color: #ff3eff; /* Light pink */
+    }
+
+    .text-danger {
+        color: #ff3eff; /* Light pink */
+        font-size: 12px; /* Smaller font size */
+    }
+</style>
 
 <form method="post" action="/Orders/Update" onsubmit="return validateForm()">
     <div>
@@ -16,24 +120,26 @@
     <div>
         <label for="Name">Name:</label>
         <input type="text" id="Name" name="Name" value="@Model.Name" />
-        <span id="NameError" style="color: red;"></span>
+        <span id="NameError"></span>
     </div>
     <div>
         <label for="Address">Address:</label>
         <input type="text" id="Address" name="Address" value="@Model.Address" />
-        <span id="AddressError" style="color: red;"></span>
+        <span id="AddressError"></span>
+        <div>
+            @Html.ValidationMessage("Address", new { @class = "text-danger" })
+        </div>
     </div>
     <div>
         <label for="City">City:</label>
         <input type="text" id="City" name="City" value="@Model.City" />
-        <span id="CityError" style="color: red;"></span>
+        <span id="CityError"></span>
     </div>
     <div>
         <label for="Email">Email:</label>
         <input type="email" id="Email" name="Email" value="@Model.Email" required />
-        <span id="EmailError" style="color: red;"></span>
+        <span id="EmailError"></span>
     </div>
-
 
     <div class="coupon-container">
         <label for="Coupon">Coupon:</label>
@@ -41,11 +147,66 @@
         <button type="button" id="applyCouponButton" onclick="applyCoupon(@Model.TotalPrice)">Apply Coupon</button>
     </div>
 
-    <!-- Optionally, add a span to display the result of applying the coupon -->
-    <span id="CouponResult" style="color: green;"></span>
+    <span id="CouponResult"></span>
 
-    <button type="submit" id="orderButton">Order Now</button>
+    <button type="submit" id="orderButton">Pay Now</button>
 </form>
+
+<div>
+    <label>Options:</label>
+    <div>
+        <div>
+            <label class="option-label" for="option1">
+                <img class="option-img" src="https://i.imgur.com/clc4TFk.jpg" alt="Option 1">
+                <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+                <p>Ice cream cones</p>
+            </label>
+        </div>
+        
+        <label class="option-label" for="option2">
+            <img class="option-img" src="https://i.imgur.com/Hi6FghU.jpg" alt="Option 2">
+            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>0.5 kg</p>
+        </label>
+        <label class="option-label" for="option1">
+            <img class="option-img" src="https://i.imgur.com/jlhHyGo.jpg" alt="Option 1">
+            <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>1 kg</p>
+        </label>
+        <label class="option-label" for="option2">
+            <img class="option-img" src="https://i.imgur.com/W6tOQJK.jpg" alt="Option 2">
+            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>0.25 kg</p>
+        </label>
+        <label class="option-label" for="option1">
+            <img class="option-img" src="https://i.imgur.com/OjC5wnF.jpg" alt="Option 1">
+            <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>Chocolate pretzels</p>
+        </label>
+        <label class="option-label" for="option2">
+            <img class="option-img" src="https://i.imgur.com/cyKglcr.jpg" alt="Option 2">
+            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>Candies</p>
+        </label>
+        <label class="option-label" for="option2">
+            <img class="option-img" src="https://i.imgur.com/ZOBH98w.jpg" alt="Option 2">
+            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>Teaspoons</p>
+        </label>
+        <label class="option-label" for="option2">
+            <img class="option-img" src="https://i.imgur.com/9ngVgKo.jpg" alt="Option 2">
+            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>Pecan</p>
+        </label>
+        <label class="option-label" for="option2">
+            <img class="option-img" src="https://i.imgur.com/TWKArvH.jpg" alt="Option 2">
+            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <p>Nuts</p>
+        </label>
+       
+        <!-- Repeat the above block for other options -->
+    </div>
+</div>
 
 <script>
     function validateForm() {
@@ -87,6 +248,7 @@
         return isValid;
     }
 
+
     function applyCoupon(totalPrice) {
 
         var couponCode = document.getElementById("Coupon").value;
@@ -102,6 +264,19 @@
                 // Update the TotalPrice in the view with the modified value
                 document.getElementById("TotalPrice").value = data.updatedTotalPrice;
             });
+    }
+</script>
+<script>
+    function updateTotalPrice(checkbox) {
+        var totalPriceInput = document.getElementById("TotalPrice");
+        var currentPrice = parseFloat(totalPriceInput.value.replace(/[^\d.-]/g, '')); // Remove non-numeric characters
+        var optionPrice = parseFloat(checkbox.value);
+
+        if (checkbox.checked) {
+            totalPriceInput.value = (currentPrice + optionPrice).toFixed(2);
+        } else {
+            totalPriceInput.value = (currentPrice - optionPrice).toFixed(2);
+        }
     }
 </script>
 

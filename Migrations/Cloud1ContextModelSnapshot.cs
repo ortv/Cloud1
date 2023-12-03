@@ -17,7 +17,7 @@ namespace Cloud1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.22")
+                .HasAnnotation("ProductVersion", "6.0.23")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -57,6 +57,8 @@ namespace Cloud1.Migrations
 
                     b.ToTable("CartItem");
                 });
+
+           
 
             modelBuilder.Entity("Cloud1.Models.HebcalResponse", b =>
                 {

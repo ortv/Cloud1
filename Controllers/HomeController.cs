@@ -35,7 +35,13 @@ namespace Cloud1.Controllers
             //ViewData["Layout"] = layout;
             return View();
         }
-        
+        public IActionResult SizeSelected()
+        {
+            //ViewData["Layout"] = layout;
+            return View();
+        }
+
+
         public async Task<IActionResult> Product()
         {
             var products = await _context.IceCream1.ToListAsync();
