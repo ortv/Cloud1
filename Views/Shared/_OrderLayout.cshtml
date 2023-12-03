@@ -1,6 +1,6 @@
-﻿
-<!DOCTYPE html>
-<html style="background-color: black; color: white;">
+﻿<!DOCTYPE html>
+
+<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
     <title>@ViewBag.Title</title>
-
     <style>
         * {
             margin: 0;
@@ -18,13 +17,13 @@
         }
 
         html, body {
-            height: 100%;
+            height: 77%;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #000000;
-            color: #fff;
+            background-color:black;
+            color:white;
             display: grid;
             place-items: center;
         }
@@ -38,8 +37,8 @@
             display: flex;
             align-items: center;
             justify-content: flex-end; /* Align items to the right */
-            gap: 40px;
-            margin-top: 20px;
+            gap: 60px;
+            margin-top:40px;
         }
 
         .link {
@@ -120,17 +119,15 @@
     </style>
 </head>
 <body>
-  
-    <!-- ***** Header Area Start ***** -->
-    <header  style="background-color: black; color: white;">
+    <header style="background-color: black; color: white;">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                  
+
                         <!-- ***** Menu Start ***** -->
                         <ul class="list">
-                           
+
                             <li>
                                 <a href="@Url.Action("Index", "Home")" class="link">Home</a>
                             </li>
@@ -150,11 +147,11 @@
                             </li>
                             <li class="right-align cart-icon">
                                 <a href="@Url.Action("Index", "CartItems")" class="link">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <i class="fas fa-shopping-cart">Back to your cart</i>
                                     <span id="cartItemCount">0</span>
                                 </a>
                             </li>
-                           
+
                         </ul>
 
                         <!-- ***** Menu End ***** -->
@@ -163,48 +160,9 @@
             </div>
         </div>
     </header>
-    @RenderSection("Styles", required: false)
-    <!-- ***** Header Area End ***** -->
-    <!-- ***** Page Content ***** -->
     <div>
         @RenderBody()
-        @RenderSection("Scripts", required: false)
-    </div>
-        <!-- ***** Footer Start ***** -->
-    <footer style="background-color: black; color: white;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="first-item">
-                            <div class="logo">
-                                <img src="/assets/images/logo3.ico" alt="hexashop ecommerce templatemo">
-                            </div>
-                            <ul>
-								<li><a href="mailto:ortv617@gmail.com"> Email</a></li>
-								<li> <a href="tel:054-5476488">Phone</a></li>
-                                 <li><a href="https://www.google.com/maps?q=הקליר%209%20נתניה">View in Google Maps</a></li>
-                            </ul>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-12">
-                        <div class="under-footer">
-                            <p>
-                                Copyright © 2023 IcePace Co., Ltd. All Rights Reserved.
-
-                                <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-                            </p>
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </div>
 </body>
 </html>

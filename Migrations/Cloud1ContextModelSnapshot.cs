@@ -58,31 +58,7 @@ namespace Cloud1.Migrations
                     b.ToTable("CartItem");
                 });
 
-            modelBuilder.Entity("Cloud1.Models.Flavours", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("IceDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Flavours");
-                });
+           
 
             modelBuilder.Entity("Cloud1.Models.HebcalResponse", b =>
                 {
