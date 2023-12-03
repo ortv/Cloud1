@@ -247,12 +247,6 @@ namespace Cloud1.Controllers
                     // Redirect to the PayPal.html page with the total price as a query parameter
                     return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
 
-
-
-                    _context.SaveChanges(); // Save changes to the database
-                                            //now, we have an order and orderDetails aved in the db!
-                                            // Redirect to the PayPal.html page with the total price as a query parameter
-                    return Redirect($"/PayPal.html?totalPrice={updatedOrder.TotalPrice}");
                 }
                 else//incorrect
                 {

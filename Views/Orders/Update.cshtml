@@ -1,7 +1,7 @@
 ﻿@model Order
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutHeadFooter.cshtml";
 
 }
 <form method="post" action="/Orders/Update">
@@ -20,6 +20,9 @@
     <div>
         <label for="Address">Address:</label>
         <input type="text" id="Address" name="Address" value="@Model.Address" />
+        <div>
+            @Html.ValidationMessage("Address",new{@class="text-danger"})
+        </div>
     </div>
     <div>
         <label for="City">City:</label>

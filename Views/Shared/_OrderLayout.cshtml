@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
+    <title>@ViewBag.Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 77%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color:black;
+            color:white;
+            display: grid;
+            place-items: center;
+        }
+
+        .right-align {
+            margin-left: auto;
+        }
+
+        .list {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align items to the right */
+            gap: 60px;
+            margin-top:40px;
+        }
+
+        .link {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            height: 60px;
+            padding: 10px 20px;
+            margin-top: -10px;
+        }
+
+            .link::before,
+            .link::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background-color: lightpink;
+                transform: scaleX(0);
+                transition: transform 0.25s;
+                top: -3px;
+                transform-origin: left;
+            }
+
+            .link::before {
+                top: -3px;
+                transform-origin: left;
+            }
+
+            .link::after {
+                bottom: -3px;
+                transform-origin: right;
+            }
+
+            .link:hover::before,
+            .link:hover::after,
+            .active::before,
+            .active::after {
+                transform: scaleX(1);
+            }
+
+            .link:hover {
+                color: white;
+            }
+
+        .name {
+            position: absolute;
+            top: 70%;
+            font-size: 11px;
+            color: deeppink;
+            font-weight: 800;
+        }
+
+        header.header-area {
+            background-color: black;
+            color: white;
+        }
+
+        .right-align {
+            margin-left: auto;
+        }
+
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: -20px; /* Adjust the positioning as needed */
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <header style="background-color: black; color: white;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="list">
+
+                            <li>
+                                <a href="@Url.Action("Index", "Home")" class="link">Home</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("About", "Home")" class="link">About</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Product", "Home")" class="link">Flavours</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Contact", "Home")" class="link">Contact</a>
+                            </li>
+                            <li class="right-align">
+                                <a href="/Identity/Account/Login" class="link">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                            </li>
+                            <li class="right-align cart-icon">
+                                <a href="@Url.Action("Index", "CartItems")" class="link">
+                                    <i class="fas fa-shopping-cart">Back to your cart</i>
+                                    <span id="cartItemCount">0</span>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div>
+        @RenderBody()
+
+    </div>
+</body>
+</html>

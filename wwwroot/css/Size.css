@@ -1,0 +1,58 @@
+﻿/* size.css */
+
+/* ... existing styles ... */
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.option-label {
+    text-align: center;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+    .option-label:hover {
+        transform: scale(1.1);
+    }
+
+.option-img {
+    width: 150px; /* Larger image size */
+    height: 150px; /* Larger image size */
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #fff; /* White border */
+}
+
+/* Larger checkboxes */
+input[type="checkbox"] {
+    margin-right: 6px; /* Smaller margin */
+    width: 20px;
+    height: 20px;
+    transform: scale(2); /* Larger size */
+}
+
+    /* Add decorative styles to the checkboxes */
+    input[type="checkbox"]:before {
+        content: '\2713'; /* Checkmark character */
+        display: inline-block;
+        font-size: 16px; /* Adjust the checkmark size */
+        line-height: 20px; /* Center the checkmark vertically */
+        color: #ff6eff; /* Pink color for the checkmark */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Show the checkmark when the checkbox is checked */
+    input[type="checkbox"]:checked:before {
+        opacity: 1;
+    }

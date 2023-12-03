@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cloud1.Data;
 using Cloud1.Models;
 using Cloud1.Services;
+using Cloud1.Migrations;
 
 namespace Cloud1.Controllers
 {
@@ -72,17 +73,9 @@ namespace Cloud1.Controllers
         {
             if (ModelState.IsValid)
             {
-               var contain = await CheckImage(iceCream1.imageUrl);
-                if(contain)
-                {
-                    _context.Add(iceCream1);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("imageUrl", "No ice cream");
-                }
+                _context.Add(iceCream1);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(iceCream1);
         }

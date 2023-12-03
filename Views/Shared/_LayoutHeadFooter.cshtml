@@ -1,26 +1,28 @@
 ﻿
 <!DOCTYPE html>
-<html>
+<html style="background-color: black; color: white;">
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-ZMP7rVo3mIykV+2+9J3Uq6q9t8lPLO6Kc5I4LLuQ5brF5a5PM4P2pd5sO8fs5Bh5" crossorigin="anonymous">
     <title>@ViewBag.Title</title>
 
     <style>
-      
-      
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html,
-        body {
+        html, body {
             height: 100%;
+        }
+
+        #cartCount {
+            font-size: 20px; /* Adjust the size based on your preference */
         }
 
         body {
@@ -31,29 +33,29 @@
             place-items: center;
         }
 
-        /* ======================== */
-
+        .right-align {
+            margin-left: auto;
+        }
 
         .list {
             list-style: none;
             display: flex;
             align-items: center;
+            justify-content: flex-end; /* Align items to the right */
             gap: 40px;
-            justify-content: center;
-             margin-top: 20px; 
+            margin-top: 20px;
         }
 
         .link {
             position: relative;
             display: inline-block;
             text-decoration: none;
-            color: white; /* שינוי הצבע ללבן */
-            color: #fff;
+            color: white;
             font-weight: 700;
-            font-size: 24px; /* שינוי גודל הטקסט */
-            height: 60px; /* שינוי גובה הלחצן */
-            padding: 10px 20px; /* שינוי רוחב הלחצן */
-            margin-top: -10px; /* Adjust the margin value as needed */
+            font-size: 18px;
+            height: 60px;
+            padding: 10px 20px;
+            margin-top: -10px;
         }
 
             .link::before,
@@ -66,6 +68,8 @@
                 background-color: lightpink;
                 transform: scaleX(0);
                 transition: transform 0.25s;
+                top: -3px;
+                transform-origin: left;
             }
 
             .link::before {
@@ -86,8 +90,9 @@
             }
 
             .link:hover {
-                color: hotpink; /* הצבע שיופיע כאשר העכבר חולף מעל הכפתור */
+                color: white;
             }
+
         .name {
             position: absolute;
             top: 70%;
@@ -96,45 +101,30 @@
             font-weight: 800;
         }
 
-       
-
-        
-        /* סלקטור לשניות צבע הכיתוב וגודל הגופן */
         header.header-area {
             background-color: black;
-            color: white; /* כיתוב לבן */
-        }
-
-          
-     
-        /* סלקטור לפלקסבוקס שמתיישב בין הלוגו והלחצנים */
-        header.header-area .main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: black;
             color: white;
-            border-bottom: none;
         }
 
-        /* סלקטור ללוגו - מרווח ומשנה את הגודל */
-        header.header-area .main-nav .logo img {
-            margin-right: 20px;
-            width: 100px; /* גודל הלוגו */
+        .right-align {
+            margin-left: auto;
         }
 
-        /* סלקטור לכל הלחצנים בתפריט - מרווח ביניהם ומשנה את הגודל */
-        header.header-area .main-nav ul.nav li {
-            margin-right: 20px; /* מרווח בין הלחצנים */
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            position: relative;
         }
 
-        footer {
-            background-color: black;
+        .heart-icon {
+            position: absolute;
+            top: -20px; /* Adjust the positioning as needed */
+            right: 0;
         }
-
     </style>
 </head>
 <body>
+  
     <!-- ***** Header Area Start ***** -->
     <header  style="background-color: black; color: white;">
         <div class="container">
@@ -144,24 +134,32 @@
                   
                         <!-- ***** Menu Start ***** -->
                         <ul class="list">
+                           
                             <li>
                                 <a href="@Url.Action("Index", "Home")" class="link">Home</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("About", "Home")" class="link">About Us</a>
+                                <a href="@Url.Action("About", "Home")" class="link">About</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Product", "Home")" class="link">Products</a>
+                                <a href="@Url.Action("Product", "Home")" class="link">Flavours</a>
                             </li>
                             <li>
-                                <a href="@Url.Action("Contact", "Home")" class="link">Contact Us</a>
+                                <a href="@Url.Action("Contact", "Home")" class="link">Contact</a>
                             </li>
-                            <li>
-                                <a href="/Identity/Account/Login" class="link">Login</a>
+                            <li class="right-align">
+                                <a href="/Identity/Account/Login" class="link">
+                                    <i class="fas fa-user"></i>
+                                </a>
                             </li>
-                            <li>
-                                <a href="@Url.Action("Index", "CartItems")" class="link">Cart</a>
+                            <li class="right-align cart-icon">
+                                <a href="@Url.Action("Index", "CartItems")" class="link">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span id="cartCount">0</span>
+                                    
+                                </a>
                             </li>
+                           
                         </ul>
 
                         <!-- ***** Menu End ***** -->
@@ -215,3 +213,62 @@
     </div>
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Fetch the initial cart count and update the cart icon
+        fetch('/CartItems/GetCartCount?timestamp=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                updateCartCount(data.cartCount);
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    });
+
+</script>
+<script>
+    function addToCart() {
+        // ... (existing code remains the same)
+
+        fetch('/CartItems/AddToCart', {
+            method: 'POST',
+            body: new FormData(document.getElementById('addToCartForm')),
+        })
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => {
+                if (data.success) {
+                    // Update the cart count dynamically
+                    updateCartCount(data.cartCount);
+
+                    // Display success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 6000);
+                    setTimeout(() => {
+                        window.history.back();
+                    }, 2000);
+                } else {
+                    // Display error message
+                    document.getElementById('errorMessage').innerText = data.message;
+                    document.getElementById('errorMessage').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('errorMessage').style.display = 'none';
+                    }, 6000);
+                    setTimeout(() => {
+                        window.history.back();
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
+
+    function updateCartCount(count) {
+        // Update the cart count in your layout
+        document.querySelector('.cart-icon span').innerText = count;
+    }
+</script>
+
