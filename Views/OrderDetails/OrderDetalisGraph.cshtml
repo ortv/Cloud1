@@ -12,17 +12,16 @@
 
 </head>
 <body>
+        <!-- Form for selecting date range -->
+<form method="get" asp-action="OrderDetalisGraph" asp-controller="OrderDetails">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="start" required>
 
-    <!-- Form for selecting date range -->
-    <form method="get" asp-action="OrderDetalisGraph" asp-controller="OrderDetails">
-        <label for="startDate">Start Date:</label>
-        <input type="date" id="startDate" name="start" required>
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="end" required>
 
-        <label for="endDate">End Date:</label>
-        <input type="date" id="endDate" name="end" required>
-
-        <button type="submit">Generate Graph</button>
-    </form>
+    <button type="submit">Generate Graph</button>
+</form>
 
     <!-- Your graph canvas -->
     <canvas id="orderDetailsGraph"></canvas>

@@ -146,6 +146,17 @@ namespace Cloud1.Controllers
             return View(order);
         }
 
+        public async Task<IActionResult> OrderDetails(int id)
+        {
+            var detailsForOrder=await _context.OrderDetails.Include(c => c.weatherResponse).
+                Include(c => c.hebcalResponse).Include(c => c.order).Where(or=>or.order.Id== id).FirstOrDefaultAsync(); //takes out the details of this order
+            if (detailsForOrder == null)
+            {
+                return NotFound(); // Or handle the case where the order is not found
+            }
+            return View(detailsForOrder);
+        }
+
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -261,13 +272,13 @@ namespace Cloud1.Controllers
             var apiService = new ApiService("acc_3d60a751e375dec");
             //http://localhost:5122/api/address?CityName=%D7%91%D7%A0%D7%99%20%D7%91%D7%A8%D7%A7&StreetName=%D7%A7%D7%91%D7%95%D7%A5%20%D7%92%D7%9C%D7%99%D7%95%D7%AA
 
-            var address = await apiService.GetApiResponseAsync<bool>($"http://localhost:5122/api/address?CityName={Uri.EscapeDataString(city)}&StreetName={Uri.EscapeDataString(street)}");
+            var address = await apiService.GetApiResponseAsync<bool>($"http://gatewayservice.somee.com/api/address?CityName={Uri.EscapeDataString(city)}&StreetName={Uri.EscapeDataString(street)}");
             return address;
         }
         public async Task<WeatherResponse> WeatherService(string city)
         {
             var apiService = new ApiService("acc_3d60a751e375dec");
-            var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://localhost:5122/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
+            var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://gatewayservice.somee.com/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
             return weather;
         }
 
@@ -328,21 +339,6 @@ namespace Cloud1.Controllers
             }
 
         }
-        //private double ApplyCoupon(double originalPrice)
-        //{
-        //    // Implement logic to apply discount
-        //    // Apply a fixed discount of 10 shekels
-        //    return originalPrice - 10.0;
-        //}
-
-        //private bool IsValidCoupon(string couponCode)
-        //{
-        //    // Implement validation logic here (e.g., check against a list of valid codes)
-        //    return couponCode == "YOUR_COUPON_CODE";
-        //}
-
-
-
 
      }
 

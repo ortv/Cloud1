@@ -89,7 +89,7 @@ namespace Cloud1.Controllers
         private async Task<bool> CheckImage(string ImageUrl)
         {
             var apiService = new ApiService("acc_3d60a751e375dec");
-            var IsIceCream = await apiService.GetApiResponseAsync<bool>($"http://localhost:5122/api/imagga?imageUrl={Uri.EscapeDataString(ImageUrl)}");
+            var IsIceCream = await apiService.GetApiResponseAsync<bool>($"http://gatewayservice.somee.com/api/imagga?imageUrl={Uri.EscapeDataString(ImageUrl)}");
             return IsIceCream;
         }
 

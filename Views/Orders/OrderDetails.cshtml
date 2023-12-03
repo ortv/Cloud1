@@ -1,0 +1,23 @@
+﻿@model Cloud1.Models.OrderDetails
+
+<h1>Order Details</h1>
+
+@if (Model != null)
+{
+    <p>Order ID: @Model.order.Id</p>
+
+    <h2>Weather Information</h2>
+    <p>City: @Model.weatherResponse.City</p>
+    <p>Feels Like: @Model.weatherResponse.FeelsLike</p>
+    <p>Humidity: @Model.weatherResponse.Humidity</p>
+
+    <h2>Hebcal Information</h2>
+    <p>Day in a Week: @Model.hebcalResponse.dayInAWeek</p>
+    <p>Is Holiday: @Model.hebcalResponse.IfHoliday</p>
+
+    
+}
+else
+{
+    <p>Order not found</p>
+}
