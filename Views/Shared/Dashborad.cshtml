@@ -17,7 +17,9 @@
     <div class="container">
         <div class="topbar">
             <div class="logo">
-                <h2>IcePace<i class="fas fa-ice-cream"></i></h2>
+                <a asp-action="Index" asp-controller="Home" style="text-decoration: none; color: inherit;">
+                    <h2>IcePace<i class="fas fa-ice-cream"></i></h2>
+                </a>
             </div>
             <div class="search">
                 <input type="text" id="search" placeholder="search here"><i class="fas fa-search"></i>
@@ -27,6 +29,7 @@
             <div class="user">
                 <i class="fas fa-user"></i>
             </div>
+
         </div>
         <div class="sidebar"></div>
         <div class="main"></div>

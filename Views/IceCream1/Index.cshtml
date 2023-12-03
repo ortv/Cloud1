@@ -83,8 +83,9 @@
 
 <h1>Index</h1>
 
-<p style="text-align: center;">
-    <a asp-action="Create" class="action-buttons">Create New</a>
+<p style="text-align: center; padding: 20px; font-size: 18px;">
+    <a asp-action="Create" class="action-buttons">יצירת טעם חדש</a>
+    <a asp-controller="Admin" asp-action="PageMeng" class="action-buttons">עמוד ראשי</a>
 </p>
 <table class="table">
     <thead>
@@ -121,7 +122,7 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    <img src="~/@Html.DisplayFor(modelItem => item.imageUrl)" />
+                    <img src="@Html.DisplayFor(modelItem => item.imageUrl)" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.isAvailable)
