@@ -136,7 +136,6 @@
     <script>
         function addToCart() {
             // ... (existing code remains the same)
-
             fetch('/CartItems/AddToCart', {
                 method: 'POST',
                 body: new FormData(document.getElementById('addToCartForm')),
@@ -144,6 +143,10 @@
                 .then(response => response.json()) // Parse the response as JSON
                 .then(data => {
                     if (data.success) {
+                        // Update the cart count dynamically
+                        updateCartCount(data.cartCount);
+
+                        // Display success message
                         document.getElementById('successMessage').style.display = 'block';
                         setTimeout(() => {
                             document.getElementById('successMessage').style.display = 'none';
@@ -166,6 +169,12 @@
                 .catch(error => {
                     console.error('Fetch error:', error);
                 });
+        }
+    </script>
+    <script>
+        function updateCartCount(count) {
+            // Update the cart count in your layout
+            document.querySelector('.cart-icon p').innerText = count;
         }
     </script>
 

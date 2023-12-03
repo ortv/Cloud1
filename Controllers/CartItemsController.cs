@@ -271,9 +271,13 @@ namespace Cloud1.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+                var cartCount = _context.CartItem.Count(c => c.CartId == ShoppingCartId);
+
+                // Return a JSON response with success and cart count
+                return Json(new { success = true, message = "Item added to the cart successfully.", cartCount });
 
                 // Return a JSON response indicating success
-                return Json(new { success = true, message = "Item added to the cart successfully." });
+                //return Json(new { success = true, message = "Item added to the cart successfully." });
             }
             catch (Exception ex)
             {
@@ -382,7 +386,13 @@ namespace Cloud1.Controllers
             }
             base.Dispose(disposing);
         }
-        
+        [HttpGet]
+        public IActionResult GetCartCount()
+        {
+            var cartCount = _context.CartItem.Count(c => c.CartId == GetCartId());
+            return Json(new { cartCount });
+        }
+
 
     }
 }
