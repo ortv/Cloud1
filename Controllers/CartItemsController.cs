@@ -223,7 +223,7 @@ namespace Cloud1.Controllers
 		public async Task<HebcalResponse> HebcalService()
 		{
 			var apiService = new ApiService("acc_3d60a751e375dec");
-			var hebcalApiResponse = await apiService.GetApiResponseAsync<HebcalResponse>("http://gatewayservice.somee.com//api/Hebcal");
+			var hebcalApiResponse = await apiService.GetApiResponseAsync<HebcalResponse>("http://gatewayService.somee.com/api/Hebcal");
             //return (hebcalApiResponse.Day, hebcalApiResponse.IsHoliday);
             return hebcalApiResponse;
 		}

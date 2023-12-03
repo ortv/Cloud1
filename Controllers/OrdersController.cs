@@ -272,7 +272,7 @@ namespace Cloud1.Controllers
         public async Task<WeatherResponse> WeatherService(string city)
         {
             var apiService = new ApiService("acc_3d60a751e375dec");
-            var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://gatewayservice.somee.com/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
+            var weather = await apiService.GetApiResponseAsync<WeatherResponse>($"http://gatewayService.somee.com/api/Weather?cityNmae={Uri.EscapeDataString(city)}");
             return weather;
         }
 
