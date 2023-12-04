@@ -4,127 +4,323 @@
 @{
     ViewData["Title"] = "Index";
 }
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #000; /* Black background */
-        color: #fff; /* White text */
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Design by foolishdeveloper.com -->
 
-    form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #111; /* Dark background */
-        border-radius: 15px;
-        padding: 15px; /* Smaller padding */
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* White shadow */
-    }
 
-        form label {
-            font-size: 14px; /* Same font size */
-            display: block;
-            margin-bottom: 6px; /* Smaller margin */
-            color: #fff; /* White text */
-        }
-
-        form input[type="text"],
-        form input[type="email"],
-        form input[type="date"] {
-            width: 100%;
-            padding: 8px; /* Smaller padding */
-            margin-bottom: 12px; /* Slightly smaller margin */
-            border: 1px solid #777; /* Light gray border */
-            border-radius: 8px;
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style>
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
             box-sizing: border-box;
-            background-color: #222; /* Darker background */
-            color: #fff; /* White text */
         }
 
-        form input[type="checkbox"] {
-            margin-right: 6px; /* Smaller margin */
+
+        .wrapper {
+            margin-top: 20px; /* כך יהיה מרווח מהקרקע של העמוד */
         }
 
-    button {
-        background-color: #ff6eff; /* Pink button */
-        color: #000; /* Black text */
-        padding: 8px 12px; /* Smaller padding */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px; /* Same font size */
-    }
+        .background {
+            width: 100%;
+            height: 520px;
+            position: relative;
+        }
+            .background .shape {
+                height: 200px;
+                width: 200px;
+                position: absolute;
+                border-radius: 50%;
+            }
 
-        button:hover {
-            background-color: #ff3eff; /* Lighter pink on hover */
+        .shape:first-child {
+            background: linear-gradient(lightpink, deeppink);
+            position: absolute;
+            left: 20%; /* שנה את הערך כדי לשנות את המרחק מהצד השמאלי של המסך */
+            top: 80px;
+            transform: translate(-50%, -50%);
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
         }
 
-    #CouponResult,
-    #NameError,
-    #AddressError,
-    #CityError,
-    #EmailError {
-        font-size: 12px; /* Same font size */
-        margin-top: 6px; /* Smaller margin */
-        color: #6effff; /* Light blue or other suitable color */
-    }
+        .shape:last-child {
+            background: linear-gradient(to right, pink, hotpink);
+            position: absolute;
+            right: 20%; /* שנה את הערך כדי לשנות את המרחק מהצד הימני של המסך */
+            bottom: -200px; /* שנה ערך זה לגובה שאת רוצה */
+            transform: translate(50%, 50%);
+            height: 200px; /* שנה ערך זה לגובה שאתה רוצה */
+            width: 200px;
+            border-radius: 50%;
+        }
 
-    .text-danger {
-        color: #ff3eff; /* Light pink */
-        font-size: 12px; /* Same font size */
-    }
+        form {
+            height: 800px;
+            width: 700px;
+            background-color: rgba(255,255,255,0.13);
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+          
+        }
 
-</style>
+            form * {
+                font-family: 'Poppins',sans-serif;
+                color: #ffffff;
+                letter-spacing: 0.5px;
+                outline: none;
+                border: none;
+            }
 
-<form method="post" action="/Orders/Update" onsubmit="return validateForm()">
-    <div>
-        <label for="OrderDate">Order Date:</label>
-        <input type="text" id="OrderDate" name="OrderDate" value="@Model.OrderDate" readonly />
-    </div>
-    <div>
-        <label for="TotalPrice">Total Price:</label>
-        <input type="text" id="TotalPrice" name="TotalPrice" value="@Model.TotalPrice" readonly />
-    </div>
-    <div>
-        <label for="Name">Name:</label>
-        <input type="text" id="Name" name="Name" value="@Model.Name" />
-        <span id="NameError"></span>
-    </div>
-    <div>
-        <label for="Address">Address:</label>
-        <input type="text" id="Address" name="Address" value="@Model.Address" />
-        <span id="AddressError"></span>
-        <div>
-            @Html.ValidationMessage("Address", new { @class = "text-danger" })
+            form h3 {
+                font-size: 32px;
+                font-weight: 500;
+                line-height: 42px;
+                text-align: center;
+            }
+
+        label {
+            display: block;
+            margin-top: 15px; /* Reduced margin between labels */
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 40px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: #e5e5e5;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .social {
+            margin-top: 30px;
+            display: flex;
+        }
+
+            .social div {
+                background: red;
+                width: 150px;
+                border-radius: 3px;
+                padding: 5px 10px 10px 5px;
+                background-color: rgba(255,255,255,0.27);
+                color: #eaf0fb;
+                text-align: center;
+            }
+
+                .social div:hover {
+                    background-color: rgba(255,255,255,0.47);
+                }
+
+            .social .fb {
+                margin-left: 25px;
+            }
+
+            .social i {
+                margin-right: 4px;
+            }
+
+        .button-link {
+            text-decoration: none; /* נוסיף קו תחתי כאשר העכבר לא מעל הלינק */
+            display: block;
+            width: 100%;
+            height: 50px;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+            .button-link:hover {
+                background-color: #e5e5e5;
+                text-decoration: none; /* נוסיף קו תחתי כאשר העכבר מעל הלינק */
+            }
+
+       
+
+        body {
+            margin: 0; /* הוסף שורה זו כדי למנוע גזירת margin מברירת המחדל של הbody */
+            background-color: #080710;
+        }
+
+
+        .coupon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* Adjust as needed */
+        }
+
+        .coupon-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 8px; /* Adjust as needed */
+        }
+
+        #Coupon {
+            width: 200px; /* Adjust the width as needed */
+            /* Add other styles as needed */
+        }
+
+        #applyCouponButton {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: pink;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #CouponResult {
+            margin-top: 10px; /* Adjust the margin as needed */
+            color: #ffffff; /* Add other styles as needed */
+        }
+
+
+
+        button#orderButton {
+            margin-top: 20px;
+            width: 100%; /* Adjust the width as needed */
+            background-color: #ffffff;
+            color: #080710;
+            padding: 10px; /* Adjust the padding as needed */
+            font-size: 16px; /* Adjust the font size as needed */
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button#orderButton:hover {
+                background-color: #e5e5e5;
+                text-decoration: none;
+            }
+
+      
+
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </div>
-    <div>
-        <label for="City">City:</label>
-        <input type="text" id="City" name="City" value="@Model.City" />
-        <span id="CityError"></span>
-    </div>
-    <div>
-        <label for="Email">Email:</label>
-        <input type="email" id="Email" name="Email" value="@Model.Email" required />
-        <span id="EmailError"></span>
-    </div>
 
-    <div class="coupon-container">
-        <label for="Coupon">Coupon:</label>
-        <input type="text" id="Coupon" name="Coupon" />
-        <button type="button" id="applyCouponButton" onclick="applyCoupon(@Model.TotalPrice)">Apply Coupon</button>
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
     </div>
 
-    <span id="CouponResult"></span>
+    <div class="wrapper">
 
-    <button type="submit" id="orderButton">Pay Now</button>
-</form>
+        <form method="post" action="/Orders/Update" onsubmit="return validateForm()">
+            <h3>Order</h3>
+
+            <label for="OrderDate">Order Date:</label>
+            <input type="text" id="OrderDate" name="OrderDate" value="@Model.OrderDate" readonly />
+
+            <label for="TotalPrice">Total Price:</label>
+            <input type="text" id="TotalPrice" name="TotalPrice" value="@Model.TotalPrice" readonly />
+
+            <label for="Name">Name:</label>
+            <input type="text" id="Name" name="Name" value="@Model.Name" />
+            <span id="NameError"></span>
+
+            <label for="Address">Address:</label>
+            <input type="text" id="Address" name="Address" value="@Model.Address" />
+            <span id="AddressError"></span>
+            <div>
+                @Html.ValidationMessage("Address", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                <label for="City">City:</label>
+                <input type="text" id="City" name="City" value="@Model.City" />
+                <span id="CityError"></span>
+            </div>
+            <div>
+                <label for="Email">Email:</label>
+                <input type="email" id="Email" name="Email" value="@Model.Email" required />
+                <span id="EmailError"></span>
+            </div>
+
+            <div class="coupon-container" style="margin-top: 1px;">
+                <label for="Coupon">Coupon:</label>
+                <div class="coupon-input-container" style="margin-top: 1px;">
+                    <input type="text" id="Coupon" name="Coupon" />
+                    <button type="button" id="applyCouponButton" onclick="applyCoupon(@Model.TotalPrice)" style="margin-top: 1px;">Apply Coupon</button>
+                </div>
+                <span id="CouponResult"></span>
+            </div>
+
+
+            <button type="submit" id="orderButton" style="margin-top: 20px;">Pay Now</button>
+
+
+
+        </form>
+
+      
+    </div>
+
+
+</body>
+
+</html>
+
+
 
 @* <div>
     <label>Options:</label>
@@ -136,7 +332,7 @@
                 <p>Ice cream cones</p>
             </label>
         </div>
-        
+
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/Hi6FghU.jpg" alt="Option 2">
             <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
@@ -177,7 +373,7 @@
             <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>Nuts</p>
         </label>
-       
+
         <!-- Repeat the above block for other options -->
     </div>
 </div>
@@ -253,10 +449,3 @@
         }
     }
 </script>
-
-<style>
-    .coupon-container {
-        display: flex;
-        align-items: center;
-    }
-</style>
