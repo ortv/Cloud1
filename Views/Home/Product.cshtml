@@ -78,32 +78,30 @@
         .gallery {
             display: flex;
             background-color: var(--background);
-            gap: 16px;
             scale: 1.6;
-            grid-gap: 20px; /* מרווח בין המוצרים */
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 עמודות בכל שורה */
-            grid-gap: 20px; /* מרווח בין המוצרים */
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+            margin-bottom: 170px; /* הוספת מרווח בין השורה ל-Footer */
         }
 
         .card {
             position: relative;
-            width: 140px;
-            height: 160px;
+            width: 90px;
+            height: 90px;
             background-color: var(--background);
             border-radius: 8px;
             transition: 1000ms all;
-            transform-origin: center left;
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
             outline: 1px solid var(--background);
             overflow: hidden;
-            margin: 10px;
+            margin: 5px;
         }
 
 
-
             .card img {
-                height: 160px;
+                width: 100%;
+                height: 100%;
                 object-fit: cover;
                 border-radius: 4px;
             }
@@ -141,12 +139,28 @@
         .card:hover .product-info {
             opacity: 1;
         }
+
+        .product-info h3, .product-info p {
+            font-size: 15px; /* או כל גודל פונט שתבחר */
+            color: white;
+            font-weight: bold; /* הוסף את זה כדי להוסיף הדגשה */
+        }
+
+        .gallery article {
+            width: 200px;
+            height: 200px;
+        }
+
+        .container .gallery {
+            padding-top: 20px; /* כל עוד אתה רוצה את הרווח של 20 פיקסלים */
+        }
+
     </style>
 </head>
 
 <body>
 
-    <div id="top">
+    <div id="top" style="margin-bottom: 20px;">
         <!-- Embedding a video with autoplay and muted for background -->
 
         <div class="video-container" style="background-color: black; color: white;">
@@ -158,9 +172,11 @@
 
     </div>
 
+    <div style="width: 100%; height: 5px; background-color: black; margin-top: 50px;"></div>
+
 
     <!-- Products Section Start -->
-    <section class="section" id="products">
+    <section class="section" id="products" style="margin-top: 20px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -169,7 +185,6 @@
                         <span>Check out all of our Flavours.</span>
                     </div>
                 </div>
-              
             </div>
 
             <div class="gallery">
@@ -189,6 +204,9 @@
                 }
             </div>
 
+            <div class="row products">
+                <!-- Add spacing or content here -->
+            </div>
 
 
 
