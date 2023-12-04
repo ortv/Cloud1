@@ -220,6 +220,7 @@ namespace Cloud1.Controllers
                     order.City = updatedOrder.City;
                     order.Email = updatedOrder.Email;
                     order.Name = updatedOrder.Name; // Add this line
+                    order.DeliveryDate = updatedOrder.DeliveryDate;
                     
                     
 
@@ -335,6 +336,7 @@ namespace Cloud1.Controllers
             }
 
         }
+        
 
      }
 
