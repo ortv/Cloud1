@@ -1,8 +1,4 @@
-﻿@{
-    Layout = "~/Views/Shared/_LayoutHeadFooter.cshtml";
-}
-@model Cloud1.Models.CartView
-
+﻿
 <!DOCTYPE html>
 <html lang="en" style="background-color: black; color: white;">
 <head>
@@ -50,11 +46,11 @@
 
 
         .product-name strong {
-            font-size: 1.0em;
+            font-size: 1.1em;
         }
 
         .product-name small {
-            font-size: 1em;
+            font-size: 1.1em;
         }
 
         h6 strong {
@@ -62,12 +58,12 @@
         }
 
         .product-name {
-            font-size: 1.5em; /* או כל ערך אחר שיתאים לך */
+            font-size: 1.2em; /* או כל ערך אחר שיתאים לך */
         }
 
         .addToCartButton i,
         .deleteFromCart i {
-            font-size: 1.0em; /* או כל ערך אחר שיתאים לך */
+            font-size: 0.5em; /* או כל ערך אחר שיתאים לך */
             color: black;
         }
 
@@ -95,7 +91,8 @@
         }
 
         .product-name small {
-            margin-bottom: 5px; /* או כל ערך אחר שתבחר */
+            font-weight: bold;
+            margin-bottom: 6px; /* או כל ערך אחר שתבחר */
         }
 
         .panel-title h5 {
@@ -105,11 +102,17 @@
         .panel-title .glyphicon-shopping-cart {
             color: black; /* צבע האייקון */
             font-size: 50px; /* גודל האייקון */
+            vertical-align: bottom;
         }
 
         .checkout-button {
             margin-top: 10px; /* מרווח מעל הכפתור */
             text-align: center;
+        }
+
+        .product-name small strong {
+            font-weight: bold; /* הוספת הדגשה לטקסט */
+            font-size: 1.5em; /* או כל ערך אחר שתבחר */
         }
 
             .checkout-button a {
@@ -141,15 +144,35 @@
                     color: black;
                 }
 
-       .container {
-            margin: auto;
+        .container {
+            margin-left: 250px;
         }
 
+        .panel-body h6 strong {
+            font-size: 1.8em; /* או כל ערך אחר שיתאים לך */
+        }
+
+        .col-xs-6.text-right {
+            text-align: left;
+        }
+
+
+    </style>
+    <style>
+        html {
+            background-color: black;
+            color: white;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+        }
     </style>
 </head>
 <body style="background-color: black; color: black;">
-
-  
+ 
+ 
     <div class="container">
         <div class="row">
             <div class="col-xs-8">
@@ -169,8 +192,12 @@
                             <div class="row">
                                 <div class="col-xs-2"><img class="img-responsive" src="@item.Cream1.imageUrl" alt="Ice Cream Image"></div>
                                 <div class="col-xs-4">
-                                    <h4 class="product-name"><strong>@item.Cream1.IceName</strong></h4>
-                                    <h4><small>@item.Cream1.IceDescription</small></h4>
+                                    <h4 class="product-name">
+                                        <strong>@item.Cream1.IceName</strong>
+                                    </h4>
+                                    <h4>
+                                        <small><strong style="  font-size: 1.2em;">@item.Cream1.IceDescription</strong></small>
+                                    </h4>
                                 </div>
                                 <div class="col-xs-6">
                                     <div class="col-xs-6 text-right">
@@ -227,6 +254,10 @@
     </div>
 
 
+
+
+
+   
     <script>
         document.querySelectorAll('.addToCartButton').forEach(button => {
             button.addEventListener('click', addToCart);
