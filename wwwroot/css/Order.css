@@ -1,0 +1,57 @@
+﻿body {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #fff; /* White color for header */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #fff; /* White color for links */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    a:hover {
+        color: #ccc; /* Light gray color on hover for links */
+    }
+
+table {
+    border-collapse: collapse;
+    width: 66%; /* Adjust the width of the table */
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White shadow for the table */
+    overflow: hidden; /* Ensure table borders are visible */
+}
+
+th, td {
+    border: 1px solid #fff; /* White borders for table cells */
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9em;
+    color: #fff; /* White text color for table cells */
+}
+
+th {
+    background-color: #333;
+    color: #fff; /* White color for table header text */
+}
+
+tr:nth-child(even) {
+    background-color: #222; /* Darker background color for even rows */
+}
+
+tr:hover {
+    background-color: #333; /* Hover color for rows */
+}

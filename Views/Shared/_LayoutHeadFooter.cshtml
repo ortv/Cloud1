@@ -11,6 +11,14 @@
     <title>@ViewBag.Title</title>
 
     <style>
+        .list {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Use space-between to move items to the edges */
+            gap: 40px;
+            margin-top: 20px;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -138,28 +146,31 @@
                             <li>
                                 <a href="@Url.Action("Index", "Home")" class="link">Home</a>
                             </li>
+
                             <li>
                                 <a href="@Url.Action("About", "Home")" class="link">About</a>
                             </li>
+
                             <li>
                                 <a href="@Url.Action("Product", "Home")" class="link">Flavours</a>
                             </li>
+
                             <li>
                                 <a href="@Url.Action("Contact", "Home")" class="link">Contact</a>
                             </li>
+
                             <li class="right-align">
                                 <a href="/Identity/Account/Login" class="link">
                                     <i class="fas fa-user"></i>
                                 </a>
                             </li>
+
                             <li class="right-align cart-icon">
                                 <a href="@Url.Action("Index", "CartItems")" class="link">
                                     <i class="fas fa-shopping-cart"></i>
                                     <span id="cartCount">0</span>
-                                    
                                 </a>
                             </li>
-                           
                         </ul>
 
                         <!-- ***** Menu End ***** -->
