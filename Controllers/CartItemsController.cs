@@ -204,6 +204,7 @@ namespace Cloud1.Controllers
             order.City = string.Empty;
             order.Email = string.Empty;
             order.Name = string.Empty;
+            order.DeliveryDate = DateTime.Now.AddMinutes(45);
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
             OrderDetails details= new OrderDetails();
