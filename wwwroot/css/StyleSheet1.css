@@ -1,0 +1,65 @@
+﻿/* Add your custom styles here */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #1c1c1c; /* Black background */
+    color: #ff6eff; /* Purple Rose text color */
+}
+
+.options-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling if options exceed container width */
+}
+
+.option-label {
+    text-align: center;
+    position: relative;
+    border-radius: 10px; /* Smaller border radius */
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    /*background-color: #2b2b2b;*/ /* Darker black background */
+    flex: 0 0 auto; /* Ensure the options don't shrink to fit */
+}
+
+    .option-label:hover {
+        transform: scale(1.1);
+    }
+
+.option-img {
+    width: 100px; /* Smaller width */
+    height: 100px; /* Smaller height */
+    object-fit: cover;
+    border-radius: 10px; /* Smaller border radius */
+    border: 1px solid #ff6eff; /* Purple Rose border */
+}
+
+input[type="checkbox"] {
+    margin-right: 6px;
+    width: 20px; /* Smaller width */
+    height: 20px; /* Smaller height */
+    transform: scale(1.5); /* Adjusted scale */
+}
+
+    input[type="checkbox"]:before {
+        content: '\2713';
+        display: inline-block;
+        font-size: 16px; /* Smaller font size */
+        line-height: 20px; /* Adjusted line height */
+        color: #ff6eff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    input[type="checkbox"]:checked:before {
+        opacity: 1;
+    }
+
+label {
+    font-family: Georgia, sans-serif;
+    color: #ff6eff; /* Purple Rose text color for the label */
+}
