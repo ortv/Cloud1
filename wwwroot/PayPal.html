@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IcePace - Enjoy the Coolness</title>
+    <title>Candy Rain - Enjoy the Sweetness</title>
     <script src="https://www.paypal.com/sdk/js?client-id=Ad_vQkBsB_83IjAeJ6fRZLjsBT9p2aBAKhyIBJE5bhnlm2No_b58SOx0F5lky5vmOwsTL-QJt2NwqhC0&components=buttons"></script>
 
     <style>
@@ -17,16 +17,29 @@
             background-color: #000;
             color: #fff;
             position: relative;
+            overflow: hidden;
+        }
+
+        .candy {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
         }
 
         #corner-image {
-            position: absolute;
-            top: 10px;
-            right: 11px;
-            width: 113px;
-            height: 110px;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 150px;
+            height: 150px;
         }
 
         #welcome-message {
@@ -35,12 +48,11 @@
         }
 
             #welcome-message p {
-                font-family: Broadway, sans-serif; /* Updated font family */
+                font-family: 'Bungee', sans-serif;
                 font-size: 32px;
                 font-weight: bold;
-                background: linear-gradient(to right, #ff6eff, #6effff); /* Galaxy-themed gradient */
                 -webkit-background-clip: text;
-                color: transparent;
+                color: white;
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             }
 
@@ -57,8 +69,8 @@
 
             #shipment-info img {
                 border-radius: 50%;
-                width: 200px; /* Adjust the size */
-                height: 200px; /* Adjust the size */
+                width: 200px;
+                height: 200px;
                 box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
                 animation: moveImage 4s infinite linear;
             }
@@ -74,31 +86,14 @@
         }
 
         #paypal-button-container {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 0 0 10px 10px;
+            margin-top: 30px;
         }
 
-        .paypal-buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-            .paypal-buttons .paypal-button {
-                margin: 0 10px;
-                padding: 15px 25px;
-                border: none;
-                border-radius: 5px;
-                font-size: 1.2em;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
+            #paypal-button-container .paypal-buttons {
+                max-width: 300px;
+                font-size: 18px;
+                padding: 15px 20px;
             }
-
-                .paypal-buttons .paypal-button:hover {
-                    background-color: #0070ba;
-                    color: #fff;
-                }
     </style>
 </head>
 
@@ -107,17 +102,39 @@
     <img id="corner-image" src="\assets\images\logo3.jpg" alt="Corner Image">
 
     <div id="welcome-message">
-        <p>Thank you for your Order, enjoy the experience</p> <!-- Updated message -->
+        <p>Thank you for your Order!</p>
     </div>
 
     <div id="shipment-info">
         <img src="https://i.imgur.com/HhbPhOh.png" alt="Shipment on the way">
-       
     </div>
 
     <div id="paypal-button-container" class="paypal-buttons"></div>
 
     <script>
+        // Function to create a random candy element
+        function createRandomCandy() {
+            const candy = document.createElement('div');
+            candy.classList.add('candy');
+            candy.style.left = Math.random() * window.innerWidth + 'px';
+            candy.style.backgroundColor = getRandomColor();
+            document.body.appendChild(candy);
+        }
+
+        // Function to generate a random color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Create a continuous stream of candies
+        setInterval(createRandomCandy, 200);
+
+        // PayPal button rendering
         paypal.Buttons({
             style: {
                 disableMaxWidth: true
