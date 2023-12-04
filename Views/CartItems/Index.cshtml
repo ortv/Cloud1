@@ -168,6 +168,28 @@
             background-color: black;
             color: white;
         }
+
+        .options-container {
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scrolling */
+            white-space: nowrap; /* Prevent items from wrapping to the next line */
+        }
+
+        .option-label {
+            display: inline-block;
+            margin-right: 10px;
+            text-align: center;
+        }
+
+        .option-img {
+            width: 80px;
+            height: auto;
+        }
+
+        .option-label input {
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 <body style="background-color: black; color: black;">
@@ -243,7 +265,37 @@
                     </div>
 
                 </div>
-                <div class="col-xs-3">
+                <div>
+                    <div class="options-container" style="margin-top: 20px;">
+                        <div class="option-label">
+                            <img class="option-img" src="https://i.imgur.com/clc4TFk.jpg" alt="Option 1">
+                            <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+
+                        </div>
+                        <div class="option-label">
+                            <img class="option-img" src="https://i.imgur.com/Hi6FghU.jpg" alt="Option 4">
+                            <input type="checkbox" id="option4" name="Options" value="15" onclick="updateTotalPrice(this)">
+
+                        </div>
+                        <div class="option-label">
+                            <img class="option-img" src="https://i.imgur.com/jlhHyGo.jpg" alt="Option 5">
+                            <input type="checkbox" id="option5" name="Options" value="15" onclick="updateTotalPrice(this)">
+
+                        </div>
+                        <div class="option-label">
+                            <img class="option-img" src="https://i.imgur.com/W6tOQJK.jpg" alt="Option 6">
+                            <input type="checkbox" id="option6" name="Options" value="15" onclick="updateTotalPrice(this)">
+
+                        </div>
+                        <div class="option-label">
+                            <img class="option-img" src="https://i.imgur.com/ZOBH98w.jpg" alt="Option 7">
+                            <input type="checkbox" id="option7" name="Options" value="15" onclick="updateTotalPrice(this)">
+
+                        </div>
+                        <!-- Repeat the above block for other options -->
+                    </div>
+                </div>
+                <div class="col-xs-3" style="margin-top: 20px;">
                     <div class="text-center">
                         <a href="@Url.Action("Product", "Home")" class="btn btn-primary"> Forgot something?</a>
                     </div>
@@ -253,7 +305,7 @@
         </div>
     </div>
 
-
+  
 
 
 

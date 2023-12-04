@@ -171,7 +171,13 @@
                         <div class="product-price"> @Model.Price.ToString("C")</div>
                     </div>
 
-                    <div class="options-container">
+                    <form id="addToCartForm" asp-controller="CartItems" asp-action="AddToCart" method="post" style="margin-top: 20px;">
+                        <input type="hidden" name="id" value="@Model.Id">
+                        <input type="hidden" name="amount" value="1">
+                        <button type="button" class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+
+                    </form>
+                    <div class="options-container" style="margin-top: 20px;">
                         <div class="option-label">
                             <img class="option-img" src="https://i.imgur.com/9ngVgKo.jpg" alt="Option 1">
                             <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
@@ -200,12 +206,7 @@
                     </div> *@
                    @*  <div class="product-price"> @Model.Price.ToString("C")</div> *@
 
-                    <form id="addToCartForm" asp-controller="CartItems" asp-action="AddToCart" method="post">
-                        <input type="hidden" name="id" value="@Model.Id">
-                        <input type="hidden" name="amount" value="1">
-                        <button type="button" class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
-
-                    </form>
+                   
 
                     
                     <div id="successMessage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: #4CAF50; color: white; text-align: center; padding: 10px; z-index: 1000;">
