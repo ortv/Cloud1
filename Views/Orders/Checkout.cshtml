@@ -18,41 +18,38 @@
     }
 
     form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #111; /* Dark background */
         border-radius: 15px;
         padding: 15px; /* Smaller padding */
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* White shadow */
-        width: 70%; /* Adjust the width of the form */
     }
 
-    label {
-        font-size: 14px; /* Smaller font size */
-        display: block;
-        margin-bottom: 6px; /* Smaller margin */
-        color: #fff; /* White text */
-    }
+        form label {
+            font-size: 14px; /* Same font size */
+            display: block;
+            margin-bottom: 6px; /* Smaller margin */
+            color: #fff; /* White text */
+        }
 
-    input[type="text"],
-    input[type="email"] {
-        width: 100%;
-        padding: 6px; /* Smaller padding */
-        margin-bottom: 10px; /* Smaller margin */
-        border: 1px solid #777; /* Light gray border */
-        border-radius: 8px;
-        box-sizing: border-box;
-        background-color: #222; /* Darker background */
-        color: #fff; /* White text */
-    }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="date"] {
+            width: 100%;
+            padding: 8px; /* Smaller padding */
+            margin-bottom: 12px; /* Slightly smaller margin */
+            border: 1px solid #777; /* Light gray border */
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: #222; /* Darker background */
+            color: #fff; /* White text */
+        }
 
-    input[type="checkbox"] {
-        margin-right: 6px; /* Smaller margin */
-    }
-
-    .coupon-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px; /* Smaller margin */
-    }
+        form input[type="checkbox"] {
+            margin-right: 6px; /* Smaller margin */
+        }
 
     button {
         background-color: #ff6eff; /* Pink button */
@@ -61,51 +58,28 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        font-size: 14px; /* Smaller font size */
+        font-size: 14px; /* Same font size */
     }
 
-    button:hover {
-        background-color: #ff3eff; /* Lighter pink on hover */
-    }
+        button:hover {
+            background-color: #ff3eff; /* Lighter pink on hover */
+        }
 
-    .option-label {
-        display: inline-block;
-        margin: 8px; /* Smaller margin */
-        border-radius: 15px;
-        overflow: hidden;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .option-label:hover {
-        transform: scale(1.1);
-    }
-
-    .option-img {
-        width: 120px; /* Larger image size */
-        height: 120px; /* Larger image size */
-        object-fit: cover;
-        border-radius: 15px;
-    }
-
-    #CouponResult {
-        font-size: 12px; /* Smaller font size */
-        margin-top: 6px; /* Smaller margin */
-        color: #6effff; /* Light blue */
-    }
-
+    #CouponResult,
     #NameError,
     #AddressError,
     #CityError,
     #EmailError {
-        font-size: 12px; /* Smaller font size */
+        font-size: 12px; /* Same font size */
         margin-top: 6px; /* Smaller margin */
-        color: #ff3eff; /* Light pink */
+        color: #6effff; /* Light blue or other suitable color */
     }
 
     .text-danger {
         color: #ff3eff; /* Light pink */
-        font-size: 12px; /* Smaller font size */
+        font-size: 12px; /* Same font size */
     }
+
 </style>
 
 <form method="post" action="/Orders/Update" onsubmit="return validateForm()">
@@ -152,62 +126,62 @@
     <button type="submit" id="orderButton">Pay Now</button>
 </form>
 
-<div>
+@* <div>
     <label>Options:</label>
     <div>
         <div>
             <label class="option-label" for="option1">
                 <img class="option-img" src="https://i.imgur.com/clc4TFk.jpg" alt="Option 1">
-                <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+                <input type="checkbox" id="option1" name="Options" value="5" onclick="updateTotalPrice(this)">
                 <p>Ice cream cones</p>
             </label>
         </div>
         
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/Hi6FghU.jpg" alt="Option 2">
-            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>0.5 kg</p>
         </label>
         <label class="option-label" for="option1">
             <img class="option-img" src="https://i.imgur.com/jlhHyGo.jpg" alt="Option 1">
-            <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option1" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>1 kg</p>
         </label>
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/W6tOQJK.jpg" alt="Option 2">
-            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>0.25 kg</p>
         </label>
         <label class="option-label" for="option1">
             <img class="option-img" src="https://i.imgur.com/OjC5wnF.jpg" alt="Option 1">
-            <input type="checkbox" id="option1" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option1" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>Chocolate pretzels</p>
         </label>
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/cyKglcr.jpg" alt="Option 2">
-            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>Candies</p>
         </label>
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/ZOBH98w.jpg" alt="Option 2">
-            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>Teaspoons</p>
         </label>
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/9ngVgKo.jpg" alt="Option 2">
-            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>Pecan</p>
         </label>
         <label class="option-label" for="option2">
             <img class="option-img" src="https://i.imgur.com/TWKArvH.jpg" alt="Option 2">
-            <input type="checkbox" id="option2" name="Options" value="15" onclick="updateTotalPrice(this)">
+            <input type="checkbox" id="option2" name="Options" value="5" onclick="updateTotalPrice(this)">
             <p>Nuts</p>
         </label>
        
         <!-- Repeat the above block for other options -->
     </div>
 </div>
-
+ *@
 <script>
     function validateForm() {
         var name = document.getElementById("Name").value;

@@ -220,6 +220,8 @@ namespace Cloud1.Controllers
                     order.City = updatedOrder.City;
                     order.Email = updatedOrder.Email;
                     order.Name = updatedOrder.Name; // Add this line
+                    
+                    
 
                     var details = _context.OrderDetails.OrderByDescending(e => e.Id).FirstOrDefault();
                     details.order.Address = updatedOrder.Address;

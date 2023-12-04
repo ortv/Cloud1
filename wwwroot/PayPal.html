@@ -1,61 +1,77 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IcePace - Enjoy the Coolness</title>
     <script src="https://www.paypal.com/sdk/js?client-id=Ad_vQkBsB_83IjAeJ6fRZLjsBT9p2aBAKhyIBJE5bhnlm2No_b58SOx0F5lky5vmOwsTL-QJt2NwqhC0&components=buttons"></script>
+
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            color: #fff;
+            position: relative;
         }
 
-        #container {
+        #corner-image {
+            position: absolute;
+            top: 10px;
+            right: 11px;
+            width: 113px;
+            height: 110px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        #welcome-message {
             text-align: center;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            max-width: 600px;
-            width: 100%;
+            margin-bottom: 40px;
         }
 
-        #header {
-            padding: 40px;
-            background: linear-gradient(135deg, #5f2c82, #49a09d);
-            color: #fff;
-            border-radius: 10px 10px 0 0;
+            #welcome-message p {
+                font-family: Broadway, sans-serif; /* Updated font family */
+                font-size: 32px;
+                font-weight: bold;
+                background: linear-gradient(to right, #ff6eff, #6effff); /* Galaxy-themed gradient */
+                -webkit-background-clip: text;
+                color: transparent;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            }
+
+        #shipment-info {
+            text-align: center;
+            margin-top: 30px;
         }
 
-            #header h1 {
-                font-size: 2em;
-                margin-bottom: 10px;
+            #shipment-info p {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
             }
 
-            #header p {
-                font-size: 1.2em;
-                line-height: 1.6;
+            #shipment-info img {
+                border-radius: 50%;
+                width: 200px; /* Adjust the size */
+                height: 200px; /* Adjust the size */
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+                animation: moveImage 4s infinite linear;
             }
 
-        #thanks-section {
-            background-color: #3fc380; /* צבע הרקע של הכיתוב */
-            padding: 20px;
-            color: #fff;
-            border-radius: 0 0 10px 10px;
-            animation: fadeInUp 1s;
+        @keyframes moveImage {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(100%);
+            }
         }
-
-            #thanks-section p {
-                font-size: 1.5em;
-            }
 
         #paypal-button-container {
             padding: 20px;
@@ -83,64 +99,56 @@
                     background-color: #0070ba;
                     color: #fff;
                 }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
+
 <body>
-    <div id="container">
-        <div id="header">
-            <h1>Welcome to IcePace</h1>
-            <p>Indulge in the delight of our ice-cold treats with every purchase.</p>
-        </div>
 
-        <div id="thanks-section">
-            <p>Thank you for your purchase!</p>
-        </div>
+    <img id="corner-image" src="\assets\images\logo3.jpg" alt="Corner Image">
 
-        <div id="paypal-button-container" class="paypal-buttons"></div>
-        <script>
-            paypal.Buttons({
-                style: {
-                    disableMaxWidth: true
-                },
-                createOrder: function (data, actions) {
-                    var urlParams = new URLSearchParams(window.location.search);
-                    var totalPrice = urlParams.get('totalPrice');
-
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: totalPrice
-                            }
-                        }]
-                    });
-                },
-                onApprove: function (data, actions) {
-                    return actions.order.capture().then(function (details) {
-                        return fetch('/your-server-side-code', {
-                            method: 'post',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                orderID: data.orderID
-                            })
-                        });
-                    });
-                }
-            }).render('.paypal-buttons');
-        </script>
+    <div id="welcome-message">
+        <p>Thank you for your Order, enjoy the experience</p> <!-- Updated message -->
     </div>
+
+    <div id="shipment-info">
+        <img src="https://i.imgur.com/HhbPhOh.png" alt="Shipment on the way">
+       
+    </div>
+
+    <div id="paypal-button-container" class="paypal-buttons"></div>
+
+    <script>
+        paypal.Buttons({
+            style: {
+                disableMaxWidth: true
+            },
+            createOrder: function (data, actions) {
+                var urlParams = new URLSearchParams(window.location.search);
+                var totalPrice = urlParams.get('totalPrice');
+
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: totalPrice
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    return fetch('/your-server-side-code', {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            orderID: data.orderID
+                        })
+                    });
+                });
+            }
+        }).render('.paypal-buttons');
+    </script>
+
 </body>
 </html>

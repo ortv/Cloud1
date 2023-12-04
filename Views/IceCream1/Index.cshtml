@@ -3,72 +3,18 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/css/icecream1.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ezFsAZQzrrqJj1g5Hv9R9gcVWeOVq+ouLmzJLZv9PH5R1NDS9g2OKtmoX5I6Dksy" crossorigin="anonymous">
 
-<style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background: linear-gradient(to bottom, #c0c0c0, #f4f4f4);
-        color: #333;
-        padding: 20px;
-        margin: 0;
-    }
 
-    h1 {
-        color: #4285f4;
-        text-align: center;
-    }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-
-    th {
-        background-color: #4285f4;
-        color: #fff;
-    }
-
-    tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-
-    img {
-        max-width: 150px;
-        max-height: 100px;
-    }
-
-    .action-buttons a {
-        display: inline-block;
-        padding: 8px 16px;
-        margin-right: 8px;
-        text-decoration: none;
-        color: #fff;
-        border: 1px solid #4285f4;
-        background-color: #4285f4;
-        border-radius: 4px;
-    }
-
-        .action-buttons a:hover {
-            background-color: #1356d2;
-            border-color: #1356d2;
-        }
-</style>
 <form asp-action="Index" method="post">
 
     <div class="input-group md-form form-control-sm form-2 pl-0">
-        <input name="searchString" class="form-control my-0 py-1 red-border" type="text" placeholder="Search..." aria-label="Search">
+        <input name="searchString" class="form-control my-0 py-1 red-border" type="text" placeholder="Search Flavour" aria-label="Search">
         <div class="input-group-append">
             <button type="submit" class="input-group-text red lighten-3" id="explore">
-                <i class="fas fa-search text-grey" aria-hidden="true"></i>
+                @* <i class="fas fa-search" aria-hidden="true"></i> *@
             </button>
         </div>
     </div>
@@ -81,11 +27,12 @@
     </form>
 </div> *@
 
-<h1>Index</h1>
+<h1>Flavours</h1>
 
 <p style="text-align: center; padding: 20px; font-size: 18px;">
-    <a asp-action="Create" class="action-buttons">יצירת טעם חדש</a>
-    <a asp-controller="Admin" asp-action="PageMeng" class="action-buttons">עמוד ראשי</a>
+    <a asp-action="Create" class="action-buttons"> New Flavour</a>
+
+    <a asp-controller="Admin" asp-action="PageMeng" class="action-buttons">Home</a>
 </p>
 <table class="table">
     <thead>

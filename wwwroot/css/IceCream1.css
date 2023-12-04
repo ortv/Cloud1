@@ -1,0 +1,60 @@
+﻿
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    color: #fff; /* White color for header */
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff; /* White background for the table */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: #000; /* Black text color for table cells */
+}
+
+th {
+    background-color: #000; /* Black background for table header */
+    color: #fff; /* White color for table header text */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+img {
+    max-width: 150px;
+    max-height: 100px;
+}
+
+.action-buttons a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 8px;
+    text-decoration: none;
+    color: #fff; /* White color for action buttons text */
+    border: 1px solid #000; /* Black border for action buttons */
+    background-color: #000; /* Black background for action buttons */
+    border-radius: 4px;
+}
+
+    .action-buttons a:hover {
+        background-color: #333; /* Darker black on hover for action buttons */
+        border-color: #333;
+    }
+
+
