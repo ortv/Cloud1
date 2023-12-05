@@ -1,0 +1,197 @@
+﻿
+/* שינוי צבע הרקע של כל הפאנל */
+.panel-info {
+    background-color: white; /* או כל גוון אחר של ורוד ביבי */
+}
+
+/* שינוי צבע הרקע של המחיקה והוספה */
+.addToCartButton i,
+.deleteFromCart i,
+.removeAll i {
+    color: pink; /* או כל גוון אחר של ורוד ביבי */
+}
+
+/* שינוי צבע הכפתור */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: pink;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+
+
+
+.product-name strong {
+    font-size: 1.1em;
+}
+
+.product-name small {
+    font-size: 1.1em;
+}
+
+h6 strong {
+    font-size: 1.2em;
+}
+
+.product-name {
+    font-size: 1.2em; /* או כל ערך אחר שיתאים לך */
+}
+
+.addToCartButton i,
+.deleteFromCart i {
+    font-size: 0.5em; /* או כל ערך אחר שיתאים לך */
+    color: black;
+}
+
+.col-xs-4 {
+    font-size: 1.5em; /* או כל ערך אחר שיתאים לך */
+}
+
+.removeAll i {
+    font-size: 1.5em; /* או כל ערך אחר שיתאים לך */
+    color: black;
+}
+
+.panel-body h6 strong {
+    font-size: 1.5em; /* או כל ערך אחר שיתאים לך */
+}
+
+/* שינוי צבע האייקון */
+.checkout-button i {
+    color: black; /* או כל צבע אחר שתבחר */
+}
+
+/* שינוי צבע הטקסט */
+.checkout-button a {
+    color: black; /* או כל צבע אחר שתבחר */
+}
+
+.product-name small {
+    font-weight: bold;
+    margin-bottom: 6px; /* או כל ערך אחר שתבחר */
+}
+
+.panel-title h5 {
+    color: black; /* צבע הטקסט */
+}
+
+.panel-title .glyphicon-shopping-cart {
+    color: black; /* צבע האייקון */
+    font-size: 50px; /* גודל האייקון */
+    vertical-align: bottom;
+}
+
+.checkout-button {
+    margin-top: 10px; /* מרווח מעל הכפתור */
+    text-align: center;
+}
+
+.product-name small strong {
+    font-weight: bold; /* הוספת הדגשה לטקסט */
+    font-size: 1.5em; /* או כל ערך אחר שתבחר */
+}
+
+.checkout-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: pink;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-button a,
+.text-center a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: pink;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 150px; /* רוחב קבוע */
+    text-align: center; /* מרכוז טקסט בכל הכפתורים */
+}
+
+    .checkout-button a:hover,
+    .text-center a:hover {
+        background-color: pink;
+        color: black;
+    }
+
+.container {
+    margin-left: 250px;
+}
+
+.panel-body h6 strong {
+    font-size: 1.8em; /* או כל ערך אחר שיתאים לך */
+}
+
+.col-xs-6.text-right {
+    text-align: left;
+}
+
+#corner-image {
+    position: fixed;
+    bottom: 13px;
+    right: 13px;
+    width: 170px;
+    height: 170px;
+}
+
+#corner-image-left {
+    position: fixed;
+    bottom: 13px;
+    left: 13px; /* Adjusted left position */
+    width: 170px;
+    height: 170px;
+}
+
+</style >
+<style >
+html {
+    background-color: black;
+    color: white;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.options-container {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent items from wrapping to the next line */
+}
+
+.option-label {
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .option-label:hover {
+        transform: scale(1.2); /* Enlarge on hover */
+    }
+
+.option-img {
+    width: 120px; /* Adjust the width to your preference */
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #ff6eff;
+}
+
+.option-label input {
+    margin-top: 5px;
+}
+
+

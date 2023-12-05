@@ -1,0 +1,16 @@
+﻿
+.video-container {
+    overflow: hidden;
+    border-radius: 20px; /* כללי עיגול */
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+
+
+

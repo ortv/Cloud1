@@ -208,8 +208,6 @@ namespace Cloud1.Controllers
                 bool exist = await CheckAddress(updatedOrder.City, updatedOrder.Address);
                 if (exist)//correct
                 {
-                    // Add the order to the context (in-memory representation)
-                    //_context.Order.Add(updatedOrder);
                     //need to update the weather in the OrderDetails object
                     var order = _context.Order.OrderByDescending(e => e.Id).FirstOrDefault();
                     // order = updatedOrder;
@@ -220,9 +218,9 @@ namespace Cloud1.Controllers
                     order.City = updatedOrder.City;
                     order.Email = updatedOrder.Email;
                     order.Name = updatedOrder.Name; // Add this line
-                    order.DeliveryDate = updatedOrder.DeliveryDate;
-                    
-                    
+                    order.DeliveryDate = DateTime.Now.AddMinutes(45);
+
+
 
                     var details = _context.OrderDetails.OrderByDescending(e => e.Id).FirstOrDefault();
                     details.order.Address = updatedOrder.Address;
@@ -230,20 +228,12 @@ namespace Cloud1.Controllers
                     details.order.TotalPrice = updatedOrder.TotalPrice;
                     details.order.City = updatedOrder.City;
                     details.order.Email = updatedOrder.Email;
-                    details.order.Name = updatedOrder.Name; // Add this line
+                    details.order.Name = updatedOrder.Name;
+                    details.order.DeliveryDate = updatedOrder.DeliveryDate;
+                                    
 
                     details.weatherResponse = await WeatherService(updatedOrder.City);
-                    //if (IsValidCoupon(couponCode))
-                    //{
-                    //    // Apply a fixed discount of 10 shekels
-                    //    updatedOrder.TotalPrice = ApplyCoupon(updatedOrder.TotalPrice);
-                    //}
-                    //else
-                    //{
-                    //    // Invalid coupon code, add a model error
-                    //    ModelState.AddModelError("CouponCode", "Invalid coupon code. Please enter a valid code.");
-                       
-                    //}
+                   
 
                     _context.SaveChanges(); // Save changes to the database
                     await SendOrderConfirmationEmail(updatedOrder);
@@ -326,18 +316,37 @@ namespace Cloud1.Controllers
                 {
                     From = new MailAddress("icepace2023@gmail.com"),
                     Subject = "Order Confirmation",
-                    Body = $" Dear {order.Name},Thank you for your order. Your total price is {order.TotalPrice:C}.",
-                    IsBodyHtml = false
+                    IsBodyHtml = true
                 };
 
                 message.To.Add(order.Email);
 
+                // Create the HTML body with image
+                var htmlBody = $@"<p>Dear {order.Name},</p>
+                          <p>Thank you for your order. Your total price is {order.TotalPrice:C}.</p>
+                          <p><img src='cid:logoImage' alt='Logo'></p>";
+
+                // Create an alternate view with the HTML body
+                var alternateView = AlternateView.CreateAlternateViewFromString(htmlBody, null, "text/html");
+
+                // Add the image as a linked resource
+                var logoImage = new LinkedResource("C:\\Users\\IMOE001\\source\\repos\\Cloud1\\wwwroot\\assets\\images\\logo3.jpg", "image/jpeg")
+                {
+                    ContentId = "logoImage"
+                };
+
+                alternateView.LinkedResources.Add(logoImage);
+
+                // Add the alternate view to the email message
+                message.AlternateViews.Add(alternateView);
+
+                // Send the email
                 await client.SendMailAsync(message);
             }
-
         }
-        
 
-     }
+
+
+    }
 
 }

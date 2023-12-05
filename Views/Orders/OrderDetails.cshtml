@@ -1,23 +1,48 @@
 ﻿@model Cloud1.Models.OrderDetails
-
-<h1>Order Details</h1>
-
-@if (Model != null)
-{
-    <p>Order ID: @Model.order.Id</p>
-
-    <h2>Weather Information</h2>
-    <p>City: @Model.weatherResponse.City</p>
-    <p>Feels Like: @Model.weatherResponse.FeelsLike</p>
-    <p>Humidity: @Model.weatherResponse.Humidity</p>
-
-    <h2>Hebcal Information</h2>
-    <p>Day in a Week: @Model.hebcalResponse.dayInAWeek</p>
-    <p>Is Holiday: @Model.hebcalResponse.IfHoliday</p>
-
-    
+@{
+    // ViewData["Title"]="About";
+    Layout = "~/Views/Shared/Admin.cshtml";
 }
-else
-{
-    <p>Order not found</p>
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/stylesheet2.css" rel="stylesheet" />
+
+    <title>Order Details</title>
+    <style>
+        #corner-image {
+            position: fixed;
+            bottom: 13px;
+            right: 13px;
+            width: 170px;
+            height: 170px;
+        }
+    </style>
+   
+</head>
+<body>
+
+    <h1>Order Details</h1>
+    <img id="corner-image" src="\assets\images\logo3.jpg" alt="Corner Image">
+    @if (Model != null)
+    {
+        <p>Order ID: @Model.order.Id</p>
+
+        <h2 class="with-line">Weather Information</h2>
+        <p>City: @Model.weatherResponse.City</p>
+        <p>Feels Like: @Model.weatherResponse.FeelsLike</p>
+        <p>Humidity: @Model.weatherResponse.Humidity</p>
+
+        <h2 class ="with-line">Hebcal Information</h2>
+        <p>Day in a Week: @Model.hebcalResponse.dayInAWeek</p>
+        <p>Is Holiday: @Model.hebcalResponse.IfHoliday</p>
+    }
+    else
+    {
+        <p>Order not found</p>
+    }
+
+</body>
+</html>

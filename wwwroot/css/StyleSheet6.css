@@ -1,0 +1,133 @@
+﻿
+
+
+body {
+    /* או כל גוון שתרצה */
+}
+
+.item {
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+    .item img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+        display: block;
+    }
+
+.down-content {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%;
+}
+
+
+:root {
+    --background: #000000;
+    --background-border: hotpink;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins;
+    height: 100vh;
+    padding: 32px;
+    display: grid;
+    place-items: center;
+    background-color: var(--background);
+}
+
+.gallery {
+    display: flex;
+    background-color: var(--background);
+    scale: 1.6;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+    margin-bottom: 170px; /* הוספת מרווח בין השורה ל-Footer */
+}
+
+.card {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    background-color: var(--background);
+    border-radius: 8px;
+    transition: 1000ms all;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+    outline: 1px solid var(--background);
+    overflow: hidden;
+    margin: 5px;
+}
+
+
+    .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .card:hover {
+        cursor: pointer;
+        transform: scale(1.15);
+        margin: 5px;
+    }
+
+
+
+        .card:hover ~ .card {
+            font-weight: bold;
+            cursor: pointer;
+            transform: translateX(22px);
+        }
+
+.product-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 100%);
+    color: white;
+    padding: 5px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.card:hover .product-info {
+    opacity: 1;
+}
+
+.product-info h3, .product-info p {
+    font-size: 15px; /* או כל גודל פונט שתבחר */
+    color: white;
+    font-weight: bold; /* הוסף את זה כדי להוסיף הדגשה */
+}
+
+.gallery article {
+    width: 200px;
+    height: 200px;
+}
+
+.container .gallery {
+    padding-top: 20px; /* כל עוד אתה רוצה את הרווח של 20 פיקסלים */
+}
+
+

@@ -11,29 +11,21 @@
     <title>@ViewBag.Title</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
 	<link href="~/css/stylesheet.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width" />
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-    
+    <link href="~/css/stylesheet9.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="admin-header">
-        @* @{
-            var user = await UserManager.GetUserAsync(User);
-            var userEmail = user?.Email;
-        } *@
-       @*  <a href="#user"><i class="fas fa-user"></i> Hello Avigail @userEmail</a> *@
+    <div class="admin-container">
+        <div class="admin-menu">
+            <a href="#" onclick="goBack()"><i class="fas fa-arrow-left"></i></a>
+        </div>
 
-        <a asp-controller="Home" asp-action="Index"> <i class="fas fa-home"> </i> HOME</a>
-
-        <a href="#"><i class="fas fa-cog"></i> Setting</a>
-
-        <a asp-action="PageMeng" asp-controller="Admin" ><i class="fas fa-question-circle"> </i> Help </a>
-    </div>
-
-
-
-    <div class="admin-content">
-        <!-- התוכן של דף ה־Admin יוצג כאן -->
-        @RenderBody()
+        <div class="admin-content">
+            <!-- התוכן של דף ה־Admin יוצג כאן -->
+            @RenderBody()
+        </div>
     </div>
 
     <div class="admin-footer">
@@ -41,3 +33,9 @@
     </div>
 </body>
 </html>
+<script>
+    function goBack() {
+        window.location.href = '@Url.Action("Index", "Orders")';
+    }
+</script>
+
