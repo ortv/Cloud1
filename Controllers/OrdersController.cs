@@ -218,7 +218,7 @@ namespace Cloud1.Controllers
                     order.City = updatedOrder.City;
                     order.Email = updatedOrder.Email;
                     order.Name = updatedOrder.Name; // Add this line
-                    order.DeliveryDate = DateTime.Now.AddMinutes(45);
+                    //order.DeliveryDate = DateTime.Now.AddMinutes(45);
 
 
 

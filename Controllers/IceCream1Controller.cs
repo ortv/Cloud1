@@ -73,9 +73,17 @@ namespace Cloud1.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(iceCream1);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                 var contain = await CheckImage(iceCream1.imageUrl);
+                if(contain)
+                {
+                  _context.Add(iceCream1);
+                  await _context.SaveChangesAsync();
+                 return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("imageUrl", "No ice cream");
+                }
             }
             return View(iceCream1);
         }

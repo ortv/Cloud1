@@ -51,13 +51,20 @@
         border: none; /* Remove the button border on hover */
     }
 
-.product-image {
-    width: 500px; /* Set a fixed width based on your preference */
-    height: 400px; /* Set a fixed height based on your preference */
+.option-img {
+    width: 100px; /* Set a fixed width based on your preference */
+    height: 100px; /* Set a fixed height based on your preference */
     object-fit: cover; /* Maintain aspect ratio and cover the entire container */
-    margin: 0 auto 20px;
-    display: block;
-    border-radius: 10px;
+    border-radius: 5px; /* Add border-radius for rounded corners if desired */
+}
+
+.options-container {
+    display: flex; /* Make the options container a flex container */
+    justify-content: space-between; /* Distribute space between the options */
+}
+
+.option-label {
+    text-align: center; /* Center the content within each option label */
 }
 
 #errorMessage {
@@ -111,6 +118,18 @@ body {
     height: 150px; /* קובע גובה */
     transform: translate(30px, -20px);
 }
+..options-container {
+    display: flex; /* Use flexbox to create a horizontal layout */
+}
 
+.option-label {
+    text-align: center; /* Center the content within each option label */
+    flex: 1; /* Allow each option label to grow equally within the flex container */
+}
 
+.option-img {
+    width: 100%; /* Make the image fill the entire width of its container */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 5px; /* Add border-radius for rounded corners if desired */
+}
 
